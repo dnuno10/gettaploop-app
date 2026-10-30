@@ -274,17 +274,17 @@ class _DashboardViewState extends State<DashboardView> {
         .length;
     final statCards = [
       _StatCard(
-        label: 'Tarjeta activa',
-        value: card?.isActive == true ? 'Activa' : 'Pendiente',
+        label: 'Active card',
+        value: card?.isActive == true ? 'Active' : 'Pending',
         subtitle: card?.publicSlug.isNotEmpty == true
             ? '@${card!.publicSlug}'
-            : 'Sin slug publicado',
+            : 'No published slug',
         tone: _panelSurfaceColor(context),
         icon: Icons.badge_outlined,
         compact: compact,
       ),
       _StatCard(
-        label: 'Visitas totales',
+        label: 'Total visits',
         value: '${analytics?.totalVisits ?? 0}',
         delta: '${growth >= 0 ? '+' : ''}${growth.toStringAsFixed(0)}%',
         deltaPositive: growth >= 0,
@@ -293,17 +293,17 @@ class _DashboardViewState extends State<DashboardView> {
         compact: compact,
       ),
       _StatCard(
-        label: 'Interacciones',
+        label: 'Interactions',
         value: '${analytics?.totalClicks ?? 0}',
-        subtitle: 'Clics en enlaces y CTA',
+        subtitle: 'Clicks on links and CTAs',
         tone: _panelSurfaceColor(context),
         icon: Icons.ads_click_outlined,
         compact: compact,
       ),
       _StatCard(
-        label: 'Leads activos',
+        label: 'Active leads',
         value: '$totalLeads',
-        subtitle: '$hotLeads listos para seguimiento',
+        subtitle: '$hotLeads ready for follow-up',
         tone: _panelSurfaceColor(context),
         icon: Icons.groups_2_outlined,
         compact: compact,
@@ -405,19 +405,19 @@ class _DashboardHeader extends StatelessWidget {
     final isCompact = MediaQuery.of(context).size.width < 680;
     final actions = [
       (
-        label: 'Editar tarjeta',
+        label: 'Edit card',
         icon: Icons.edit_outlined,
         filled: false,
         onTap: () => onNavigate(1),
       ),
       (
-        label: 'Compartir',
+        label: 'Share',
         icon: Icons.ios_share_outlined,
         filled: false,
         onTap: () => onNavigate(2),
       ),
       (
-        label: 'Ver perfil',
+        label: 'View profile',
         icon: Icons.arrow_outward_rounded,
         filled: true,
         onTap: onOpenPublicCard,
@@ -432,9 +432,9 @@ class _DashboardHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HelpTitle(
-                title: 'Panel principal',
+                title: 'Dashboard',
                 helpText:
-                    'Resumen operativo de visitas, leads y accesos principales de tu tarjeta.',
+                    'Operational summary of your card\'s visits, leads, and main shortcuts.',
                 style: GoogleFonts.outfit(
                   color: context.textPrimary,
                   fontSize: 28,
@@ -443,7 +443,7 @@ class _DashboardHeader extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                'Monitorea visitas, leads y rendimiento de tu tarjeta TapLoop en un solo flujo.',
+                'Monitor your TapLoop card\'s visits, leads, and performance in a single flow.',
                 style: GoogleFonts.dmSans(
                   color: context.textSecondary,
                   fontSize: 14,
@@ -490,9 +490,9 @@ class _DashboardHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HelpTitle(
-                  title: 'Panel principal',
+                  title: 'Dashboard',
                   helpText:
-                      'Resumen operativo de visitas, leads y accesos principales de tu tarjeta.',
+                      'Operational summary of your card\'s visits, leads, and main shortcuts.',
                   style: GoogleFonts.outfit(
                     color: context.textPrimary,
                     fontSize: 30,
@@ -501,7 +501,7 @@ class _DashboardHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Monitorea visitas, leads y rendimiento de tu tarjeta TapLoop en un solo flujo.',
+                  'Monitor your TapLoop card\'s visits, leads, and performance in a single flow.',
                   style: GoogleFonts.dmSans(
                     color: context.textSecondary,
                     fontSize: 14,
@@ -687,7 +687,7 @@ class _StatCard extends StatelessWidget {
           HelpTitle(
             title: label,
             helpText:
-                subtitle ?? 'Métrica resumida del rendimiento de tu tarjeta.',
+                subtitle ?? 'Summary metric of your card\'s performance.',
             style: GoogleFonts.dmSans(
               color: context.textSecondary,
               fontSize: 12,
@@ -785,9 +785,9 @@ class _PerformancePanel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HelpTitle(
-                      title: 'Resumen de actividad',
+                      title: 'Activity summary',
                       helpText:
-                          'Compara visitas, clics y toques NFC de los últimos días.',
+                          'Compare visits, clicks, and NFC taps from recent days.',
                       style: GoogleFonts.outfit(
                         color: context.textPrimary,
                         fontSize: 20,
@@ -796,7 +796,7 @@ class _PerformancePanel extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Comparativa semanal entre visitas, clics y toques NFC.',
+                      'Weekly comparison of visits, clicks, and NFC taps.',
                       style: GoogleFonts.dmSans(
                         color: context.textSecondary,
                         fontSize: 13,
@@ -806,7 +806,7 @@ class _PerformancePanel extends StatelessWidget {
                 ),
               ),
               Text(
-                'Últimos 7 días',
+                'Last 7 days',
                 style: GoogleFonts.dmSans(
                   color: context.textSecondary,
                   fontSize: 12,
@@ -818,16 +818,16 @@ class _PerformancePanel extends StatelessWidget {
           const SizedBox(height: 14),
           if (!hasData)
             const EmptyDataState(
-              hint: 'Aún no hay actividad registrada para mostrar.',
+              hint: 'No activity recorded to show yet.',
             )
           else ...[
             Wrap(
               spacing: 18,
               runSpacing: 8,
               children: const [
-                _ChartLegend(color: AppColors.primary, label: 'Visitas'),
-                _ChartLegend(color: Color(0xFF3F3F46), label: 'Clics'),
-                _ChartLegend(color: Color(0xFF2E8B57), label: 'Toques NFC'),
+                _ChartLegend(color: AppColors.primary, label: 'Visits'),
+                _ChartLegend(color: Color(0xFF3F3F46), label: 'Clicks'),
+                _ChartLegend(color: Color(0xFF2E8B57), label: 'NFC taps'),
               ],
             ),
             const SizedBox(height: 18),
@@ -874,7 +874,7 @@ class _PerformancePanel extends StatelessWidget {
                         showTitles: true,
                         interval: 1,
                         getTitlesWidget: (value, meta) {
-                          const labels = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+                          const labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
                           final index = value.toInt();
                           if (index < 0 || index >= labels.length) {
                             return const SizedBox.shrink();
@@ -955,20 +955,20 @@ class _QuickActions extends StatelessWidget {
     final actions = [
       (
         icon: Icons.edit_note_outlined,
-        label: 'Actualizar perfil',
-        description: 'Ajusta tu tarjeta y tu presencia digital.',
+        label: 'Update profile',
+        description: 'Adjust your card and your digital presence.',
         onTap: () => onNavigate(1),
       ),
       (
         icon: Icons.send_outlined,
-        label: 'Compartir tarjeta',
-        description: 'Envía tu tarjeta por QR o enlace.',
+        label: 'Share card',
+        description: 'Send your card by QR or link.',
         onTap: () => onNavigate(2),
       ),
       (
         icon: Icons.language_rounded,
-        label: 'Ver perfil público',
-        description: 'Revisa el perfil que ve tu lead.',
+        label: 'View public profile',
+        description: 'Review the profile your leads see.',
         onTap: onOpenPublicCard,
       ),
     ];
@@ -978,9 +978,9 @@ class _QuickActions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Acciones rápidas',
+            title: 'Quick actions',
             helpText:
-                'Accesos directos para editar, compartir o revisar tu tarjeta.',
+                'Shortcuts to edit, share, or review your card.',
             style: GoogleFonts.outfit(
               color: context.textPrimary,
               fontSize: 20,
@@ -989,7 +989,7 @@ class _QuickActions extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Acciones clave para operar TapLoop sin cambiar de contexto.',
+            'Key actions to run TapLoop without switching context.',
             style: GoogleFonts.dmSans(
               color: context.textSecondary,
               fontSize: 13,
@@ -1148,9 +1148,9 @@ class _CardPreviewPanel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               HelpTitle(
-                title: 'Tarjeta',
+                title: 'Card',
                 helpText:
-                    'Vista previa rápida de la tarjeta seleccionada y acceso a su perfil público.',
+                    'Quick preview of the selected card and access to its public profile.',
                 style: GoogleFonts.outfit(
                   color: context.textPrimary,
                   fontSize: 19,
@@ -1159,7 +1159,7 @@ class _CardPreviewPanel extends StatelessWidget {
               ),
               TextButton(
                 onPressed: onOpenPublicCard,
-                child: const Text('Abrir'),
+                child: const Text('Open'),
               ),
             ],
           ),
@@ -1219,7 +1219,7 @@ class _CardPreviewPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  card.name.isNotEmpty ? card.name : 'Perfil TapLoop',
+                  card.name.isNotEmpty ? card.name : 'TapLoop Profile',
                   style: GoogleFonts.outfit(
                     color: context.textPrimary,
                     fontSize: 22,
@@ -1269,17 +1269,17 @@ class _ConversionPanel extends StatelessWidget {
         (analytics?.totalClicks ?? 0) > 0;
     final metrics = [
       (
-        label: 'Visitas',
+        label: 'Visits',
         value: analytics?.totalVisits ?? 0,
         color: AppColors.primary,
       ),
       (
-        label: 'Toques NFC',
+        label: 'NFC taps',
         value: analytics?.totalTaps ?? 0,
         color: const Color(0xFFA98BFF),
       ),
       (
-        label: 'Clics',
+        label: 'Clicks',
         value: analytics?.totalClicks ?? 0,
         color: const Color(0xFF57B894),
       ),
@@ -1290,9 +1290,9 @@ class _ConversionPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Conversión',
+            title: 'Conversion',
             helpText:
-                'Distribución de interacciones por visitas, clics y toques NFC.',
+                'Interactions broken down by visits, clicks, and NFC taps.',
             style: GoogleFonts.outfit(
               color: context.textPrimary,
               fontSize: 19,
@@ -1301,7 +1301,7 @@ class _ConversionPanel extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Participación de cada tipo de evento dentro del rango.',
+            'Share of each event type within the range.',
             style: GoogleFonts.dmSans(
               color: context.textSecondary,
               fontSize: 13,
@@ -1310,7 +1310,7 @@ class _ConversionPanel extends StatelessWidget {
           const SizedBox(height: 18),
           if (!hasData)
             const EmptyDataState(
-              hint: 'Aún no hay interacciones registradas en este periodo.',
+              hint: 'No interactions recorded in this period yet.',
             )
           else
             ...metrics.map(
@@ -1440,8 +1440,8 @@ class _TopLinksPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Enlaces principales',
-            helpText: 'Ranking de enlaces con más clics en tu tarjeta.',
+            title: 'Main links',
+            helpText: 'Ranking of the most clicked links on your card.',
             style: GoogleFonts.outfit(
               color: context.textPrimary,
               fontSize: 19,
@@ -1450,7 +1450,7 @@ class _TopLinksPanel extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Los enlaces con mayor intención de contacto.',
+            'The links with the highest contact intent.',
             style: GoogleFonts.dmSans(
               color: context.textSecondary,
               fontSize: 13,
@@ -1459,7 +1459,7 @@ class _TopLinksPanel extends StatelessWidget {
           const SizedBox(height: 16),
           if (topLinks.isEmpty)
             const EmptyDataState(
-              hint: 'Aún no hay clics suficientes para mostrar el ranking.',
+              hint: 'Not enough clicks yet to show the ranking.',
             )
           else
             ...topLinks
@@ -1491,7 +1491,7 @@ class _TopLinksPanel extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                '${(link.percentage * 100).toStringAsFixed(0)}% de los clics',
+                                '${(link.percentage * 100).toStringAsFixed(0)}% of clicks',
                                 style: GoogleFonts.dmSans(
                                   color: context.textSecondary,
                                   fontSize: 11,
@@ -1534,8 +1534,8 @@ class _ActivityPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Actividad reciente',
-            helpText: 'Últimos eventos registrados por tus tarjetas y enlaces.',
+            title: 'Recent activity',
+            helpText: 'Latest events recorded by your cards and links.',
             style: GoogleFonts.outfit(
               color: context.textPrimary,
               fontSize: 19,
@@ -1544,7 +1544,7 @@ class _ActivityPanel extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Últimos movimientos detectados en tu ecosistema TapLoop.',
+            'Latest activity detected across your TapLoop ecosystem.',
             style: GoogleFonts.dmSans(
               color: context.textSecondary,
               fontSize: 13,
@@ -1553,7 +1553,7 @@ class _ActivityPanel extends StatelessWidget {
           const SizedBox(height: 16),
           if (items.isEmpty)
             const EmptyDataState(
-              hint: 'Todavía no hay eventos recientes registrados.',
+              hint: 'No recent events recorded yet.',
             )
           else
             ...items.map(
@@ -1624,9 +1624,9 @@ class _LeadsTable extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HelpTitle(
-                      title: 'Leads recientes',
+                      title: 'Recent leads',
                       helpText:
-                          'Contactos capturados y priorizados por actividad reciente.',
+                          'Contacts captured and prioritized by recent activity.',
                       style: GoogleFonts.outfit(
                         color: context.textPrimary,
                         fontSize: 20,
@@ -1635,7 +1635,7 @@ class _LeadsTable extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Leads priorizados por intención y última actividad.',
+                      'Leads prioritized by intent and latest activity.',
                       style: GoogleFonts.dmSans(
                         color: context.textSecondary,
                         fontSize: 13,
@@ -1645,7 +1645,7 @@ class _LeadsTable extends StatelessWidget {
                 ),
               ),
               _HeaderButton(
-                label: 'Abrir analíticas',
+                label: 'Open analytics',
                 icon: Icons.arrow_forward_rounded,
                 filled: false,
                 onTap: () => onNavigate(3),
@@ -1654,7 +1654,7 @@ class _LeadsTable extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           if (leads.isEmpty)
-            const EmptyDataState(hint: 'Todavía no hay leads capturados.')
+            const EmptyDataState(hint: 'No leads captured yet.')
           else if (isDesktop)
             Column(
               children: [
@@ -1707,11 +1707,11 @@ class _LeadsHeaderRow extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: HelpTitle(title: 'ETAPA', style: style),
+            child: HelpTitle(title: 'STAGE', style: style),
           ),
           Expanded(
             flex: 3,
-            child: HelpTitle(title: 'ÚLTIMA VISITA', style: style),
+            child: HelpTitle(title: 'LAST VISIT', style: style),
           ),
         ],
       ),
@@ -1771,7 +1771,7 @@ class _LeadRow extends StatelessWidget {
                             ? lead.company!
                             : (lead.location?.isNotEmpty == true
                                   ? lead.location!
-                                  : 'Sin empresa registrada'),
+                                  : 'No company on file'),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.dmSans(
@@ -1874,7 +1874,7 @@ class _LeadCard extends StatelessWidget {
           Row(
             children: [
               _LeadMetric(
-                label: 'Última visita',
+                label: 'Last visit',
                 value: _formatShortDate(lead.lastSeen),
               ),
             ],
@@ -2023,7 +2023,7 @@ class _LinkCardDialogState extends State<_LinkCardDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Vincular tarjeta TapLoop',
+                'Link TapLoop card',
                 style: GoogleFonts.outfit(
                   color: context.textPrimary,
                   fontSize: 26,
@@ -2032,7 +2032,7 @@ class _LinkCardDialogState extends State<_LinkCardDialog> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Pega la URL del QR o el serial NFC para conectar la tarjeta con este workspace.',
+                'Paste the QR URL or NFC serial to connect the card to this workspace.',
                 style: GoogleFonts.dmSans(
                   color: context.textSecondary,
                   fontSize: 13,
@@ -2052,7 +2052,7 @@ class _LinkCardDialogState extends State<_LinkCardDialog> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: _ModeChip(
-                      label: 'Código NFC',
+                      label: 'NFC code',
                       active: !isQr,
                       onTap: () => setState(() => _mode = _LinkInputMode.code),
                     ),
@@ -2064,8 +2064,8 @@ class _LinkCardDialogState extends State<_LinkCardDialog> {
                 controller: _controller,
                 decoration: InputDecoration(
                   hintText: isQr
-                      ? 'https://.../nfc/ABC123 o ABC123'
-                      : 'Ej. ABC123456',
+                      ? 'https://.../nfc/ABC123 or ABC123'
+                      : 'e.g. ABC123456',
                 ),
               ),
               if (_error != null) ...[
@@ -2087,12 +2087,12 @@ class _LinkCardDialogState extends State<_LinkCardDialog> {
                     onPressed: _submitting
                         ? null
                         : () => Navigator.of(context).pop(),
-                    child: const Text('Cancelar'),
+                    child: const Text('Cancel'),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: _submitting ? null : _submit,
-                    child: Text(_submitting ? 'Vinculando...' : 'Vincular'),
+                    child: Text(_submitting ? 'Linking...' : 'Link'),
                   ),
                 ],
               ),
@@ -2173,49 +2173,49 @@ IconData _platformIcon(String platform) {
 String _eventTitle(VisitEventModel event) {
   switch ((event.source ?? '').toLowerCase()) {
     case 'nfc':
-      return 'Tap NFC registrado';
+      return 'NFC tap recorded';
     case 'qr':
-      return 'Escaneo QR registrado';
+      return 'QR scan recorded';
     case 'form':
-      return 'Formulario completado';
+      return 'Form completed';
     case 'social':
-      return 'Interacción social';
+      return 'Social interaction';
     case 'link':
-      return 'Click en enlace';
+      return 'Link click';
     default:
-      return 'Visita al perfil';
+      return 'Profile visit';
   }
 }
 
 String _pipelineLabel(String stage) {
   switch (stage) {
     case 'qualified':
-      return 'Calificado';
+      return 'Qualified';
     case 'proposal':
-      return 'Propuesta';
+      return 'Proposal';
     case 'won':
-      return 'Cerrado';
+      return 'Closed';
     case 'contacted':
-      return 'Contactado';
+      return 'Contacted';
     default:
-      return 'Nuevo lead';
+      return 'New lead';
   }
 }
 
 String _formatShortDate(DateTime date) {
   const months = [
-    'Ene',
+    'Jan',
     'Feb',
     'Mar',
-    'Abr',
+    'Apr',
     'May',
     'Jun',
     'Jul',
-    'Ago',
+    'Aug',
     'Sep',
     'Oct',
     'Nov',
-    'Dic',
+    'Dec',
   ];
 
   return '${date.day} ${months[date.month - 1]}';

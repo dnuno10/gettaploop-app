@@ -50,7 +50,7 @@ class _SettingsViewState extends State<SettingsView> {
       _confirmPasswordCtrl.clear();
       TapLoopToast.show(
         context,
-        'Contraseña actualizada correctamente.',
+        'Password updated successfully.',
         TapLoopToastType.success,
       );
     } catch (error) {
@@ -68,12 +68,12 @@ class _SettingsViewState extends State<SettingsView> {
   String _friendlyPasswordError(Object error) {
     final raw = error.toString();
     if (raw.contains('Invalid login credentials')) {
-      return 'La contraseña actual es incorrecta.';
+      return 'The current password is incorrect.';
     }
     if (raw.contains('Password should be')) {
-      return 'La nueva contraseña no cumple con los requisitos mínimos.';
+      return 'The new password doesn\'t meet the minimum requirements.';
     }
-    return 'No se pudo actualizar la contraseña. Intenta de nuevo.';
+    return 'Could not update the password. Please try again.';
   }
 
   @override
@@ -106,7 +106,7 @@ class _SettingsViewState extends State<SettingsView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Configuración',
+                        'Settings',
                         style: GoogleFonts.outfit(
                           fontSize: 28,
                           fontWeight: FontWeight.w800,
@@ -115,7 +115,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Administra la sesión activa, la tarjeta seleccionada y la seguridad de tu cuenta.',
+                        'Manage the active session, the selected card, and your account security.',
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           color: context.textSecondary,
@@ -131,14 +131,14 @@ class _SettingsViewState extends State<SettingsView> {
                       _ProfileCard(user: user, card: appState.currentCard),
                       const SizedBox(height: 20),
                       _SettingsSection(
-                        title: 'Seguridad',
+                        title: 'Security',
                         child: Form(
                           key: _passwordFormKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Cambiar contraseña',
+                                'Change password',
                                 style: GoogleFonts.outfit(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w800,
@@ -147,7 +147,7 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                               const SizedBox(height: 6),
                               Text(
-                                'Confirma tu contraseña actual y define una nueva contraseña para esta sesión.',
+                                'Confirm your current password and set a new password for this session.',
                                 style: GoogleFonts.dmSans(
                                   fontSize: 13,
                                   color: context.textSecondary,
@@ -155,48 +155,48 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                               const SizedBox(height: 18),
                               TapLoopTextField(
-                                label: 'Contraseña actual',
-                                hint: 'Ingresa tu contraseña actual',
+                                label: 'Current password',
+                                hint: 'Enter your current password',
                                 controller: _currentPasswordCtrl,
                                 obscureText: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Ingresa tu contraseña actual';
+                                    return 'Enter your current password';
                                   }
                                   return null;
                                 },
                               ),
                               const SizedBox(height: 14),
                               TapLoopTextField(
-                                label: 'Nueva contraseña',
-                                hint: 'Mínimo 8 caracteres',
+                                label: 'New password',
+                                hint: 'Minimum 8 characters',
                                 controller: _newPasswordCtrl,
                                 obscureText: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Ingresa una nueva contraseña';
+                                    return 'Enter a new password';
                                   }
                                   if (value.length < 8) {
-                                    return 'La nueva contraseña debe tener al menos 8 caracteres';
+                                    return 'The new password must have at least 8 characters';
                                   }
                                   if (value == _currentPasswordCtrl.text) {
-                                    return 'La nueva contraseña debe ser diferente a la actual';
+                                    return 'The new password must be different from the current one';
                                   }
                                   return null;
                                 },
                               ),
                               const SizedBox(height: 14),
                               TapLoopTextField(
-                                label: 'Confirmar nueva contraseña',
-                                hint: 'Repite la nueva contraseña',
+                                label: 'Confirm new password',
+                                hint: 'Repeat the new password',
                                 controller: _confirmPasswordCtrl,
                                 obscureText: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Confirma la nueva contraseña';
+                                    return 'Confirm the new password';
                                   }
                                   if (value != _newPasswordCtrl.text) {
-                                    return 'Las contraseñas no coinciden';
+                                    return 'Passwords don\'t match';
                                   }
                                   return null;
                                 },
@@ -206,7 +206,7 @@ class _SettingsViewState extends State<SettingsView> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: TapLoopButton(
-                                  label: 'Actualizar contraseña',
+                                  label: 'Update password',
                                   onPressed: _changingPassword
                                       ? null
                                       : _changePassword,
@@ -219,20 +219,20 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       const SizedBox(height: 20),
                       _SettingsSection(
-                        title: 'Sesión',
+                        title: 'Session',
                         child: Column(
                           children: [
                             _SettingsRow(
                               icon: Icons.mail_outline,
                               title: user.email,
-                              subtitle: 'Correo de la sesión activa.',
+                              subtitle: 'Email for the active session.',
                             ),
                             Divider(color: context.borderColor, height: 28),
                             _SettingsRow(
                               icon: Icons.logout_rounded,
-                              title: 'Cerrar sesión',
+                              title: 'Sign out',
                               subtitle:
-                                  'Termina la sesión en este dispositivo.',
+                                  'End the session on this device.',
                               onTap: () async {
                                 await AuthService.signOut();
                                 appState.clear();
@@ -348,7 +348,7 @@ class _SettingsSection extends StatelessWidget {
         children: [
           HelpTitle(
             title: title,
-            helpText: 'Agrupa las opciones relacionadas con $title.',
+            helpText: 'Groups the options related to $title.',
             style: GoogleFonts.outfit(
               fontSize: 18,
               fontWeight: FontWeight.w800,

@@ -43,17 +43,17 @@ class LeadActionEvent {
     }
     switch (action) {
       case LeadAction.visitedProfile:
-        return 'Visitó el perfil';
+        return 'Visited profile';
       case LeadAction.clickedLinkedIn:
-        return 'Click en LinkedIn';
+        return 'Clicked LinkedIn';
       case LeadAction.clickedWebsite:
-        return 'Click en sitio web';
+        return 'Clicked website';
       case LeadAction.clickedWhatsApp:
-        return 'Abrió WhatsApp';
+        return 'Opened WhatsApp';
       case LeadAction.downloadedContact:
-        return 'Descargó contacto';
+        return 'Downloaded contact';
       case LeadAction.filledForm:
-        return 'Llenó formulario';
+        return 'Filled out form';
     }
   }
 
@@ -190,16 +190,16 @@ class LeadModel {
     return LeadStatus.cold;
   }
 
-  String get displayName => name ?? 'Visitante anónimo';
+  String get displayName => name ?? 'Anonymous visitor';
 
   String get statusLabel {
     switch (status) {
       case LeadStatus.hot:
-        return 'Lead caliente 🔥';
+        return 'Hot lead 🔥';
       case LeadStatus.warm:
-        return 'Lead tibio';
+        return 'Warm lead';
       case LeadStatus.cold:
-        return 'Lead frío';
+        return 'Cold lead';
     }
   }
 
@@ -214,14 +214,14 @@ class LeadModel {
       (a) => a.action == LeadAction.downloadedContact,
     );
     final parts = <String>[];
-    if (visits > 1) parts.add('visitó el perfil $visits veces');
-    if (hasWhatsapp) parts.add('abrió WhatsApp');
-    if (hasSaved) parts.add('guardó el contacto');
+    if (visits > 1) parts.add('visited the profile $visits times');
+    if (hasWhatsapp) parts.add('opened WhatsApp');
+    if (hasSaved) parts.add('saved the contact');
     final summary = parts.isNotEmpty ? ', ${parts.join(', ')}' : '';
-    return 'Lead Score $score%, interés ${status == LeadStatus.hot
-        ? 'alto'
+    return 'Lead Score $score%, ${status == LeadStatus.hot
+        ? 'high'
         : score >= 30
-        ? 'medio'
-        : 'bajo'}$summary.';
+        ? 'medium'
+        : 'low'} interest$summary.';
   }
 }

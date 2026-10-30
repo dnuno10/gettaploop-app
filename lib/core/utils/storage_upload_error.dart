@@ -8,25 +8,25 @@ String friendlyStorageUploadError(
 
   if (normalized.contains('bucket not found') ||
       normalized.contains('not found') && normalized.contains(bucket)) {
-    return 'No se pudo subir $assetLabel porque el bucket `$bucket` no existe en Supabase Storage.';
+    return 'Could not upload $assetLabel because the bucket `$bucket` does not exist in Supabase Storage.';
   }
 
   if (normalized.contains('row-level security') ||
       normalized.contains('permission') ||
       normalized.contains('not allowed') ||
       normalized.contains('unauthorized')) {
-    return 'No se pudo subir $assetLabel porque las policies de Storage no permiten escribir en `$bucket`.';
+    return 'Could not upload $assetLabel because Storage policies do not allow writing to `$bucket`.';
   }
 
   if (normalized.contains('mime') || normalized.contains('content type')) {
-    return 'No se pudo subir $assetLabel porque el bucket `$bucket` no acepta ese tipo de archivo.';
+    return 'Could not upload $assetLabel because the bucket `$bucket` does not accept that file type.';
   }
 
   if (normalized.contains('too large') ||
       normalized.contains('payload too large') ||
       normalized.contains('entity too large')) {
-    return 'No se pudo subir $assetLabel porque el archivo excede el límite permitido en Storage.';
+    return 'Could not upload $assetLabel because the file exceeds the allowed Storage limit.';
   }
 
-  return 'No se pudo subir $assetLabel. Detalle: $raw';
+  return 'Could not upload $assetLabel. Detail: $raw';
 }

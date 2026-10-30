@@ -138,7 +138,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Enlace público',
+                      'Public link',
                       style: GoogleFonts.outfit(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
@@ -147,7 +147,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'app.taploop.com.mx/',
+                      'app.gettaploop.com/',
                       style: GoogleFonts.dmSans(
                         fontSize: 13,
                         color: ctx.textSecondary,
@@ -155,9 +155,9 @@ class _ShareCardViewState extends State<ShareCardView> {
                     ),
                     const SizedBox(height: 12),
                     TapLoopTextField(
-                      label: 'Enlace',
+                      label: 'Link',
                       controller: controller,
-                      hint: 'tu-nombre',
+                      hint: 'your-name',
                       autofocus: true,
                     ),
                     if (errorText != null) ...[
@@ -176,13 +176,13 @@ class _ShareCardViewState extends State<ShareCardView> {
                       children: [
                         TextButton(
                           onPressed: () => Navigator.pop(ctx),
-                          child: const Text('Cancelar'),
+                          child: const Text('Cancel'),
                         ),
                         const SizedBox(width: 8),
                         SizedBox(
                           width: 120,
                           child: TapLoopButton(
-                            label: 'Guardar',
+                            label: 'Save',
                             onPressed: () async {
                               final candidate = controller.text
                                   .trim()
@@ -192,7 +192,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                               )) {
                                 setDialogState(() {
                                   errorText =
-                                      'Usa solo letras minúsculas, números y guiones (ej. juan-perez).';
+                                      'Use only lowercase letters, numbers, and hyphens (e.g. john-smith).';
                                 });
                                 return;
                               }
@@ -208,7 +208,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                               if (!ctx.mounted) return;
                               if (!available) {
                                 setDialogState(() {
-                                  errorText = 'Ese enlace ya está en uso.';
+                                  errorText = 'That link is already in use.';
                                 });
                                 return;
                               }
@@ -233,14 +233,14 @@ class _ShareCardViewState extends State<ShareCardView> {
       appState.updateCard(card.copyWith(publicSlug: newSlug));
       TapLoopToast.show(
         context,
-        'Enlace actualizado correctamente.',
+        'Link updated successfully.',
         TapLoopToastType.success,
       );
     } catch (_) {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'No se pudo actualizar el enlace. Intenta de nuevo.',
+        'Could not update the link. Please try again.',
         TapLoopToastType.error,
       );
     }
@@ -275,7 +275,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Compartir',
+                        'Share',
                         style: GoogleFonts.outfit(
                           fontSize: 28,
                           fontWeight: FontWeight.w800,
@@ -284,7 +284,7 @@ class _ShareCardViewState extends State<ShareCardView> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Distribuye tu tarjeta digital, QR y contacto desde un centro único.',
+                        'Distribute your digital card, QR, and contact from a single hub.',
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           color: context.textSecondary,
@@ -382,9 +382,9 @@ class _MobileLayout extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const _SectionHeading(
-                      title: 'Distribución',
+                      title: 'Distribution',
                       subtitle:
-                          'Copia el enlace o envíalo por tus canales principales.',
+                          'Copy the link or send it through your main channels.',
                     ),
                     const SizedBox(height: 18),
                     _LinkBar(
@@ -454,9 +454,9 @@ class _DesktopLayout extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const _SectionHeading(
-                        title: 'Compartir contacto',
+                        title: 'Share contact',
                         subtitle:
-                            'Administra el enlace principal y distribúyelo desde aquí.',
+                            'Manage your main link and distribute it from here.',
                       ),
                       const SizedBox(height: 18),
                       _LinkBar(
@@ -506,9 +506,9 @@ class _CardHeroSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: isDesktop ? 'Centro de distribución' : 'Compartir contacto',
+            title: isDesktop ? 'Distribution center' : 'Share contact',
             helpText:
-                'Centro para compartir tu tarjeta mediante enlace, QR y acciones rápidas.',
+                'Hub for sharing your card by link, QR, and quick actions.',
             style: GoogleFonts.outfit(
               fontSize: 24,
               fontWeight: FontWeight.w800,
@@ -517,7 +517,7 @@ class _CardHeroSection extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Presenta tu tarjeta de forma más ejecutiva y comparte desde un solo lugar.',
+            'Present your card in a more executive way and share from one place.',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               color: context.textSecondary,
@@ -531,7 +531,7 @@ class _CardHeroSection extends StatelessWidget {
               Expanded(
                 child: _StatChip(
                   icon: Icons.touch_app_outlined,
-                  label: 'Taps NFC',
+                  label: 'NFC Taps',
                   value: '${a?.totalTaps ?? 0}',
                   color: const Color(0xFF6C4FE8),
                 ),
@@ -549,7 +549,7 @@ class _CardHeroSection extends StatelessWidget {
               Expanded(
                 child: _StatChip(
                   icon: Icons.visibility_outlined,
-                  label: 'Esta semana',
+                  label: 'This week',
                   value: '+${a?.visitsThisWeek ?? 0}',
                   color: AppColors.success,
                 ),
@@ -633,7 +633,7 @@ class _StatChip extends StatelessWidget {
               const SizedBox(width: 5),
               HelpTitle(
                 title: label,
-                helpText: 'Métrica de uso para $label.',
+                helpText: 'Usage metric for $label.',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: context.textSecondary,
@@ -700,14 +700,14 @@ class _QrSectionState extends State<_QrSection> {
       final blob = html.Blob([bytes], 'image/png');
       final blobUrl = html.Url.createObjectUrlFromBlob(blob);
       html.AnchorElement(href: blobUrl)
-        ..download = 'qr_tarjeta.png'
+        ..download = 'qr_card.png'
         ..click();
       html.Url.revokeObjectUrl(blobUrl);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Error al generar QR: $e')));
+        ).showSnackBar(SnackBar(content: Text('Error generating QR: $e')));
       }
     } finally {
       if (mounted) setState(() => _downloading = false);
@@ -720,9 +720,9 @@ class _QrSectionState extends State<_QrSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const _SectionHeading(
-          title: 'Código QR ejecutivo',
+          title: 'Executive QR code',
           subtitle:
-              'Personaliza el QR y úsalo en presentaciones, impresos o eventos.',
+              'Customize the QR and use it in presentations, print materials, or events.',
         ),
         const SizedBox(height: 18),
         Wrap(
@@ -764,7 +764,7 @@ class _QrSectionState extends State<_QrSection> {
               ),
               const SizedBox(height: 12),
               Text(
-                'app.taploop.com.mx/${appState.currentCard?.publicSlug ?? ''}',
+                'app.gettaploop.com/${appState.currentCard?.publicSlug ?? ''}',
                 style: GoogleFonts.dmSans(
                   fontSize: 13,
                   color: context.textSecondary,
@@ -782,7 +782,7 @@ class _QrSectionState extends State<_QrSection> {
                 icon: _downloading
                     ? Icons.hourglass_empty
                     : Icons.download_outlined,
-                label: _downloading ? 'Generando...' : 'Descargar PNG',
+                label: _downloading ? 'Generating...' : 'Download PNG',
                 onTap: _downloadQrPng,
                 variant: _QrButtonVariant.outline,
               ),
@@ -861,9 +861,9 @@ class _LinkBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HelpTitle(
-          title: 'Enlace público',
+          title: 'Public link',
           helpText:
-              'URL pública que puedes copiar o personalizar para compartir.',
+              'Public URL you can copy or customize for sharing.',
           style: GoogleFonts.dmSans(
             fontSize: 12,
             fontWeight: FontWeight.w700,
@@ -922,7 +922,7 @@ class _LinkBar extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    copied ? 'Enlace copiado' : 'Copiar enlace',
+                    copied ? 'Link copied' : 'Copy link',
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
@@ -956,10 +956,10 @@ class _QuickShareSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardUrl = appState.currentCard?.publicUrl ?? '';
-    final name = appState.currentCard?.name ?? 'mi contacto';
+    final name = appState.currentCard?.name ?? 'my contact';
     final encoded = Uri.encodeComponent(cardUrl);
     final msgText = Uri.encodeComponent(
-      'Te comparto la tarjeta digital de $name: $cardUrl',
+      'Here\'s the digital card of $name: $cardUrl',
     );
 
     final actions = <(IconData, String, VoidCallback)>[
@@ -972,14 +972,14 @@ class _QuickShareSection extends StatelessWidget {
         Icons.email_outlined,
         'Email',
         () => _open(
-          'mailto:?subject=${Uri.encodeComponent('Tarjeta digital de $name')}&body=$msgText',
+          'mailto:?subject=${Uri.encodeComponent('Digital card of $name')}&body=$msgText',
         ),
       ),
       (
         Icons.send_outlined,
         'Telegram',
         () => _open(
-          'https://t.me/share/url?url=$encoded&text=${Uri.encodeComponent('Tarjeta de $name')}',
+          'https://t.me/share/url?url=$encoded&text=${Uri.encodeComponent('Card of $name')}',
         ),
       ),
       (
@@ -1000,8 +1000,8 @@ class _QuickShareSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const _SectionHeading(
-          title: 'Canales de envío',
-          subtitle: 'Usa accesos rápidos para mandar tu contacto en segundos.',
+          title: 'Sharing channels',
+          subtitle: 'Use shortcuts to send your contact in seconds.',
         ),
         const SizedBox(height: 14),
         LayoutBuilder(

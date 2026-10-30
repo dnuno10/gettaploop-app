@@ -104,12 +104,12 @@ class _LoginViewState extends State<LoginView> {
 
   String _friendlyError(String raw) {
     if (raw.contains('Invalid login credentials')) {
-      return 'Correo o contraseña incorrectos.';
+      return 'Incorrect email or password.';
     }
     if (raw.contains('Email not confirmed')) {
-      return 'Tu correo no ha sido confirmado.';
+      return 'Your email has not been confirmed.';
     }
-    return 'No se pudo iniciar sesión. Intenta de nuevo.';
+    return 'Could not sign in. Please try again.';
   }
 
   void _onContinuePressed() {
@@ -121,10 +121,10 @@ class _LoginViewState extends State<LoginView> {
     final emailEmpty = _emailCtrl.text.trim().isEmpty;
     final passwordEmpty = _passwordCtrl.text.isEmpty;
     final message = emailEmpty && passwordEmpty
-        ? 'Ingresa tu correo y contraseña para continuar.'
+        ? 'Enter your email and password to continue.'
         : emailEmpty
-        ? 'Ingresa tu correo para continuar.'
-        : 'Ingresa tu contraseña para continuar.';
+        ? 'Enter your email to continue.'
+        : 'Enter your password to continue.';
 
     if (emailEmpty) {
       _emailFocus.requestFocus();
@@ -192,9 +192,9 @@ class _LoginViewState extends State<LoginView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             AuthHeader(
-              title: 'Inicia sesión en TapLoop',
+              title: 'Sign in to TapLoop',
               subtitle:
-                  'Usa tu correo para continuar. Si aún no tienes una cuenta, podrás crearla.',
+                  'Use your email to continue. If you don\'t have an account yet, you can create one.',
               logoHeight: isMobile ? 34 : 40,
               logoBottomSpacing: isMobile ? 12 : 16,
               titleBottomSpacing: isMobile ? 12 : 14,
@@ -206,7 +206,7 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(height: headerToFormGap),
 
             _AuthInputField(
-              label: 'Correo electrónico',
+              label: 'Email',
               hint: 'Email',
               controller: _emailCtrl,
               keyboardType: TextInputType.emailAddress,
@@ -216,9 +216,9 @@ class _LoginViewState extends State<LoginView> {
               autofocus: !isMobile,
               validator: (v) {
                 if (v == null || v.trim().isEmpty) {
-                  return 'Ingresa tu correo';
+                  return 'Enter your email';
                 }
-                if (!v.contains('@')) return 'Correo inválido';
+                if (!v.contains('@')) return 'Invalid email';
                 return null;
               },
               onSubmitted: (_) => _passwordFocus.requestFocus(),
@@ -226,8 +226,8 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(height: 14),
 
             _AuthInputField(
-              label: 'Contraseña',
-              hint: 'Contraseña',
+              label: 'Password',
+              hint: 'Password',
               controller: _passwordCtrl,
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
@@ -235,7 +235,7 @@ class _LoginViewState extends State<LoginView> {
               prefixIcon: Icons.lock_outline,
               focusNode: _passwordFocus,
               validator: (v) {
-                if (v == null || v.isEmpty) return 'Ingresa tu contraseña';
+                if (v == null || v.isEmpty) return 'Enter your password';
                 return null;
               },
               onSubmitted: (_) => _onContinuePressed(),
@@ -253,11 +253,11 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(height: 20),
 
             TapLoopButton(
-              label: 'Continuar',
+              label: 'Continue',
               onPressed: _loading ? null : _onContinuePressed,
               variant: TapLoopButtonVariant.primary,
               isLoading: _loading,
-              loadingLabel: 'Entrando...',
+              loadingLabel: 'Signing in...',
               height: isMobile ? 58 : 67,
               icon: const Icon(Icons.arrow_forward, size: 22),
               animateIconOnHover: true,
@@ -283,9 +283,9 @@ class _LoginViewState extends State<LoginView> {
                 alignment: WrapAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () => context.push('/terminos'),
+                    onTap: () => context.push('/terms'),
                     child: Text(
-                      'Términos y condiciones',
+                      'Terms and conditions',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -302,9 +302,9 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => context.push('/privacidad'),
+                    onTap: () => context.push('/privacy'),
                     child: Text(
-                      'Políticas de privacidad',
+                      'Privacy policy',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -320,7 +320,7 @@ class _LoginViewState extends State<LoginView> {
             const _DividerWithDot(),
             SizedBox(height: isMobile ? 16 : 18),
             Text(
-              '¿Recibiste una tarjeta TapLoop?',
+              'Did you receive a TapLoop card?',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: isMobile ? 15 : 16,
@@ -330,7 +330,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Inicia sesión y vincúlala a tu perfil digital.',
+              'Sign in and link it to your digital profile.',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: isMobile ? 14 : 16,
@@ -530,8 +530,8 @@ class _AuthInputFieldState extends State<_AuthInputField> {
             suffixIcon: widget.obscureText
                 ? IconButton(
                     tooltip: _obscured
-                        ? 'Mostrar contraseña'
-                        : 'Ocultar contraseña',
+                        ? 'Show password'
+                        : 'Hide password',
                     icon: Icon(
                       _obscured
                           ? Icons.visibility_outlined

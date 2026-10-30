@@ -18,7 +18,7 @@ class WeeklyVisitsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const allDays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+    const allDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     final refDate = referenceDate ?? DateTime.now();
     final days = List.generate(7, (i) {
       final d = refDate.subtract(Duration(days: 6 - i));

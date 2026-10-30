@@ -129,7 +129,7 @@ String _defaultHelpMessage(String title, String? subtitle) {
     return cleanSubtitle;
   }
   if (cleanTitle.isEmpty) {
-    return 'Explica la funcionalidad de este bloque.';
+    return 'Explains what this section does.';
   }
-  return 'Explica la funcionalidad del bloque "$cleanTitle".';
+  return 'Explains what the "$cleanTitle" section does.';
 }

@@ -14,7 +14,7 @@ class TapLoopLoadingView extends StatelessWidget {
   const TapLoopLoadingView({
     super.key,
     this.scaffold = false,
-    this.title = 'Preparando tu perfil',
+    this.title = 'Preparing your profile',
   });
 
   @override
@@ -50,7 +50,7 @@ class TapLoopLoadingView extends StatelessWidget {
                 const _PulsingDots(),
                 SizedBox(height: compact ? 26 : 34),
                 Text(
-                  '¿Recibiste una tarjeta TapLoop?',
+                  'Did you receive a TapLoop card?',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     color: context.textPrimary,
@@ -61,7 +61,7 @@ class TapLoopLoadingView extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Inicia sesión y vincúlala a tu perfil digital.',
+                  'Sign in and link it to your digital profile.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     color: context.textSecondary,

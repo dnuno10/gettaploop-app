@@ -68,7 +68,7 @@ class _OtpViewState extends State<OtpView> {
   void _onVerify() async {
     final code = _codeCtrl.text.trim();
     if (code.length != 8) {
-      setState(() => _errorMsg = 'Ingresa el código de 8 dígitos');
+      setState(() => _errorMsg = 'Enter the 8-digit code');
       return;
     }
     setState(() {
@@ -112,7 +112,7 @@ class _OtpViewState extends State<OtpView> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Código reenviado. Revisa tu correo.'),
+            content: Text('Code resent. Check your email.'),
             backgroundColor: AppColors.success,
           ),
         );
@@ -121,7 +121,7 @@ class _OtpViewState extends State<OtpView> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Error al reenviar el código. Intenta de nuevo.'),
+            content: Text('Error resending the code. Please try again.'),
             backgroundColor: AppColors.error,
           ),
         );
@@ -131,18 +131,18 @@ class _OtpViewState extends State<OtpView> {
 
   String _friendlyError(String raw) {
     if (raw.contains('expired') || raw.contains('Token has expired')) {
-      return 'El código expiró. Usa el botón "Reenviar código".';
+      return 'The code expired. Use the "Resend code" button.';
     }
     if (raw.contains('invalid') ||
         raw.contains('Token not found') ||
         raw.contains('otp_error') ||
         raw.contains('OTP')) {
-      return 'Código incorrecto. Verifica e inténtalo de nuevo.';
+      return 'Incorrect code. Check it and try again.';
     }
     if (raw.contains('rate limit') || raw.contains('too many')) {
-      return 'Demasiados intentos. Espera un momento.';
+      return 'Too many attempts. Please wait a moment.';
     }
-    return 'Error al verificar. Intenta de nuevo.';
+    return 'Verification error. Please try again.';
   }
 
   String _maskedEmail(String email) {
@@ -162,9 +162,9 @@ class _OtpViewState extends State<OtpView> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AuthHeader(
-            title: isLogin ? 'Verifica tu correo' : 'Confirma tu cuenta',
+            title: isLogin ? 'Verify your email' : 'Confirm your account',
             subtitle:
-                'Ingresa el código de 8 dígitos que enviamos a\n${_maskedEmail(widget.email)}',
+                'Enter the 8-digit code we sent to\n${_maskedEmail(widget.email)}',
           ),
           const SizedBox(height: 40),
 
@@ -247,7 +247,7 @@ class _OtpViewState extends State<OtpView> {
 
           // ── Verificar ────────────────────────────────────────────────────
           TapLoopButton(
-            label: 'Verificar código',
+            label: 'Verify code',
             onPressed: _loading ? null : _onVerify,
             variant: TapLoopButtonVariant.primary,
             isLoading: _loading,
@@ -259,7 +259,7 @@ class _OtpViewState extends State<OtpView> {
           Center(
             child: _resendCountdown > 0
                 ? Text(
-                    'Reenviar código en ${_resendCountdown}s',
+                    'Resend code in ${_resendCountdown}s',
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       color: context.textSecondary,
@@ -268,7 +268,7 @@ class _OtpViewState extends State<OtpView> {
                 : GestureDetector(
                     onTap: _onResend,
                     child: Text(
-                      'Reenviar código',
+                      'Resend code',
                       style: GoogleFonts.dmSans(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
@@ -300,7 +300,7 @@ class _OtpViewState extends State<OtpView> {
                 context.go('/');
               },
               child: Text(
-                '← Cambiar correo',
+                '← Change email',
                 style: GoogleFonts.dmSans(
                   fontSize: 13,
                   color: context.textSecondary,

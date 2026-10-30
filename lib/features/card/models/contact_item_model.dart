@@ -55,15 +55,15 @@ class ContactItemModel {
   String get defaultLabel {
     switch (type) {
       case ContactType.phone:
-        return 'Teléfono';
+        return 'Phone';
       case ContactType.whatsapp:
         return 'WhatsApp';
       case ContactType.email:
-        return 'Correo';
+        return 'Email';
       case ContactType.address:
-        return 'Dirección';
+        return 'Address';
       case ContactType.website:
-        return 'Sitio web';
+        return 'Website';
     }
   }
 

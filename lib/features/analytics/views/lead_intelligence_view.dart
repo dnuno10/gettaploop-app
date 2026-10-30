@@ -38,52 +38,59 @@ class _TimelineEvent {
 String _formTitle(String? formType) {
   switch (formType) {
     case 'cotizacion':
-      return 'Solicitar cotización';
+      return 'Request a quote';
     case 'demo':
-      return 'Agendar demo';
+      return 'Schedule a demo';
     case 'catalogo':
-      return 'Descargar catálogo';
+      return 'Download catalog';
     case 'contacto':
-      return 'Formulario de contacto';
+      return 'Contact form';
     case 'propuesta':
-      return 'Solicitar propuesta';
+      return 'Request a proposal';
     default:
-      return 'Formulario';
+      return 'Form';
   }
 }
 
 String _verboseEventLabel(LeadActionEvent action, LeadModel lead) {
   if (action.action == LeadAction.filledForm) {
-    return 'Hizo el llenado de ${_formTitle(lead.formType)}';
+    return 'Filled out ${_formTitle(lead.formType)}';
   }
 
   if (action.customLabel != null && action.customLabel!.trim().isNotEmpty) {
     final raw = action.customLabel!.trim();
     final lower = raw.toLowerCase();
     if (lower.contains('email') || lower.contains('correo')) {
-      return 'Hizo click en Email';
+      return 'Clicked Email';
     }
     if (lower.startsWith('hizo ') ||
         lower.startsWith('visit') ||
-        lower.startsWith('descarg')) {
+        lower.startsWith('descarg') ||
+        lower.startsWith('clicked ') ||
+        lower.startsWith('download') ||
+        lower.startsWith('filled ') ||
+        lower.startsWith('scanned ') ||
+        lower.startsWith('opened ') ||
+        lower.startsWith('saved ') ||
+        lower.startsWith('shared ')) {
       return raw;
     }
-    return 'Hizo click en $raw';
+    return 'Clicked $raw';
   }
 
   switch (action.action) {
     case LeadAction.visitedProfile:
-      return 'Visitó el perfil digital';
+      return 'Visited the digital profile';
     case LeadAction.clickedLinkedIn:
-      return 'Hizo click en LinkedIn';
+      return 'Clicked LinkedIn';
     case LeadAction.clickedWebsite:
-      return 'Hizo click en Sitio web';
+      return 'Clicked Website';
     case LeadAction.clickedWhatsApp:
-      return 'Hizo click en WhatsApp';
+      return 'Clicked WhatsApp';
     case LeadAction.downloadedContact:
-      return 'Descargó el contacto';
+      return 'Downloaded the contact';
     case LeadAction.filledForm:
-      return 'Hizo el llenado de ${_formTitle(lead.formType)}';
+      return 'Filled out ${_formTitle(lead.formType)}';
   }
 }
 
@@ -93,7 +100,7 @@ List<_TimelineEvent> _buildTimeline(LeadModel lead) {
     final label = a.label.toLowerCase();
     if (label.contains('nfc')) {
       icon = Icons.nfc_outlined;
-    } else if (label.contains('perfil')) {
+    } else if (label.contains('perfil') || label.contains('profile')) {
       icon = Icons.person_outline_rounded;
     } else {
       switch (a.action) {
@@ -149,14 +156,14 @@ List<_TimelineEvent> _buildTimeline(LeadModel lead) {
       timestamp: base,
       time: _fmt(base),
       date: _fmtDay(base),
-      label: 'Escaneó NFC',
+      label: 'Scanned NFC',
       icon: Icons.nfc_outlined,
     ),
     _TimelineEvent(
       timestamp: base.add(const Duration(minutes: 1)),
       time: _fmt(base.add(const Duration(minutes: 1))),
       date: _fmtDay(base.add(const Duration(minutes: 1))),
-      label: 'Abrió perfil',
+      label: 'Opened profile',
       icon: Icons.person_outline_rounded,
     ),
   ];
@@ -170,18 +177,18 @@ String _fmt(DateTime dt) {
 
 String _fmtDay(DateTime dt) {
   const months = [
-    'ene',
+    'jan',
     'feb',
     'mar',
-    'abr',
+    'apr',
     'may',
     'jun',
     'jul',
-    'ago',
+    'aug',
     'sep',
     'oct',
     'nov',
-    'dic',
+    'dec',
   ];
   return '${dt.day} ${months[dt.month - 1]}';
 }
@@ -353,7 +360,7 @@ class _LeadIntelligenceViewState extends State<LeadIntelligenceView> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Lead marcado como contactado.',
+          'Lead marked as contacted.',
           TapLoopToastType.success,
         );
       }
@@ -393,9 +400,9 @@ class _LeadIntelligenceViewState extends State<LeadIntelligenceView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       HelpTitle(
-                        title: 'Bandeja de leads',
+                        title: 'Leads inbox',
                         helpText:
-                            'Administra, filtra y prioriza los leads capturados por tus tarjetas.',
+                            'Manage, filter, and prioritize the leads captured by your cards.',
                         style: GoogleFonts.outfit(
                           fontSize: isDesktop ? 42 : 30,
                           fontWeight: FontWeight.w800,
@@ -405,7 +412,7 @@ class _LeadIntelligenceViewState extends State<LeadIntelligenceView> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Administra y filtra leads capturados por tu tarjeta.',
+                        'Manage and filter leads captured by your card.',
                         style: GoogleFonts.dmSans(
                           fontSize: 15,
                           color: context.textSecondary,
@@ -472,7 +479,7 @@ class _LeadIntelligenceViewState extends State<LeadIntelligenceView> {
                   height: 260,
                   child: Center(
                     child: Text(
-                      'No hay leads para este filtro todavía.',
+                      'No leads for this filter yet.',
                       style: GoogleFonts.dmSans(
                         fontSize: 14,
                         color: context.textMuted,
@@ -525,7 +532,7 @@ class _LeadCommandBar extends StatelessWidget {
         maxLength: 200,
         style: GoogleFonts.dmSans(fontSize: 13, color: context.textPrimary),
         decoration: InputDecoration(
-          hintText: 'Buscar lead...',
+          hintText: 'Search lead...',
           hintStyle: GoogleFonts.dmSans(fontSize: 13, color: context.textMuted),
           counterText: '',
           isDense: true,
@@ -578,17 +585,17 @@ class _LeadCommandBar extends StatelessWidget {
               const SizedBox(width: 12),
               const _LeadToolbarButton(
                 icon: Icons.calendar_today_outlined,
-                label: 'Fechas',
+                label: 'Dates',
               ),
               const SizedBox(width: 12),
               const _LeadToolbarButton(
                 icon: Icons.filter_alt_outlined,
-                label: 'Todos los orígenes',
+                label: 'All sources',
               ),
               const SizedBox(width: 12),
               const _LeadToolbarButton(
                 icon: Icons.keyboard_arrow_down_rounded,
-                label: 'Ordenar por: Recientes',
+                label: 'Sort by: Recent',
               ),
             ],
           );
@@ -625,19 +632,19 @@ class _LeadMetricStrip extends StatelessWidget {
         _LeadMetricChip(
           icon: Icons.assignment_ind_outlined,
           value: total,
-          label: 'leads totales',
+          label: 'total leads',
           color: context.textSecondary,
         ),
         _LeadMetricChip(
           icon: Icons.circle,
           value: newCount,
-          label: 'nuevos',
+          label: 'new',
           color: AppColors.primary,
         ),
         _LeadMetricChip(
           icon: Icons.circle,
           value: contactedCount,
-          label: 'contactado',
+          label: 'contacted',
           color: AppColors.success,
         ),
       ],
@@ -797,7 +804,7 @@ class _LeadListPanel extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Text(
-                    'Fin de la lista',
+                    'End of list',
                     style: GoogleFonts.dmSans(
                       fontSize: 12,
                       color: context.textMuted,
@@ -910,7 +917,7 @@ class _LeadListRowState extends State<_LeadListRow> {
                     Text(
                       lead.company?.trim().isNotEmpty == true
                           ? lead.company!
-                          : 'Empresa no disponible',
+                          : 'Company not available',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.dmSans(
@@ -955,7 +962,7 @@ class _LeadListRowState extends State<_LeadListRow> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Ver info',
+                        'View info',
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           fontWeight: FontWeight.w800,
@@ -1027,7 +1034,7 @@ class _LeadDetailPanelState extends State<_LeadDetailPanel> {
                     HelpTitle(
                       title: lead.displayName,
                       helpText:
-                          'Resumen del lead seleccionado y sus datos principales.',
+                          'Summary of the selected lead and their main details.',
                       style: GoogleFonts.outfit(
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
@@ -1039,7 +1046,7 @@ class _LeadDetailPanelState extends State<_LeadDetailPanel> {
                     Text(
                       lead.company?.trim().isNotEmpty == true
                           ? lead.company!
-                          : 'Empresa no disponible',
+                          : 'Company not available',
                       style: GoogleFonts.dmSans(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -1074,17 +1081,17 @@ class _LeadDetailPanelState extends State<_LeadDetailPanel> {
             children: [
               _LeadDetailFact(
                 icon: Icons.schedule_rounded,
-                label: 'Estado:',
-                value: lead.isConverted ? 'Contactado' : 'Pendiente',
+                label: 'Status:',
+                value: lead.isConverted ? 'Contacted' : 'Pending',
               ),
               _LeadDetailFact(
                 icon: Icons.link_rounded,
-                label: 'Origen:',
+                label: 'Source:',
                 value: _leadSourceLabel(lead),
               ),
               _LeadDetailFact(
                 icon: Icons.calendar_today_outlined,
-                label: 'Capturado:',
+                label: 'Captured:',
                 value: _fmtDay(lead.firstSeen),
               ),
             ],
@@ -1142,11 +1149,11 @@ class _LeadDetailActions extends StatelessWidget {
           if (lead.formData != null && lead.formData!.isNotEmpty) ...[
             _LeadOutlineAction(
               icon: Icons.open_in_new_rounded,
-              label: 'Ver info',
+              label: 'View info',
               child: _FormEventButton(
                 formData: lead.formData!,
                 formType: lead.formType,
-                label: 'Ver info',
+                label: 'View info',
                 primaryStyle: true,
               ),
             ),
@@ -1154,7 +1161,7 @@ class _LeadDetailActions extends StatelessWidget {
           ],
           _LeadOutlineAction(
             icon: Icons.check_circle_outline_rounded,
-            label: lead.isConverted ? 'Contactado' : 'Marcar contactado',
+            label: lead.isConverted ? 'Contacted' : 'Mark as contacted',
             onTap: lead.isConverted ? null : onConverted,
           ),
         ],
@@ -1237,8 +1244,8 @@ class _LeadActivityColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HelpTitle(
-          title: 'Actividad reciente',
-          helpText: 'Secuencia de eventos e interacciones de este lead.',
+          title: 'Recent activity',
+          helpText: 'Sequence of events and interactions for this lead.',
           style: GoogleFonts.outfit(
             fontSize: 16,
             fontWeight: FontWeight.w800,
@@ -1262,7 +1269,7 @@ class _LeadActivityColumn extends StatelessWidget {
             child: GestureDetector(
               onTap: onToggleTimeline,
               child: Text(
-                showAllTimeline ? 'Ver menos' : 'Ver todos los eventos',
+                showAllTimeline ? 'Show less' : 'View all events',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
@@ -1295,9 +1302,9 @@ class _LeadInfoPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Información del lead',
+            title: 'Lead information',
             helpText:
-                'Datos de contacto, estado y detalles capturados del lead.',
+                'Contact details, status, and captured information for the lead.',
             style: GoogleFonts.outfit(
               fontSize: 15,
               fontWeight: FontWeight.w800,
@@ -1307,23 +1314,23 @@ class _LeadInfoPanel extends StatelessWidget {
           const SizedBox(height: 18),
           _LeadInfoRow(
             icon: Icons.schedule_rounded,
-            label: 'Estado',
-            value: lead.isConverted ? 'Contactado' : 'Pendiente',
+            label: 'Status',
+            value: lead.isConverted ? 'Contacted' : 'Pending',
             pill: true,
           ),
           _LeadInfoRow(
             icon: Icons.link_rounded,
-            label: 'Origen',
+            label: 'Source',
             value: _leadSourceLabel(lead),
           ),
           _LeadInfoRow(
             icon: Icons.alarm_rounded,
-            label: 'Última actividad',
+            label: 'Last activity',
             value: '${_fmtDay(lead.lastSeen)}, ${_fmt(lead.lastSeen)}',
           ),
           _LeadInfoRow(
             icon: Icons.calendar_today_outlined,
-            label: 'Capturado',
+            label: 'Captured',
             value: '${_fmtDay(lead.firstSeen)}, ${_fmt(lead.firstSeen)}',
           ),
         ],
@@ -1366,7 +1373,7 @@ class _LeadInfoRow extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           pill
-              ? _LeadStatusPill(contacted: value == 'Contactado')
+              ? _LeadStatusPill(contacted: value == 'Contacted')
               : Flexible(
                   child: Text(
                     value,
@@ -1479,7 +1486,7 @@ class _LeadStatusPill extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           Text(
-            contacted ? 'Contactado' : 'Pendiente',
+            contacted ? 'Contacted' : 'Pending',
             style: GoogleFonts.dmSans(
               fontSize: 11,
               fontWeight: FontWeight.w800,
@@ -1523,7 +1530,7 @@ class _LeadListAvatar extends StatelessWidget {
 String _leadSourceLabel(LeadModel lead) {
   final source = lead.formType?.trim();
   if (source != null && source.isNotEmpty) return _formTitle(source);
-  return 'link público';
+  return 'public link';
 }
 
 class _LeadStatusTabs extends StatelessWidget {
@@ -1537,19 +1544,19 @@ class _LeadStatusTabs extends StatelessWidget {
     return Row(
       children: [
         _LeadStatusTab(
-          label: 'Todos',
+          label: 'All',
           value: 'all',
           selected: value == 'all',
           onTap: onChanged,
         ),
         _LeadStatusTab(
-          label: 'Nuevo',
+          label: 'New',
           value: 'new',
           selected: value == 'new',
           onTap: onChanged,
         ),
         _LeadStatusTab(
-          label: 'Contactado',
+          label: 'Contacted',
           value: 'contacted',
           selected: value == 'contacted',
           onTap: onChanged,
@@ -1833,7 +1840,7 @@ class _LeadContactButton extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                contacted ? 'Contactado' : 'Pendiente',
+                contacted ? 'Contacted' : 'Pending',
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                   fontWeight: FontWeight.w800,
@@ -1921,7 +1928,7 @@ class _LeadTimelineCardState extends State<_LeadTimelineCard> {
                                   _FormEventButton(
                                     formData: lead.formData!,
                                     formType: lead.formType,
-                                    label: 'Ver info',
+                                    label: 'View info',
                                   ),
                                 ],
                               ],
@@ -1930,7 +1937,7 @@ class _LeadTimelineCardState extends State<_LeadTimelineCard> {
                             Text(
                               lead.company?.trim().isNotEmpty == true
                                   ? lead.company!
-                                  : 'Empresa no disponible',
+                                  : 'Company not available',
                               style: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
@@ -1961,8 +1968,8 @@ class _LeadTimelineCardState extends State<_LeadTimelineCard> {
                               children: [
                                 _LeadBadge(
                                   label: lead.isConverted
-                                      ? 'Contactado'
-                                      : 'Pendiente',
+                                      ? 'Contacted'
+                                      : 'Pending',
                                   color: lead.isConverted
                                       ? AppColors.success
                                       : const Color(0xFF64748B),
@@ -1972,7 +1979,7 @@ class _LeadTimelineCardState extends State<_LeadTimelineCard> {
                                   subtle: !lead.isConverted,
                                 ),
                                 _LeadBadge(
-                                  label: 'Origen: link público',
+                                  label: 'Source: public link',
                                   color: context.textSecondary,
                                   subtle: true,
                                 ),
@@ -2030,8 +2037,8 @@ class _LeadTimelineCardState extends State<_LeadTimelineCard> {
                         ),
                         child: Text(
                           _showAllTimeline
-                              ? 'Ver menos'
-                              : 'Ver todos los eventos',
+                              ? 'Show less'
+                              : 'View all events',
                           style: GoogleFonts.dmSans(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -2177,7 +2184,7 @@ class _FormEventButton extends StatelessWidget {
   const _FormEventButton({
     required this.formData,
     this.formType,
-    this.label = 'Ver formulario',
+    this.label = 'View form',
     this.primaryStyle = false,
   });
 
@@ -2186,14 +2193,14 @@ class _FormEventButton extends StatelessWidget {
     final ok = await launchUrl(uri, mode: LaunchMode.platformDefault);
     if (!ok && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No fue posible abrir la acción.')),
+        const SnackBar(content: Text('Could not open the action.')),
       );
     }
   }
 
   Future<void> _saveLeadSummary(BuildContext context) async {
     final buffer = StringBuffer();
-    buffer.writeln('Formulario: ${_formTitle(formType)}');
+    buffer.writeln('Form: ${_formTitle(formType)}');
     for (final entry in _visibleFormEntries(formData)) {
       final key = entry.key;
       final value = entry.value;
@@ -2203,7 +2210,7 @@ class _FormEventButton extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Información copiada para guardar contacto.'),
+          content: Text('Information copied to save the contact.'),
         ),
       );
     }
@@ -2232,7 +2239,7 @@ class _FormEventButton extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Dato copiado.')));
+      ).showSnackBar(const SnackBar(content: Text('Detail copied.')));
     }
   }
 
@@ -2347,7 +2354,7 @@ class _FormEventButton extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'Información enviada desde el perfil público.',
+                              'Information submitted from the public profile.',
                               style: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 color: ctx.textSecondary,
@@ -2493,7 +2500,7 @@ class _FormEventButton extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.pop(ctx),
                         child: Text(
-                          'Cerrar',
+                          'Close',
                           style: GoogleFonts.dmSans(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
@@ -2504,7 +2511,7 @@ class _FormEventButton extends StatelessWidget {
                       const SizedBox(width: 14),
                       _DialogPrimaryAction(
                         icon: Icons.save_alt_rounded,
-                        label: 'Guardar contacto',
+                        label: 'Save contact',
                         onTap: () => _saveLeadSummary(context),
                       ),
                     ],

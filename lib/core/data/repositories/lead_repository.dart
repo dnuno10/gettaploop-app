@@ -441,7 +441,7 @@ class LeadRepository {
       return LeadActionEvent(
         action: LeadAction.visitedProfile,
         timestamp: e.timestamp,
-        customLabel: 'Escaneó NFC',
+        customLabel: 'Scanned NFC',
       );
     }
 
@@ -449,7 +449,7 @@ class LeadRepository {
       return LeadActionEvent(
         action: LeadAction.filledForm,
         timestamp: e.timestamp,
-        customLabel: label?.isNotEmpty == true ? label : 'Llenó formulario',
+        customLabel: label?.isNotEmpty == true ? label : 'Filled out form',
       );
     }
 
@@ -457,7 +457,7 @@ class LeadRepository {
       return LeadActionEvent(
         action: LeadAction.downloadedContact,
         timestamp: e.timestamp,
-        customLabel: label?.isNotEmpty == true ? label : 'Guardó contacto',
+        customLabel: label?.isNotEmpty == true ? label : 'Saved contact',
       );
     }
 
@@ -465,7 +465,7 @@ class LeadRepository {
       return LeadActionEvent(
         action: LeadAction.clickedWebsite,
         timestamp: e.timestamp,
-        customLabel: label?.isNotEmpty == true ? label : 'Compartió perfil',
+        customLabel: label?.isNotEmpty == true ? label : 'Shared profile',
       );
     }
 
@@ -475,14 +475,14 @@ class LeadRepository {
         return LeadActionEvent(
           action: LeadAction.clickedWhatsApp,
           timestamp: e.timestamp,
-          customLabel: label?.isNotEmpty == true ? label : 'Abrió WhatsApp',
+          customLabel: label?.isNotEmpty == true ? label : 'Opened WhatsApp',
         );
       }
       if (lower.contains('linkedin')) {
         return LeadActionEvent(
           action: LeadAction.clickedLinkedIn,
           timestamp: e.timestamp,
-          customLabel: label?.isNotEmpty == true ? label : 'Click en LinkedIn',
+          customLabel: label?.isNotEmpty == true ? label : 'Clicked LinkedIn',
         );
       }
 
@@ -492,7 +492,7 @@ class LeadRepository {
         return LeadActionEvent(
           action: LeadAction.visitedProfile,
           timestamp: e.timestamp,
-          customLabel: 'Abrió perfil',
+          customLabel: 'Opened profile',
         );
       }
 
@@ -501,7 +501,7 @@ class LeadRepository {
         timestamp: e.timestamp,
         customLabel: label?.isNotEmpty == true
             ? label
-            : 'Interacción en enlace',
+            : 'Link interaction',
       );
     }
 

@@ -24,7 +24,7 @@ class CardQrWebScanner extends StatefulWidget {
 
 class _CardQrWebScannerState extends State<CardQrWebScanner> {
   static const String _phoneFallbackMessage =
-      'Si tu computadora no tiene camara, accede desde tu telefono para usar su camara y escanear el QR.';
+      'If your computer has no camera, sign in from your phone to use its camera and scan the QR.';
   static const List<String> _jsQrUrls = [
     'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js',
     'https://unpkg.com/jsqr@1.4.0/dist/jsQR.js',
@@ -83,7 +83,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
         final jsQrLoaded = await _ensureJsQrLoaded();
         if (!jsQrLoaded) {
           _emitError(
-            'Este navegador no soporta escaneo QR en vivo con la camara. $_phoneFallbackMessage',
+            'This browser doesn\'t support live QR scanning with the camera. $_phoneFallbackMessage',
           );
           return;
         }
@@ -95,7 +95,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
       final mediaDevices = html.window.navigator.mediaDevices;
       if (mediaDevices == null) {
         _emitError(
-          'No fue posible acceder a la camara del navegador. $_phoneFallbackMessage',
+          'Could not access the browser camera. $_phoneFallbackMessage',
         );
         return;
       }
@@ -124,7 +124,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
       );
     } catch (_) {
       _emitError(
-        'No se pudo abrir la camara. Verifica el permiso del navegador o accede desde tu telefono si este equipo no tiene camara.',
+        'Could not open the camera. Check the browser permission or sign in from your phone if this device has no camera.',
       );
     }
   }
@@ -148,7 +148,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
         }
       }
     } catch (_) {
-      _emitError('No se pudo leer el QR desde la camara.');
+      _emitError('Could not read the QR from the camera.');
     } finally {
       _scanInFlight = false;
     }
@@ -156,7 +156,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
 
   Future<void> _scanWithBarcodeDetector() async {
     if (_barcodeDetector == null) {
-      throw StateError('BarcodeDetector no disponible');
+      throw StateError('BarcodeDetector not available');
     }
 
     final result = await (_barcodeDetector as JSObject)
@@ -181,7 +181,7 @@ class _CardQrWebScannerState extends State<CardQrWebScanner> {
   void _scanWithJsQr() {
     final jsQr = globalContext.getProperty<JSFunction?>('jsQR'.toJS);
     if (jsQr == null) {
-      throw StateError('jsQR no disponible');
+      throw StateError('jsQR not available');
     }
 
     final width = _videoElement.videoWidth;

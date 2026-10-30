@@ -97,20 +97,20 @@ class VisitEventTile extends StatelessWidget {
   String get _sourceLabel {
     switch (event.source) {
       case 'contact':
-        return 'Contacto';
+        return 'Contact';
       case 'social':
-        return 'Red social';
+        return 'Social network';
       case 'form':
-        return 'Formulario';
+        return 'Form';
       case 'downloaded_contact':
-        return 'Guardó contacto';
+        return 'Saved contact';
       case 'share':
-        return 'Compartió perfil';
+        return 'Shared profile';
       case 'nfc':
       case 'qr':
-        return 'Escaneo NFC';
+        return 'NFC scan';
       case 'link':
-        return 'Abrió perfil';
+        return 'Opened profile';
       default:
         return event.source ?? '';
     }
@@ -195,15 +195,15 @@ class _SourceBadge extends StatelessWidget {
       case 'link':
         return 'LINK';
       case 'contact':
-        return 'CONTACTO';
+        return 'CONTACT';
       case 'social':
         return 'SOCIAL';
       case 'form':
         return 'FORM';
       case 'downloaded_contact':
-        return 'GUARDADO';
+        return 'SAVED';
       case 'share':
-        return 'COMPARTIR';
+        return 'SHARE';
       default:
         return source!.toUpperCase();
     }

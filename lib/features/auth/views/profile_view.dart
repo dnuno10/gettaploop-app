@@ -80,7 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Perfil actualizado correctamente'),
+            content: Text('Profile updated successfully'),
             backgroundColor: AppColors.success,
           ),
         );
@@ -90,7 +90,7 @@ class _ProfileViewState extends State<ProfileView> {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error al guardar: $e'),
+            content: Text('Error saving: $e'),
             backgroundColor: AppColors.error,
           ),
         );
@@ -123,7 +123,7 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
       backgroundColor: context.bgPage,
       appBar: AppBar(
-        title: const Text('Mi perfil'),
+        title: const Text('My profile'),
         backgroundColor: context.bgCard,
         actions: [
           if (_edited)
@@ -132,7 +132,7 @@ class _ProfileViewState extends State<ProfileView> {
               child: TextButton(
                 onPressed: _onSave,
                 child: Text(
-                  'Guardar',
+                  'Save',
                   style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.w700,
                     color: AppColors.primary,
@@ -164,10 +164,10 @@ class _ProfileViewState extends State<ProfileView> {
 
                   // Personal info card
                   _SectionCard(
-                    title: 'Información personal',
+                    title: 'Personal information',
                     children: [
                       TapLoopTextField(
-                        label: 'Nombre completo',
+                        label: 'Full name',
                         controller: _nameCtrl,
                         prefixIcon: Icon(
                           Icons.person_outline,
@@ -175,12 +175,12 @@ class _ProfileViewState extends State<ProfileView> {
                           color: context.textMuted,
                         ),
                         validator: (v) => (v == null || v.trim().isEmpty)
-                            ? 'Nombre requerido'
+                            ? 'Name required'
                             : null,
                       ),
                       const SizedBox(height: 16),
                       TapLoopTextField(
-                        label: 'Teléfono',
+                        label: 'Phone',
                         controller: _phoneCtrl,
                         keyboardType: TextInputType.phone,
                         prefixIcon: Icon(
@@ -191,7 +191,7 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       const SizedBox(height: 16),
                       TapLoopTextField(
-                        label: 'Cargo / Puesto',
+                        label: 'Job title / Position',
                         controller: _jobCtrl,
                         prefixIcon: Icon(
                           Icons.work_outline,
@@ -201,7 +201,7 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       const SizedBox(height: 16),
                       TapLoopTextField(
-                        label: 'Empresa',
+                        label: 'Company',
                         controller: _companyCtrl,
                         prefixIcon: Icon(
                           Icons.business_outlined,
@@ -215,10 +215,10 @@ class _ProfileViewState extends State<ProfileView> {
 
                   // Account info card
                   _SectionCard(
-                    title: 'Cuenta',
+                    title: 'Account',
                     children: [
                       TapLoopTextField(
-                        label: 'Correo electrónico',
+                        label: 'Email',
                         controller: _emailCtrl,
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: Icon(
@@ -229,7 +229,7 @@ class _ProfileViewState extends State<ProfileView> {
                         suffixIcon:
                             (appState.currentUser?.emailVerified ?? false)
                             ? const Tooltip(
-                                message: 'Correo verificado',
+                                message: 'Email verified',
                                 child: Icon(
                                   Icons.verified,
                                   size: 20,
@@ -237,7 +237,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                               )
                             : const Tooltip(
-                                message: 'Correo no verificado',
+                                message: 'Email not verified',
                                 child: Icon(
                                   Icons.warning_amber_rounded,
                                   size: 20,
@@ -246,19 +246,19 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                         validator: (v) {
                           if (v == null || v.trim().isEmpty) {
-                            return 'Correo requerido';
+                            return 'Email required';
                           }
                           if (!RegExp(
                             r'^[^@]+@[^@]+\.[^@]+',
                           ).hasMatch(v.trim())) {
-                            return 'Correo inválido';
+                            return 'Invalid email';
                           }
                           return null;
                         },
                       ),
                       const SizedBox(height: 16),
                       TapLoopButton(
-                        label: 'Cambiar contraseña',
+                        label: 'Change password',
                         onPressed: _onChangePassword,
                         variant: TapLoopButtonVariant.outline,
                         isLoading: _changingPassword,
@@ -274,7 +274,7 @@ class _ProfileViewState extends State<ProfileView> {
 
                   // Save button
                   TapLoopButton(
-                    label: 'Guardar cambios',
+                    label: 'Save changes',
                     onPressed: _onSave,
                     variant: TapLoopButtonVariant.primary,
                     isLoading: _saving,
@@ -379,7 +379,7 @@ class _AvatarSection extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Correo verificado',
+                      'Email verified',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: AppColors.success,
@@ -450,7 +450,7 @@ class _DangerZone extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Zona de peligro',
+            'Danger zone',
             style: GoogleFonts.outfit(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -459,7 +459,7 @@ class _DangerZone extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Estas acciones son permanentes e irreversibles.',
+            'These actions are permanent and irreversible.',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               color: context.textSecondary,
@@ -479,7 +479,7 @@ class _DangerZone extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Eliminar mi cuenta',
+                'Delete my account',
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -528,7 +528,7 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Contraseña actualizada'),
+          content: Text('Password updated'),
           backgroundColor: AppColors.success,
         ),
       );
@@ -563,7 +563,7 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
               ),
             ),
             Text(
-              'Cambiar contraseña',
+              'Change password',
               style: GoogleFonts.outfit(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -571,39 +571,39 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
             ),
             const SizedBox(height: 20),
             TapLoopTextField(
-              label: 'Contraseña actual',
+              label: 'Current password',
               controller: _currentCtrl,
               obscureText: true,
               validator: (v) => (v == null || v.isEmpty)
-                  ? 'Ingresa tu contraseña actual'
+                  ? 'Enter your current password'
                   : null,
             ),
             const SizedBox(height: 16),
             TapLoopTextField(
-              label: 'Nueva contraseña',
+              label: 'New password',
               controller: _newCtrl,
               obscureText: true,
               validator: (v) {
                 if (v == null || v.isEmpty) {
-                  return 'Ingresa la nueva contraseña';
+                  return 'Enter the new password';
                 }
-                if (v.length < 8) return 'Mínimo 8 caracteres';
+                if (v.length < 8) return 'Minimum 8 characters';
                 return null;
               },
             ),
             const SizedBox(height: 16),
             TapLoopTextField(
-              label: 'Confirmar nueva contraseña',
+              label: 'Confirm new password',
               controller: _confirmCtrl,
               obscureText: true,
               validator: (v) {
-                if (v != _newCtrl.text) return 'Las contraseñas no coinciden';
+                if (v != _newCtrl.text) return 'Passwords don\'t match';
                 return null;
               },
             ),
             const SizedBox(height: 24),
             TapLoopButton(
-              label: 'Actualizar contraseña',
+              label: 'Update password',
               onPressed: _save,
               variant: TapLoopButtonVariant.secondary,
               isLoading: _loading,
@@ -640,7 +640,7 @@ class _DeleteAccountDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Eliminar cuenta',
+              'Delete account',
               style: GoogleFonts.outfit(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -648,7 +648,7 @@ class _DeleteAccountDialog extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Esta acción eliminará permanentemente tu cuenta y todos tus datos. No podrás recuperarlos.',
+              'This action will permanently delete your account and all your data. You will not be able to recover them.',
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 color: context.textSecondary,
@@ -669,7 +669,7 @@ class _DeleteAccountDialog extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Sí, eliminar mi cuenta',
+                  'Yes, delete my account',
                   style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.w600,
                     color: AppColors.white,
@@ -690,7 +690,7 @@ class _DeleteAccountDialog extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Cancelar',
+                  'Cancel',
                   style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.w600,
                     color: context.textPrimary,

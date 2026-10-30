@@ -217,7 +217,7 @@ class AnalyticsRepository {
             .map(
               (entry) => LinkStatModel(
                 linkId: entry.key,
-                label: groupedLabels[entry.key] ?? 'Enlace',
+                label: groupedLabels[entry.key] ?? 'Link',
                 platform: groupedPlatforms[entry.key] ?? '',
                 clicks: entry.value,
                 percentage: totalClicks > 0 ? entry.value / totalClicks : 0,
@@ -467,12 +467,12 @@ class AnalyticsRepository {
       );
     }
     final fallbackLabel = switch (event.source) {
-      'contact' => 'Contacto',
-      'social' => 'Red social',
-      'form' => 'Formulario',
-      'downloaded_contact' => 'Guardó contacto',
-      'share' => 'Compartió perfil',
-      'link' => 'Abrió perfil',
+      'contact' => 'Contact',
+      'social' => 'Social network',
+      'form' => 'Form',
+      'downloaded_contact' => 'Saved contact',
+      'share' => 'Shared profile',
+      'link' => 'Opened profile',
       _ => '',
     };
     return _ResolvedLinkReference(
@@ -529,7 +529,7 @@ class AnalyticsRepository {
         final id = row['id'] as String?;
         if (id == null) continue;
         resolved['form:$id'] = _ResolvedLinkReference(
-          label: row['name'] as String? ?? 'Formulario',
+          label: row['name'] as String? ?? 'Form',
           platform: 'form',
         );
       }

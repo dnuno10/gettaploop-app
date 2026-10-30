@@ -42,23 +42,23 @@ SmartFormIncludedField? _includedFieldFromString(String? value) {
 
 extension SmartFormIncludedFieldX on SmartFormIncludedField {
   String get label => switch (this) {
-    SmartFormIncludedField.name => 'Nombre',
+    SmartFormIncludedField.name => 'Name',
     SmartFormIncludedField.email => 'Email',
-    SmartFormIncludedField.phone => 'Teléfono',
-    SmartFormIncludedField.company => 'Empresa',
-    SmartFormIncludedField.message => 'Mensaje',
-    SmartFormIncludedField.budget => 'Presupuesto',
-    SmartFormIncludedField.date => 'Fecha',
+    SmartFormIncludedField.phone => 'Phone',
+    SmartFormIncludedField.company => 'Company',
+    SmartFormIncludedField.message => 'Message',
+    SmartFormIncludedField.budget => 'Budget',
+    SmartFormIncludedField.date => 'Date',
   };
 
   String get placeholder => switch (this) {
-    SmartFormIncludedField.name => 'Tu nombre',
-    SmartFormIncludedField.email => 'tu@email.com',
-    SmartFormIncludedField.phone => '+52 000 000 0000',
-    SmartFormIncludedField.company => 'Empresa',
-    SmartFormIncludedField.message => 'Cuéntanos qué necesitas',
-    SmartFormIncludedField.budget => 'Presupuesto estimado',
-    SmartFormIncludedField.date => 'Fecha deseada',
+    SmartFormIncludedField.name => 'Your name',
+    SmartFormIncludedField.email => 'you@email.com',
+    SmartFormIncludedField.phone => '+1 000 000 0000',
+    SmartFormIncludedField.company => 'Company',
+    SmartFormIncludedField.message => 'Tell us what you need',
+    SmartFormIncludedField.budget => 'Estimated budget',
+    SmartFormIncludedField.date => 'Preferred date',
   };
 
   SmartFormFieldType get fieldType => switch (this) {
@@ -101,23 +101,29 @@ List<SmartFormIncludedField> _includedFieldsFromJson(
   final legacy = <SmartFormIncludedField>{};
   for (final field in legacyFields) {
     final normalized = field.label.toLowerCase();
-    if (normalized.contains('nombre')) legacy.add(SmartFormIncludedField.name);
+    if (normalized.contains('nombre') || normalized.contains('name')) {
+      legacy.add(SmartFormIncludedField.name);
+    }
     if (normalized.contains('mail') || normalized.contains('correo')) {
       legacy.add(SmartFormIncludedField.email);
     }
-    if (normalized.contains('tel') || normalized.contains('cel')) {
+    if (normalized.contains('tel') ||
+        normalized.contains('cel') ||
+        normalized.contains('phone')) {
       legacy.add(SmartFormIncludedField.phone);
     }
-    if (normalized.contains('empresa')) {
+    if (normalized.contains('empresa') || normalized.contains('company')) {
       legacy.add(SmartFormIncludedField.company);
     }
-    if (normalized.contains('mensaje')) {
+    if (normalized.contains('mensaje') || normalized.contains('message')) {
       legacy.add(SmartFormIncludedField.message);
     }
-    if (normalized.contains('presupuesto')) {
+    if (normalized.contains('presupuesto') || normalized.contains('budget')) {
       legacy.add(SmartFormIncludedField.budget);
     }
-    if (normalized.contains('fecha')) legacy.add(SmartFormIncludedField.date);
+    if (normalized.contains('fecha') || normalized.contains('date')) {
+      legacy.add(SmartFormIncludedField.date);
+    }
   }
   return smartFormIncludedFieldOrder
       .where((field) => legacy.contains(field))
@@ -224,7 +230,7 @@ class SmartFormModel {
     required this.cardId,
     required this.name,
     this.description,
-    this.successMessage = 'Gracias, recibimos tu información.',
+    this.successMessage = 'Thank you, we received your information.',
     this.isActive = true,
     this.includedFields = const [],
     this.fields = const [],
@@ -244,11 +250,11 @@ class SmartFormModel {
     return SmartFormModel(
       id: json['id'] as String,
       cardId: json['card_id'] as String,
-      name: json['name'] as String? ?? 'Formulario',
+      name: json['name'] as String? ?? 'Form',
       description: json['description'] as String?,
       successMessage:
           json['success_message'] as String? ??
-          'Gracias, recibimos tu información.',
+          'Thank you, we received your information.',
       isActive: json['is_active'] as bool? ?? true,
       includedFields: includedFields,
       fields: resolvedFields,

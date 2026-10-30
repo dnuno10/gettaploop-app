@@ -12,7 +12,7 @@ class EmptyDataState extends StatelessWidget {
 
   const EmptyDataState({
     super.key,
-    this.title = 'No hay datos',
+    this.title = 'No data',
     this.hint,
     this.icon = Icons.inbox_outlined,
     this.centered = false,

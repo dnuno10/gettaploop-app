@@ -208,22 +208,22 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
     try {
       final rows = <List<dynamic>>[
         ['TapLoop - Metrics Report'],
-        ['Rango', '${_fmtDate(_range.start)} - ${_fmtDate(_range.end)}'],
+        ['Range', '${_fmtDate(_range.start)} - ${_fmtDate(_range.end)}'],
         [],
-        ['Indicador', 'Valor'],
-        ['Visitas', analytics.totalVisits],
-        ['Taps NFC', analytics.totalTaps],
+        ['Metric', 'Value'],
+        ['Visits', analytics.totalVisits],
+        ['NFC Taps', analytics.totalTaps],
         ['Clicks', analytics.totalClicks],
-        ['Interacciones totales', analytics.totalInteractions],
-        ['Visitas en el rango', analytics.visitsThisWeek],
-        ['Visitas período anterior', analytics.visitsLastWeek],
+        ['Total interactions', analytics.totalInteractions],
+        ['Visits in range', analytics.visitsThisWeek],
+        ['Previous period visits', analytics.visitsLastWeek],
         [
-          'Crecimiento de interacciones %',
+          'Interaction growth %',
           analytics.interactionsGrowthPercent.toStringAsFixed(1),
         ],
         [],
-        ['Visitas por día', ''],
-        ['Fecha', 'Visitas'],
+        ['Visits per day', ''],
+        ['Date', 'Visits'],
       ];
 
       for (var i = 0; i < analytics.visitsByDay.length; i++) {
@@ -248,14 +248,14 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'CSV exportado correctamente.',
+        'CSV exported successfully.',
         TapLoopToastType.success,
       );
     } catch (e) {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'Error al exportar CSV. Intenta nuevamente.',
+        'Error exporting CSV. Please try again.',
         TapLoopToastType.error,
       );
     }
@@ -275,16 +275,16 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
           margin: const pw.EdgeInsets.all(28),
           build: (context) => [
             pw.Text(
-              'TapLoop - Reporte de Métricas',
+              'TapLoop - Metrics Report',
               style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.bold),
             ),
             pw.SizedBox(height: 6),
             pw.Text(
-              'Rango: ${_fmtDate(_range.start)} - ${_fmtDate(_range.end)}',
+              'Range: ${_fmtDate(_range.start)} - ${_fmtDate(_range.end)}',
               style: const pw.TextStyle(fontSize: 11),
             ),
             pw.Text(
-              'Generado: ${generatedAt.day}/${generatedAt.month}/${generatedAt.year}',
+              'Generated: ${generatedAt.day}/${generatedAt.month}/${generatedAt.year}',
               style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey700),
             ),
             pw.SizedBox(height: 16),
@@ -300,23 +300,23 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
                 horizontal: 8,
                 vertical: 6,
               ),
-              headers: ['Indicador', 'Valor'],
+              headers: ['Metric', 'Value'],
               data: [
-                ['Visitas', '${analytics.totalVisits}'],
-                ['Taps NFC', '${analytics.totalTaps}'],
+                ['Visits', '${analytics.totalVisits}'],
+                ['NFC Taps', '${analytics.totalTaps}'],
                 ['Clicks', '${analytics.totalClicks}'],
-                ['Interacciones totales', '${analytics.totalInteractions}'],
-                ['Visitas en el rango', '${analytics.visitsThisWeek}'],
-                ['Visitas período anterior', '${analytics.visitsLastWeek}'],
+                ['Total interactions', '${analytics.totalInteractions}'],
+                ['Visits in range', '${analytics.visitsThisWeek}'],
+                ['Previous period visits', '${analytics.visitsLastWeek}'],
                 [
-                  'Crecimiento de interacciones',
+                  'Interaction growth',
                   '${analytics.interactionsGrowthPercent.toStringAsFixed(1)}%',
                 ],
               ],
             ),
             pw.SizedBox(height: 18),
             pw.Text(
-              'Visitas por día',
+              'Visits per day',
               style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
             ),
             pw.SizedBox(height: 8),
@@ -326,7 +326,7 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
                 horizontal: 8,
                 vertical: 6,
               ),
-              headers: ['Fecha', 'Visitas'],
+              headers: ['Date', 'Visits'],
               data: [
                 for (var i = 0; i < analytics.visitsByDay.length; i++)
                   [
@@ -357,14 +357,14 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'PDF exportado correctamente.',
+        'PDF exported successfully.',
         TapLoopToastType.success,
       );
     } catch (e) {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'Error al exportar PDF. Intenta nuevamente.',
+        'Error exporting PDF. Please try again.',
         TapLoopToastType.error,
       );
     }
@@ -372,18 +372,18 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
 
   static String _fmtDate(DateTime d) {
     const months = [
-      'Ene',
+      'Jan',
       'Feb',
       'Mar',
-      'Abr',
+      'Apr',
       'May',
       'Jun',
       'Jul',
-      'Ago',
+      'Aug',
       'Sep',
       'Oct',
       'Nov',
-      'Dic',
+      'Dec',
     ];
     return '${d.day} ${months[d.month - 1]}';
   }
@@ -412,9 +412,9 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Analíticas',
+            title: 'Analytics',
             helpText:
-                'Panel general para medir visitas, clics, leads y rendimiento del equipo.',
+                'Overview panel to measure visits, clicks, leads, and team performance.',
             style: GoogleFonts.outfit(
               fontSize: isDesktop ? 42 : 30,
               fontWeight: FontWeight.w800,
@@ -424,7 +424,7 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Mide el rendimiento general de tu tarjeta digital y tu equipo.',
+            'Measure the overall performance of your digital card and your team.',
             style: GoogleFonts.dmSans(
               fontSize: 15,
               color: context.textSecondary,
@@ -450,7 +450,7 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
             _load();
           },
         ),
-        _PeriodChip(label: 'Todo', onTap: _pickRange),
+        _PeriodChip(label: 'All', onTap: _pickRange),
         _ExportActionButton(
           label: 'CSV',
           icon: Icons.table_chart_outlined,
@@ -521,7 +521,7 @@ class _AnalyticsDashboardViewState extends State<AnalyticsDashboardView> {
                                 child: EmptyDataState(
                                   centered: true,
                                   hint:
-                                      'No hay registros en el rango seleccionado.',
+                                      'No records in the selected range.',
                                 ),
                               )
                             : isDesktop
@@ -653,7 +653,7 @@ class _TotalBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Interacciones totales',
+            'Total interactions',
             style: GoogleFonts.dmSans(
               fontSize: 17,
               fontWeight: FontWeight.w800,
@@ -706,7 +706,7 @@ class _TotalBlock extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'vs período anterior',
+                'vs previous period',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: context.textMuted,
@@ -731,14 +731,14 @@ class _MetricRow extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
     final items = [
       _MetricItem(
-        label: 'Visitas',
+        label: 'Visits',
         value: '${analytics.totalVisits}',
         icon: Icons.visibility_outlined,
         trend: _formatTrendValue(analytics.visitsGrowthPercent),
         positive: analytics.visitsGrowthPercent >= 0,
       ),
       _MetricItem(
-        label: 'Taps NFC',
+        label: 'NFC Taps',
         value: '${analytics.totalTaps}',
         icon: Icons.nfc_outlined,
         trend: _formatTrendValue(analytics.tapsGrowthPercent),
@@ -898,7 +898,7 @@ class _MetricCompactCard extends StatelessWidget {
               Expanded(
                 child: HelpTitle(
                   title: item.label,
-                  helpText: 'Métrica de analítica: ${item.label}.',
+                  helpText: 'Analytics metric: ${item.label}.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: context.textSecondary,
@@ -960,9 +960,9 @@ class _ChartBlock extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               HelpTitle(
-                title: 'Visitas por día',
+                title: 'Visits per day',
                 helpText:
-                    'Gráfica con el comportamiento diario de visitas en el rango seleccionado.',
+                    'Chart showing daily visit behavior in the selected range.',
                 style: GoogleFonts.outfit(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -971,7 +971,7 @@ class _ChartBlock extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '${analytics.totalVisits} en el rango',
+                '${analytics.totalVisits} in range',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: context.textMuted,
@@ -1046,9 +1046,9 @@ class _LinksBlock extends StatelessWidget {
           Row(
             children: [
               HelpTitle(
-                title: 'Links más clickeados',
+                title: 'Most clicked links',
                 helpText:
-                    'Ranking de enlaces con más clics dentro del periodo seleccionado.',
+                    'Ranking of the most clicked links in the selected period.',
                 style: GoogleFonts.outfit(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -1057,7 +1057,7 @@ class _LinksBlock extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '${analytics.totalClicks} clicks totales',
+                '${analytics.totalClicks} total clicks',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: context.textMuted,
@@ -1119,8 +1119,8 @@ class _ActivityBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Actividad reciente',
-            helpText: 'Últimas interacciones registradas con tu tarjeta.',
+            title: 'Recent activity',
+            helpText: 'Latest interactions recorded with your card.',
             style: GoogleFonts.outfit(
               fontSize: 22,
               fontWeight: FontWeight.w800,
@@ -1129,7 +1129,7 @@ class _ActivityBlock extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Últimas interacciones con tu tarjeta',
+            'Latest interactions with your card',
             style: GoogleFonts.dmSans(fontSize: 12, color: context.textMuted),
           ),
           const SizedBox(height: 20),

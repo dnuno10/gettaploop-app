@@ -106,7 +106,7 @@ class _HomeShellState extends State<HomeShell> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo iniciar la vinculación de la tarjeta.'),
+          content: Text('Could not start linking the card.'),
         ),
       );
     } finally {
@@ -153,7 +153,7 @@ class _HomeShellState extends State<HomeShell> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo actualizar la marca de verificado.',
+          'Could not update the verified badge.',
           TapLoopToastType.warning,
         );
       }
@@ -167,22 +167,22 @@ class _HomeShellState extends State<HomeShell> {
       const _NavItem(
         icon: Icons.home_rounded,
         activeIcon: Icons.home_rounded,
-        label: 'Inicio',
+        label: 'Home',
       ),
       const _NavItem(
         icon: Icons.badge_outlined,
         activeIcon: Icons.badge_rounded,
-        label: 'Perfil digital',
+        label: 'Digital profile',
       ),
       const _NavItem(
         icon: Icons.share_outlined,
         activeIcon: Icons.share_rounded,
-        label: 'Compartir',
+        label: 'Share',
       ),
       const _NavItem(
         icon: Icons.query_stats_outlined,
         activeIcon: Icons.query_stats_rounded,
-        label: 'Analíticas',
+        label: 'Analytics',
       ),
       const _NavItem(
         icon: Icons.assignment_ind_outlined,
@@ -192,17 +192,17 @@ class _HomeShellState extends State<HomeShell> {
       const _NavItem(
         icon: Icons.groups_outlined,
         activeIcon: Icons.groups_rounded,
-        label: 'Equipo',
+        label: 'Team',
       ),
       const _NavItem(
         icon: Icons.admin_panel_settings_outlined,
         activeIcon: Icons.admin_panel_settings_rounded,
-        label: 'Administración',
+        label: 'Administration',
       ),
       const _NavItem(
         icon: Icons.settings_outlined,
         activeIcon: Icons.settings_rounded,
-        label: 'Configuración',
+        label: 'Settings',
       ),
     ];
     if (appState.currentUser?.isAdmin != true) {
@@ -337,7 +337,7 @@ class _DesktopShell extends StatelessWidget {
                     _SidebarAccountCard(
                       name: user?.name.isNotEmpty == true
                           ? user!.name
-                          : 'Equipo TapLoop',
+                          : 'TapLoop Team',
                       email: user?.email ?? '',
                       initials: user?.initials ?? 'TL',
                       photoUrl: profilePhotoUrl,
@@ -431,7 +431,7 @@ class _DesktopTopBar extends StatelessWidget {
                   icon: incomplete
                       ? Icons.info_outline_rounded
                       : Icons.check_circle_outline_rounded,
-                  label: incomplete ? 'Perfil incompleto' : 'Perfil completo',
+                  label: incomplete ? 'Incomplete profile' : 'Complete profile',
                   accent: incomplete
                       ? const Color(0xFF5B72FF)
                       : AppColors.success,
@@ -492,7 +492,7 @@ class _TopProfileSummary extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Perfil seleccionado',
+                  'Selected profile',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
@@ -603,7 +603,7 @@ class _VerifiedBadge extends StatelessWidget {
                 Icon(Icons.verified_rounded, size: 22, color: accent),
                 const SizedBox(width: 8),
                 Text(
-                  verified ? 'Verificado' : 'Sin verificar',
+                  verified ? 'Verified' : 'Unverified',
                   style: GoogleFonts.dmSans(
                     color: verified ? context.textPrimary : context.textMuted,
                     fontSize: 13,
@@ -1000,18 +1000,18 @@ class _CardDropdown extends StatelessWidget {
         const _StyledPopupEntry<String>(
           value: '__new_profile',
           icon: Icons.person_add_alt_1_rounded,
-          label: 'Nuevo perfil',
+          label: 'New profile',
           trailing: Icon(Icons.workspace_premium_rounded, size: 18),
         ),
         const _StyledPopupEntry<String>(
           value: '__link_card',
           icon: Icons.add_card_rounded,
-          label: 'Vincular tarjeta',
+          label: 'Link card',
         ),
         const _StyledPopupEntry<String>(
           value: '__digital_profile',
           icon: Icons.person_outline_rounded,
-          label: 'Perfil digital',
+          label: 'Digital profile',
         ),
       ],
       child: _ProfileSelectorShell(
@@ -1102,7 +1102,7 @@ class _ProfileSelectorShell extends StatelessWidget {
                 children: [
                   if (!compact) ...[
                     Text(
-                      'Perfil activo',
+                      'Active profile',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.dmSans(
@@ -1467,7 +1467,7 @@ class _SidebarAccountCard extends StatelessWidget {
               _StyledPopupEntry<String>(
                 value: 'logout',
                 icon: Icons.logout_rounded,
-                label: 'Cerrar sesión',
+                label: 'Sign out',
               ),
             ],
             child: Icon(
@@ -1497,7 +1497,7 @@ class _NavItem {
 String _cardTitle(DigitalCardModel card, int index) {
   final name = card.name.trim();
   if (name.isNotEmpty) return name;
-  return 'Tarjeta ${index + 1}';
+  return 'Card ${index + 1}';
 }
 
 bool _isProfileIncomplete(DigitalCardModel? card) {

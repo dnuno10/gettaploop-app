@@ -36,11 +36,11 @@ enum _AdminFieldType { text, email, phone, textarea, select }
 
 extension _AdminFieldTypeX on _AdminFieldType {
   String get label => switch (this) {
-    _AdminFieldType.text => 'Texto',
+    _AdminFieldType.text => 'Text',
     _AdminFieldType.email => 'Email',
-    _AdminFieldType.phone => 'Teléfono',
-    _AdminFieldType.textarea => 'Mensaje',
-    _AdminFieldType.select => 'Selección',
+    _AdminFieldType.phone => 'Phone',
+    _AdminFieldType.textarea => 'Message',
+    _AdminFieldType.select => 'Selection',
   };
 
   IconData get icon => switch (this) {
@@ -95,7 +95,7 @@ extension _AdminCalProviderX on _AdminCalProvider {
     _AdminCalProvider.googleCalendar => 'Google Calendar',
     _AdminCalProvider.calendly => 'Calendly',
     _AdminCalProvider.outlook => 'Outlook',
-    _AdminCalProvider.custom => 'Otro',
+    _AdminCalProvider.custom => 'Other',
   };
 
   IconData get icon => switch (this) {
@@ -107,9 +107,9 @@ extension _AdminCalProviderX on _AdminCalProvider {
 
   String get hint => switch (this) {
     _AdminCalProvider.googleCalendar => 'https://calendar.google.com/...',
-    _AdminCalProvider.calendly => 'https://calendly.com/tu-nombre',
+    _AdminCalProvider.calendly => 'https://calendly.com/your-name',
     _AdminCalProvider.outlook => 'https://outlook.office365.com/...',
-    _AdminCalProvider.custom => 'https://tu-servicio.com/tu-enlace',
+    _AdminCalProvider.custom => 'https://your-service.com/your-link',
   };
 }
 
@@ -139,33 +139,33 @@ class _AdminMember {
   static List<_AdminSmartForm> _defaultForms() => [
     _AdminSmartForm(
       id: 'cotizacion',
-      title: 'Solicitar cotización',
+      title: 'Request a quote',
       description:
-          'El prospecto llena sus datos y recibe una cotización personalizada.',
+          'The prospect fills in their details and receives a personalized quote.',
       icon: Icons.request_quote_outlined,
       enabled: true,
       fields: [
         _AdminFormField(
-          label: 'Nombre completo',
+          label: 'Full name',
           type: _AdminFieldType.text,
           required: true,
         ),
         _AdminFormField(
-          label: 'Empresa',
+          label: 'Company',
           type: _AdminFieldType.text,
           required: true,
         ),
         _AdminFormField(
-          label: 'Teléfono',
+          label: 'Phone',
           type: _AdminFieldType.phone,
           required: true,
         ),
         _AdminFormField(
-          label: 'Correo electrónico',
+          label: 'Email',
           type: _AdminFieldType.email,
         ),
         _AdminFormField(
-          label: 'Descripción del proyecto',
+          label: 'Project description',
           type: _AdminFieldType.textarea,
           required: true,
         ),
@@ -173,58 +173,58 @@ class _AdminMember {
     ),
     _AdminSmartForm(
       id: 'demo',
-      title: 'Agendar demo',
-      description: 'El prospecto reserva una demostración en el calendario.',
+      title: 'Schedule a demo',
+      description: 'The prospect books a demo on the calendar.',
       icon: Icons.videocam_outlined,
       fields: [
         _AdminFormField(
-          label: 'Nombre completo',
+          label: 'Full name',
           type: _AdminFieldType.text,
           required: true,
         ),
         _AdminFormField(
-          label: 'Correo electrónico',
+          label: 'Email',
           type: _AdminFieldType.email,
           required: true,
         ),
-        _AdminFormField(label: 'Teléfono', type: _AdminFieldType.phone),
-        _AdminFormField(label: 'Área de interés', type: _AdminFieldType.text),
+        _AdminFormField(label: 'Phone', type: _AdminFieldType.phone),
+        _AdminFormField(label: 'Area of interest', type: _AdminFieldType.text),
       ],
     ),
     _AdminSmartForm(
       id: 'catalogo',
-      title: 'Descargar catálogo',
-      description: 'El prospecto deja su email para recibir el catálogo.',
+      title: 'Download catalog',
+      description: 'The prospect leaves their email to receive the catalog.',
       icon: Icons.download_outlined,
       enabled: true,
       fields: [
         _AdminFormField(
-          label: 'Nombre completo',
+          label: 'Full name',
           type: _AdminFieldType.text,
           required: true,
         ),
         _AdminFormField(
-          label: 'Correo corporativo',
+          label: 'Work email',
           type: _AdminFieldType.email,
           required: true,
         ),
-        _AdminFormField(label: 'Empresa', type: _AdminFieldType.text),
+        _AdminFormField(label: 'Company', type: _AdminFieldType.text),
       ],
     ),
     _AdminSmartForm(
       id: 'contacto',
-      title: 'Formulario de contacto',
-      description: 'Formulario rápido ideal para ferias y eventos.',
+      title: 'Contact form',
+      description: 'Quick form, ideal for trade shows and events.',
       icon: Icons.contact_page_outlined,
       fields: [
         _AdminFormField(
-          label: 'Nombre completo',
+          label: 'Full name',
           type: _AdminFieldType.text,
           required: true,
         ),
-        _AdminFormField(label: 'Empresa', type: _AdminFieldType.text),
+        _AdminFormField(label: 'Company', type: _AdminFieldType.text),
         _AdminFormField(
-          label: 'Mensaje',
+          label: 'Message',
           type: _AdminFieldType.textarea,
           required: true,
         ),
@@ -448,7 +448,7 @@ class _AdminViewState extends State<AdminView> {
           (form) => _AdminSmartForm(
             id: form.id,
             title: form.name,
-            description: form.description ?? 'Formulario de captura',
+            description: form.description ?? 'Capture form',
             icon: Icons.description_outlined,
             enabled: form.isActive,
             fields: form.fields
@@ -639,8 +639,8 @@ class _AdminViewState extends State<AdminView> {
       TapLoopToast.show(
         context,
         enabled
-            ? 'Configuración compartida aplicada a la organización.'
-            : 'Configuración compartida desactivada.',
+            ? 'Shared settings applied to the organization.'
+            : 'Shared settings disabled.',
         TapLoopToastType.success,
       );
       await _loadData();
@@ -649,7 +649,7 @@ class _AdminViewState extends State<AdminView> {
       setState(() => _consistency = previous);
       TapLoopToast.show(
         context,
-        'No se pudo actualizar la consistencia. Ejecuta la migración de BD si aún no existe.',
+        'Could not update consistency settings. Run the DB migration if it doesn\'t exist yet.',
         TapLoopToastType.error,
       );
     } finally {
@@ -691,7 +691,7 @@ class _AdminViewState extends State<AdminView> {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'Miembro plantilla actualizado.',
+        'Template member updated.',
         TapLoopToastType.success,
       );
       await _loadData();
@@ -699,7 +699,7 @@ class _AdminViewState extends State<AdminView> {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'No se pudo actualizar el miembro plantilla.',
+        'Could not update the template member.',
         TapLoopToastType.error,
       );
     }
@@ -725,7 +725,7 @@ class _AdminViewState extends State<AdminView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Elegir miembro plantilla',
+                  'Choose template member',
                   style: GoogleFonts.outfit(
                     fontSize: 18,
                     fontWeight: FontWeight.w800,
@@ -734,7 +734,7 @@ class _AdminViewState extends State<AdminView> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Este miembro definirá lo que ven todos los demás mientras el toggle esté activo.',
+                  'This member will define what everyone else sees while the toggle is on.',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: ctx.textSecondary,
@@ -819,12 +819,12 @@ class _AdminViewState extends State<AdminView> {
   Future<void> _shareAccess() async {
     final orgId = appState.currentUser?.orgId;
     await Clipboard.setData(
-      ClipboardData(text: orgId == null ? 'TapLoop' : 'Organización: $orgId'),
+      ClipboardData(text: orgId == null ? 'TapLoop' : 'Organization: $orgId'),
     );
     if (!mounted) return;
     TapLoopToast.show(
       context,
-      'Referencia de acceso copiada.',
+      'Access reference copied.',
       TapLoopToastType.success,
     );
   }
@@ -832,7 +832,7 @@ class _AdminViewState extends State<AdminView> {
   void _showInviteUnavailable() {
     TapLoopToast.show(
       context,
-      'El flujo de invitaciones aún no está configurado en la base de datos.',
+      'The invitation flow is not set up in the database yet.',
       TapLoopToastType.warning,
     );
   }
@@ -863,7 +863,7 @@ class _AdminViewState extends State<AdminView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Administración',
+                    'Administration',
                     style: GoogleFonts.outfit(
                       fontSize: isDesktop ? 42 : 30,
                       fontWeight: FontWeight.w800,
@@ -873,7 +873,7 @@ class _AdminViewState extends State<AdminView> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Centraliza la gestión de tu equipo, su identidad y su operación desde un solo lugar.',
+                    'Centralize the management of your team, its identity, and its operations in one place.',
                     style: GoogleFonts.dmSans(
                       fontSize: 15,
                       color: context.textSecondary,
@@ -906,7 +906,7 @@ class _AdminViewState extends State<AdminView> {
                   const SizedBox(height: 20),
                   if (_members.isEmpty)
                     const EmptyDataState(
-                      hint: 'Aún no hay miembros del equipo para mostrar.',
+                      hint: 'There are no team members to show yet.',
                     )
                   else
                     _TeamProfilesPanel(
@@ -939,14 +939,14 @@ class _AdminViewState extends State<AdminView> {
       await AdminRepository.updateCardActivation(
         cardId: m.card.id,
         isActive: value,
-        reason: value ? null : 'Tarjeta digital desactivada por seguridad',
+        reason: value ? null : 'Digital card disabled for security',
       );
       m.card = m.card.copyWith(
         isActive: value,
         deactivatedAt: value ? null : DateTime.now(),
         deactivationReason: value
             ? null
-            : 'Tarjeta digital desactivada por seguridad',
+            : 'Digital card disabled for security',
       );
       if (appState.currentCard?.id == m.card.id) {
         appState.updateCard(m.card);
@@ -956,7 +956,7 @@ class _AdminViewState extends State<AdminView> {
       setState(() => m.isActive = previous);
       TapLoopToast.show(
         context,
-        'No se pudo actualizar la tarjeta. Intenta de nuevo.',
+        'Could not update the card. Please try again.',
         TapLoopToastType.error,
       );
     }
@@ -970,7 +970,7 @@ class _AdminViewState extends State<AdminView> {
   void _showAdminEditBlockedToast() {
     TapLoopToast.show(
       context,
-      'No se pueden editar administradores desde esta sección.',
+      'Administrators cannot be edited from this section.',
       TapLoopToastType.warning,
     );
   }
@@ -1057,7 +1057,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Solo se permiten imágenes en formato JPG, PNG o SVG.',
+          'Only JPG, PNG, or SVG images are allowed.',
           TapLoopToastType.error,
         );
       }
@@ -1067,7 +1067,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'La imagen supera el límite de 5 MB.',
+          'The image exceeds the 5 MB limit.',
           TapLoopToastType.error,
         );
       }
@@ -1142,7 +1142,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'El logo se actualizó correctamente.',
+          'Logo updated successfully.',
           TapLoopToastType.success,
         );
       }
@@ -1152,7 +1152,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
           context,
           friendlyStorageUploadError(
             error,
-            assetLabel: 'el logo',
+            assetLabel: 'the logo',
             bucket: 'company-logos',
           ),
           TapLoopToastType.warning,
@@ -1181,7 +1181,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nombre de la organización',
+                  'Organization name',
                   style: GoogleFonts.outfit(
                     fontSize: 18,
                     fontWeight: FontWeight.w800,
@@ -1190,9 +1190,9 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
                 ),
                 const SizedBox(height: 16),
                 TapLoopTextField(
-                  label: 'Nombre',
+                  label: 'Name',
                   controller: controller,
-                  hint: 'Nombre de la organización',
+                  hint: 'Organization name',
                   autofocus: true,
                 ),
                 const SizedBox(height: 20),
@@ -1201,13 +1201,13 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
-                      child: const Text('Cancelar'),
+                      child: const Text('Cancel'),
                     ),
                     const SizedBox(width: 8),
                     SizedBox(
                       width: 120,
                       child: TapLoopButton(
-                        label: 'Guardar',
+                        label: 'Save',
                         onPressed: () {
                           final trimmed = controller.text.trim();
                           if (trimmed.isEmpty) return;
@@ -1233,14 +1233,14 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'Nombre de la organización actualizado.',
+        'Organization name updated.',
         TapLoopToastType.success,
       );
     } catch (_) {
       if (!mounted) return;
       TapLoopToast.show(
         context,
-        'No se pudo actualizar el nombre. Intenta de nuevo.',
+        'Could not update the name. Please try again.',
         TapLoopToastType.error,
       );
     }
@@ -1254,7 +1254,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
         final card = appState.currentCard;
         final company = (card?.company.trim().isNotEmpty ?? false)
             ? card!.company
-            : 'Organización';
+            : 'Organization';
         final logoUrl = _organizationLogoUrl ?? card?.companyLogoUrl;
         final isDesktop = Responsive.isDesktop(context);
 
@@ -1288,19 +1288,19 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
                       icon: _uploading
                           ? Icons.hourglass_top_rounded
                           : Icons.edit_outlined,
-                      label: _uploading ? 'Cargando...' : 'Cambiar logo',
+                      label: _uploading ? 'Loading...' : 'Change logo',
                       onTap: _uploading ? null : _pickAndUploadLogo,
                     ),
                     const SizedBox(width: 12),
                     _AdminHeroButton(
                       icon: Icons.drive_file_rename_outline_rounded,
-                      label: 'Cambiar nombre',
+                      label: 'Change name',
                       onTap: () => _editOrgName(company),
                     ),
                     const SizedBox(width: 12),
                     _AdminHeroButton(
                       icon: Icons.groups_2_outlined,
-                      label: 'Gestionar equipo',
+                      label: 'Manage team',
                       onTap: widget.onManageTeam,
                     ),
                     const SizedBox(width: 10),
@@ -1308,7 +1308,7 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
                       icon: Icons.delete_outline_rounded,
                       onTap: () => TapLoopToast.show(
                         context,
-                        'La eliminación de organización no está habilitada.',
+                        'Deleting an organization is not enabled.',
                         TapLoopToastType.warning,
                       ),
                     ),
@@ -1337,17 +1337,17 @@ class _CompanyHeaderState extends State<_CompanyHeader> {
                       children: [
                         _AdminHeroButton(
                           icon: Icons.edit_outlined,
-                          label: 'Cambiar logo',
+                          label: 'Change logo',
                           onTap: _uploading ? null : _pickAndUploadLogo,
                         ),
                         _AdminHeroButton(
                           icon: Icons.drive_file_rename_outline_rounded,
-                          label: 'Cambiar nombre',
+                          label: 'Change name',
                           onTap: () => _editOrgName(company),
                         ),
                         _AdminHeroButton(
                           icon: Icons.groups_2_outlined,
-                          label: 'Gestionar equipo',
+                          label: 'Manage team',
                           onTap: widget.onManageTeam,
                         ),
                       ],
@@ -1419,7 +1419,7 @@ class _CompanyTitle extends StatelessWidget {
       children: [
         HelpTitle(
           title: company,
-          helpText: 'Identifica la organización que estás administrando.',
+          helpText: 'Identifies the organization you are managing.',
           style: GoogleFonts.outfit(
             fontSize: 34,
             fontWeight: FontWeight.w800,
@@ -1538,31 +1538,31 @@ class _TeamConsistencyPanel extends StatelessWidget {
       _ConsistencyItem(
         kind: _ConsistencyKind.design,
         icon: Icons.palette_outlined,
-        title: 'Diseño compartido',
-        description: 'Usa los mismos colores, portada y estilo visual.',
+        title: 'Shared design',
+        description: 'Use the same colors, cover, and visual style.',
         enabled: settings.sharedDesign,
       ),
       _ConsistencyItem(
         kind: _ConsistencyKind.forms,
         icon: Icons.dynamic_form_outlined,
-        title: 'Formulario compartido',
+        title: 'Shared form',
         description:
-            'Usa el mismo formulario de captura para todos los perfiles.',
+            'Use the same capture form for all profiles.',
         enabled: settings.sharedForms,
       ),
       _ConsistencyItem(
         kind: _ConsistencyKind.links,
         icon: Icons.link_rounded,
-        title: 'Enlaces compartidos',
-        description: 'Usa las mismas redes sociales para todos los perfiles.',
+        title: 'Shared links',
+        description: 'Use the same social networks for all profiles.',
         enabled: settings.sharedLinks,
       ),
       _ConsistencyItem(
         kind: _ConsistencyKind.integrations,
         icon: Icons.add_link_rounded,
-        title: 'Integración compartida',
+        title: 'Shared integration',
         description:
-            'Usa las mismas conexiones externas para todos los perfiles.',
+            'Use the same external connections for all profiles.',
         enabled: settings.sharedIntegrations,
       ),
     ];
@@ -1579,9 +1579,9 @@ class _TeamConsistencyPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Consistencia del equipo',
+            title: 'Team consistency',
             helpText:
-                'Controla qué campos se mantienen uniformes en los perfiles del equipo.',
+                'Control which fields stay uniform across team profiles.',
             style: GoogleFonts.outfit(
               fontSize: 28,
               fontWeight: FontWeight.w800,
@@ -1591,7 +1591,7 @@ class _TeamConsistencyPanel extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           Text(
-            'Define qué elementos se mantienen iguales para todos los perfiles y cuáles puede personalizar cada miembro.',
+            'Define which elements stay the same for all profiles and which ones each member can customize.',
             style: GoogleFonts.dmSans(
               fontSize: 16,
               color: context.textSecondary,
@@ -1738,7 +1738,7 @@ class _ConsistencyCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  item.enabled ? 'Activo' : 'Inactivo',
+                  item.enabled ? 'Active' : 'Inactive',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
@@ -1782,7 +1782,7 @@ class _TemplateMemberSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final name = templateMember?.card.name.trim();
     final displayName = (name == null || name.isEmpty)
-        ? 'Sin miembro asignado'
+        ? 'No member assigned'
         : name;
     return Container(
       width: double.infinity,
@@ -1796,7 +1796,7 @@ class _TemplateMemberSurface extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Miembro plantilla',
+            'Template member',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -1814,7 +1814,7 @@ class _TemplateMemberSurface extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Lo que configures para este miembro es lo que verán todos los demás mientras el toggle esté activo. Su propia configuración nunca se pierde.',
+            'Whatever you configure for this member is what everyone else will see while the toggle is on. Their own settings are never lost.',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               color: context.textSecondary,
@@ -1829,13 +1829,13 @@ class _TemplateMemberSurface extends StatelessWidget {
               SizedBox(
                 width: 180,
                 child: TapLoopButton(
-                  label: 'Editar plantilla',
+                  label: 'Edit template',
                   onPressed: templateMember == null ? null : onEditTemplate,
                 ),
               ),
               OutlinedButton(
                 onPressed: onChangeTemplate,
-                child: const Text('Cambiar miembro plantilla'),
+                child: const Text('Change template member'),
               ),
             ],
           ),
@@ -1881,9 +1881,9 @@ class _SharedDesignEditor extends StatelessWidget {
       children: [
         _SharedConfigHeader(
           icon: Icons.palette_outlined,
-          title: 'Configuración de diseño compartido',
+          title: 'Shared design settings',
           subtitle:
-              'Este diseño se aplica a todos los perfiles de la organización. Las configuraciones individuales quedan reemplazadas mientras esté activo.',
+              'This design applies to all profiles in the organization. Individual settings are replaced while it is active.',
         ),
         const SizedBox(height: 22),
         LayoutBuilder(
@@ -1893,15 +1893,15 @@ class _SharedDesignEditor extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _SharedDesignSection(
-                  title: 'Diseño del perfil',
+                  title: 'Profile design',
                   subtitle:
-                      'Define si todos los perfiles públicos usan el diseño clásico o moderno.',
+                      'Define whether all public profiles use the classic or modern design.',
                   child: Wrap(
                     spacing: 12,
                     runSpacing: 12,
                     children: [
                       _SharedOptionChip(
-                        label: 'Clásico',
+                        label: 'Classic',
                         selected:
                             card.profileDesign == CardProfileDesign.classic,
                         onTap: () => onChanged(
@@ -1913,7 +1913,7 @@ class _SharedDesignEditor extends StatelessWidget {
                         ),
                       ),
                       _SharedOptionChip(
-                        label: 'Moderno',
+                        label: 'Modern',
                         selected:
                             card.profileDesign == CardProfileDesign.modern,
                         onTap: () => onChanged(
@@ -1929,15 +1929,15 @@ class _SharedDesignEditor extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 _SharedDesignSection(
-                  title: 'Identidad visual',
+                  title: 'Visual identity',
                   subtitle:
-                      'Color principal para acciones y color personalizado para iconos.',
+                      'Primary color for actions and custom color for icons.',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _sharedColorPicker(
                         context,
-                        label: 'Color principal',
+                        label: 'Primary color',
                         selectedColor: card.primaryColor,
                         onSelected: (color) =>
                             onChanged(card.copyWith(primaryColor: color)),
@@ -1945,7 +1945,7 @@ class _SharedDesignEditor extends StatelessWidget {
                       const SizedBox(height: 18),
                       _sharedColorPicker(
                         context,
-                        label: 'Color de iconos',
+                        label: 'Icon color',
                         selectedColor: _iconColor,
                         onSelected: (color) =>
                             onChanged(card.copyWith(iconColor: color)),
@@ -1955,15 +1955,15 @@ class _SharedDesignEditor extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 _SharedDesignSection(
-                  title: 'Fondo',
+                  title: 'Background',
                   subtitle:
-                      'Configura el fondo base que se utiliza cuando la portada no tiene imagen.',
+                      'Set the base background used when the cover has no image.',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _sharedColorPicker(
                         context,
-                        label: 'Color de fondo',
+                        label: 'Background color',
                         selectedColor: _backgroundColor,
                         onSelected: (color) => onChanged(
                           card.copyWith(
@@ -1975,7 +1975,7 @@ class _SharedDesignEditor extends StatelessWidget {
                       const SizedBox(height: 18),
                       _sharedColorPicker(
                         context,
-                        label: 'Color final del fondo',
+                        label: 'Background end color',
                         selectedColor: _backgroundEndColor,
                         onSelected: (color) => onChanged(
                           card.copyWith(
@@ -1989,15 +1989,15 @@ class _SharedDesignEditor extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 _SharedDesignSection(
-                  title: 'Fondo y portada sin imagen',
+                  title: 'Background and cover without image',
                   subtitle:
-                      'Selecciona el tono general para perfiles sin portada personalizada.',
+                      'Select the overall tone for profiles without a custom cover.',
                   child: Wrap(
                     spacing: 12,
                     runSpacing: 12,
                     children: [
                       _SharedOptionChip(
-                        label: 'Blanco',
+                        label: 'White',
                         selected: card.themeStyle == CardThemeStyle.white,
                         onTap: () => onChanged(
                           card.copyWith(
@@ -2010,7 +2010,7 @@ class _SharedDesignEditor extends StatelessWidget {
                         ),
                       ),
                       _SharedOptionChip(
-                        label: 'Negro',
+                        label: 'Black',
                         selected: card.themeStyle == CardThemeStyle.black,
                         onTap: () => onChanged(
                           card.copyWith(
@@ -2027,35 +2027,35 @@ class _SharedDesignEditor extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 _SharedDesignSection(
-                  title: 'Efecto de fondo',
+                  title: 'Background effect',
                   subtitle:
-                      'Aplica un efecto visual compartido para el fondo público.',
+                      'Apply a shared visual effect to the public background.',
                   child: Wrap(
                     spacing: 12,
                     runSpacing: 12,
                     children: [
                       _SharedOptionChip(
-                        label: 'Sin efecto',
+                        label: 'No effect',
                         selected: card.bgStyle == CardBgStyle.plain,
                         onTap: () => onChanged(
                           card.copyWith(bgStyle: CardBgStyle.plain),
                         ),
                       ),
                       _SharedOptionChip(
-                        label: 'Gradiente',
+                        label: 'Gradient',
                         selected: card.bgStyle == CardBgStyle.gradient,
                         onTap: () => onChanged(
                           card.copyWith(bgStyle: CardBgStyle.gradient),
                         ),
                       ),
                       _SharedOptionChip(
-                        label: 'Malla',
+                        label: 'Mesh',
                         selected: card.bgStyle == CardBgStyle.mesh,
                         onTap: () =>
                             onChanged(card.copyWith(bgStyle: CardBgStyle.mesh)),
                       ),
                       _SharedOptionChip(
-                        label: 'Rayas',
+                        label: 'Stripes',
                         selected: card.bgStyle == CardBgStyle.stripes,
                         onTap: () => onChanged(
                           card.copyWith(bgStyle: CardBgStyle.stripes),
@@ -2206,7 +2206,7 @@ class _SharedDesignPreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Vista compartida',
+            'Shared view',
             style: GoogleFonts.outfit(
               fontSize: 16,
               fontWeight: FontWeight.w800,
@@ -2263,7 +2263,7 @@ class _SharedDesignPreview extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Perfil del equipo',
+                      'Team profile',
                       textAlign: card.profileDesign == CardProfileDesign.modern
                           ? TextAlign.left
                           : TextAlign.center,
@@ -2276,8 +2276,8 @@ class _SharedDesignPreview extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       card.profileDesign == CardProfileDesign.modern
-                          ? 'Diseño moderno'
-                          : 'Diseño clásico',
+                          ? 'Modern design'
+                          : 'Classic design',
                       textAlign: card.profileDesign == CardProfileDesign.modern
                           ? TextAlign.left
                           : TextAlign.center,
@@ -2374,9 +2374,9 @@ class _SharedFormsEditorState extends State<_SharedFormsEditor> {
       children: [
         const _SharedConfigHeader(
           icon: Icons.dynamic_form_outlined,
-          title: 'Configuración de formulario compartido',
+          title: 'Shared form settings',
           subtitle:
-              'Estos formularios se usan en todos los perfiles de la organización mientras el formulario compartido esté activo.',
+              'These forms are used on all profiles in the organization while the shared form is active.',
         ),
         const SizedBox(height: 12),
         ..._forms.asMap().entries.map((entry) {
@@ -2468,9 +2468,9 @@ class _SharedIntegrationEditorState extends State<_SharedIntegrationEditor> {
       children: [
         const _SharedConfigHeader(
           icon: Icons.add_link_rounded,
-          title: 'Configuración de integración compartida',
+          title: 'Shared integration settings',
           subtitle:
-              'Esta conexión externa reemplaza las integraciones individuales de todos los miembros de la organización.',
+              'This external connection replaces the individual integrations of all organization members.',
         ),
         const SizedBox(height: 20),
         Wrap(
@@ -2488,7 +2488,7 @@ class _SharedIntegrationEditorState extends State<_SharedIntegrationEditor> {
         TextField(
           controller: _urlCtrl,
           decoration: InputDecoration(
-            hintText: _provider?.hint ?? 'https://calendario.com/tu-enlace',
+            hintText: _provider?.hint ?? 'https://calendar.com/your-link',
             prefixIcon: const Icon(Icons.link_rounded),
           ),
         ),
@@ -2498,7 +2498,7 @@ class _SharedIntegrationEditorState extends State<_SharedIntegrationEditor> {
           child: SizedBox(
             width: 180,
             child: TapLoopButton(
-              label: _saving ? 'Guardando...' : 'Guardar',
+              label: _saving ? 'Saving...' : 'Save',
               onPressed: _saving ? null : _save,
               height: 46,
             ),
@@ -2636,7 +2636,7 @@ class _TeamProfilesPanel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Perfiles del equipo',
+                    'Team profiles',
                     style: GoogleFonts.outfit(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
@@ -2646,7 +2646,7 @@ class _TeamProfilesPanel extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Gestiona los perfiles digitales de tu equipo.',
+                    'Manage your team\'s digital profiles.',
                     style: GoogleFonts.dmSans(
                       fontSize: 16,
                       color: context.textSecondary,
@@ -2662,19 +2662,19 @@ class _TeamProfilesPanel extends StatelessWidget {
                   _ProfileCounterPill(
                     icon: Icons.badge_outlined,
                     value: members.length,
-                    label: 'Perfiles',
+                    label: 'Profiles',
                     color: AppColors.primary,
                   ),
                   _ProfileCounterPill(
                     icon: Icons.check_circle_outline_rounded,
                     value: activeCount,
-                    label: 'Activos',
+                    label: 'Active',
                     color: AppColors.success,
                   ),
                   _ProfileCounterPill(
                     icon: Icons.pause_circle_outline_rounded,
                     value: inactiveCount,
-                    label: 'Inactivos',
+                    label: 'Inactive',
                     color: context.textSecondary,
                   ),
                 ],
@@ -2786,27 +2786,27 @@ class _TeamProfilesHeader extends StatelessWidget {
       children: [
         SizedBox(
           width: 260,
-          child: HelpTitle(title: 'Miembro', style: style),
+          child: HelpTitle(title: 'Member', style: style),
         ),
         SizedBox(
           width: 250,
-          child: HelpTitle(title: 'Cargo / Empresa', style: style),
+          child: HelpTitle(title: 'Job title / Company', style: style),
         ),
         SizedBox(
           width: 220,
-          child: HelpTitle(title: 'Perfil público', style: style),
+          child: HelpTitle(title: 'Public profile', style: style),
         ),
         SizedBox(
           width: 150,
-          child: HelpTitle(title: 'Estado', style: style),
+          child: HelpTitle(title: 'Status', style: style),
         ),
         SizedBox(
           width: 180,
-          child: HelpTitle(title: 'Progreso', style: style),
+          child: HelpTitle(title: 'Progress', style: style),
         ),
         SizedBox(
           width: 300,
-          child: HelpTitle(title: 'Acciones', style: style),
+          child: HelpTitle(title: 'Actions', style: style),
         ),
       ],
     );
@@ -2868,7 +2868,7 @@ class _TeamProfileRow extends StatelessWidget {
                 Text(
                   member.card.jobTitle.trim().isNotEmpty
                       ? member.card.jobTitle
-                      : 'Sin cargo',
+                      : 'No job title',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
@@ -2931,7 +2931,7 @@ class _TeamProfileRow extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  member.isActive ? 'Activo' : 'Inactivo',
+                  member.isActive ? 'Active' : 'Inactive',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
                     fontWeight: FontWeight.w900,
@@ -2959,7 +2959,7 @@ class _TeamProfileRow extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Completo ${(progress * 100).round()}%',
+                  'Complete ${(progress * 100).round()}%',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
                     fontWeight: FontWeight.w900,
@@ -2975,13 +2975,13 @@ class _TeamProfileRow extends StatelessWidget {
               children: [
                 _ProfileActionButton(
                   icon: Icons.visibility_outlined,
-                  label: 'Ver',
+                  label: 'View',
                   onTap: onView,
                 ),
                 const SizedBox(width: 10),
                 _ProfileActionButton(
                   icon: Icons.edit_outlined,
-                  label: 'Editar',
+                  label: 'Edit',
                   onTap: onEdit,
                 ),
                 const SizedBox(width: 10),
@@ -3097,11 +3097,11 @@ class _AdminSummaryStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stats = [
-      ('$activeCount / $totalCount', 'Miembros activos', Icons.people_outlined),
-      ('$totalViews', 'Vistas del equipo', Icons.visibility_outlined),
-      ('$totalTaps', 'Taps del equipo', Icons.touch_app_outlined),
-      ('$totalClicks', 'Clicks en enlace', Icons.ads_click_outlined),
-      ('$totalLeads', 'Leads del equipo', Icons.bolt_outlined),
+      ('$activeCount / $totalCount', 'Active members', Icons.people_outlined),
+      ('$totalViews', 'Team views', Icons.visibility_outlined),
+      ('$totalTaps', 'Team taps', Icons.touch_app_outlined),
+      ('$totalClicks', 'Link clicks', Icons.ads_click_outlined),
+      ('$totalLeads', 'Team leads', Icons.bolt_outlined),
     ];
 
     return Container(
@@ -3182,9 +3182,9 @@ class _AdminPerformancePanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Rendimiento del equipo',
+            title: 'Team performance',
             helpText:
-                'Vista consolidada de vistas, taps y clics de los miembros activos.',
+                'Consolidated view of views, taps, and clicks from active members.',
             style: GoogleFonts.outfit(
               fontSize: 16,
               fontWeight: FontWeight.w800,
@@ -3193,7 +3193,7 @@ class _AdminPerformancePanel extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Vista consolidada de vistas, taps y clicks en enlaces de todos los miembros activos.',
+            'Consolidated view of views, taps, and link clicks from all active members.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: context.textSecondary,
@@ -3202,11 +3202,11 @@ class _AdminPerformancePanel extends StatelessWidget {
           const SizedBox(height: 14),
           if (!hasData)
             const EmptyDataState(
-              hint: 'Aún no hay actividad del equipo registrada.',
+              hint: 'No team activity recorded yet.',
             )
           else ...[
             _AdminTrendRow(
-              label: 'Vistas',
+              label: 'Views',
               total: viewsSeries.fold(0, (a, b) => a + b),
               series: viewsSeries,
               color: AppColors.primary,
@@ -3220,7 +3220,7 @@ class _AdminPerformancePanel extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _AdminTrendRow(
-              label: 'Clicks en enlace',
+              label: 'Link clicks',
               total: clicksSeries.fold(0, (a, b) => a + b),
               series: clicksSeries,
               color: const Color(0xFFE67E22),
@@ -3342,7 +3342,7 @@ class _AdminTeamHighlights extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Highlights del equipo',
+            'Team highlights',
             style: GoogleFonts.outfit(
               fontSize: 16,
               fontWeight: FontWeight.w800,
@@ -3351,7 +3351,7 @@ class _AdminTeamHighlights extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Miembros con mayor número de taps e interacción comercial.',
+            'Members with the most taps and commercial interaction.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: context.textSecondary,
@@ -3360,7 +3360,7 @@ class _AdminTeamHighlights extends StatelessWidget {
           const SizedBox(height: 16),
           if (members.isEmpty)
             Text(
-              'Sin miembros activos.',
+              'No active members.',
               style: GoogleFonts.dmSans(fontSize: 12, color: context.textMuted),
             )
           else
@@ -3534,7 +3534,7 @@ class _MemberCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
-                      'Administrador',
+                      'Administrator',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
@@ -3581,7 +3581,7 @@ class _MemberCard extends StatelessWidget {
                       ? onToggle(member, member.isActive)
                       : onEdit(member),
                   child: Text(
-                    'Editar',
+                    'Edit',
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -3609,7 +3609,7 @@ List<int> _sumAdminSeries(List<List<int>> all) {
 }
 
 String _adminDayLabel(int index) {
-  const labels = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  const labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   return labels[index % labels.length];
 }
 
@@ -3714,8 +3714,8 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                             const SizedBox(width: 4),
                             Text(
                               _fieldsOpen
-                                  ? 'Ocultar campos'
-                                  : 'Personalizar campos (${form.fields.length})',
+                                  ? 'Hide fields'
+                                  : 'Customize fields (${form.fields.length})',
                               style: GoogleFonts.dmSans(
                                 fontSize: 12,
                                 color: AppColors.primary,
@@ -3759,7 +3759,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Campos del formulario',
+                              'Form fields',
                               style: GoogleFonts.dmSans(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -3768,7 +3768,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                             ),
                           ),
                           Text(
-                            '${form.fields.where((f) => f.required).length} obligatorios',
+                            '${form.fields.where((f) => f.required).length} required',
                             style: GoogleFonts.dmSans(
                               fontSize: 11,
                               color: context.textMuted,
@@ -3954,7 +3954,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Tipo de campo',
+                                              'Field type',
                                               style: GoogleFonts.dmSans(
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w600,
@@ -4053,7 +4053,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                                                   ),
                                                   const SizedBox(width: 6),
                                                   Text(
-                                                    'Campo obligatorio',
+                                                    'Required field',
                                                     style: GoogleFonts.dmSans(
                                                       fontSize: 12,
                                                       color:
@@ -4074,7 +4074,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                       ),
                       Divider(color: context.borderColor, height: 16),
                       Text(
-                        'Agregar campo',
+                        'Add field',
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -4142,7 +4142,7 @@ class _AdminFormRowState extends State<_AdminFormRow> {
                               ),
                               decoration: InputDecoration(
                                 isDense: true,
-                                hintText: 'Nombre del campo...',
+                                hintText: 'Field name...',
                                 hintStyle: GoogleFonts.dmSans(
                                   fontSize: 12,
                                   color: context.textMuted,

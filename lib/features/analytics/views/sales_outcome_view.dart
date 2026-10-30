@@ -128,8 +128,8 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
       TapLoopToast.show(
         context,
         isConverted
-            ? 'Venta registrada correctamente.'
-            : 'Venta desmarcada correctamente.',
+            ? 'Sale recorded successfully.'
+            : 'Sale unmarked successfully.',
         TapLoopToastType.success,
       );
     } catch (error) {
@@ -137,7 +137,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
       setState(() => _updatingLeads.remove(lead.id));
       TapLoopToast.show(
         context,
-        'Error al actualizar la venta: $error',
+        'Error updating the sale: $error',
         TapLoopToastType.error,
       );
     }
@@ -161,9 +161,9 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HelpTitle(
-                  title: 'Ventas',
+                  title: 'Sales',
                   helpText:
-                      'Seguimiento de leads convertidos y cierres confirmados.',
+                      'Tracking of converted leads and confirmed closes.',
                   style: GoogleFonts.outfit(
                     fontSize: 28,
                     fontWeight: FontWeight.w800,
@@ -173,7 +173,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '${_convertedLeads.length} cierres confirmados de ${_allLeads.length} leads totales',
+                  '${_convertedLeads.length} confirmed closes out of ${_allLeads.length} total leads',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     color: context.textMuted,
@@ -197,7 +197,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
                     ),
                     Expanded(
                       child: _MetricBlock(
-                        label: 'Ventas cerradas',
+                        label: 'Closed sales',
                         value: '${_convertedLeads.length}',
                         accent: true,
                       ),
@@ -210,7 +210,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
                     ),
                     Expanded(
                       child: _MetricBlock(
-                        label: 'Conversión',
+                        label: 'Conversion',
                         value: '${(_conversionRate * 100).toStringAsFixed(0)}%',
                       ),
                     ),
@@ -229,7 +229,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
               child: Text(
-                'CONFIRMADAS',
+                'CONFIRMED',
                 style: GoogleFonts.outfit(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -259,7 +259,7 @@ class _SalesOutcomeViewState extends State<SalesOutcomeView> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
               child: Text(
-                'PENDIENTES',
+                'PENDING',
                 style: GoogleFonts.outfit(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -315,7 +315,7 @@ class _MetricBlock extends StatelessWidget {
         children: [
           HelpTitle(
             title: label,
-            helpText: 'Indicador de ventas para $label.',
+            helpText: 'Sales indicator for $label.',
             style: GoogleFonts.dmSans(fontSize: 11, color: context.textMuted),
           ),
           const SizedBox(height: 4),
@@ -387,7 +387,7 @@ class _ConvertedRow extends StatelessWidget {
                         ),
                       ),
                     Text(
-                      'Venta confirmada',
+                      'Sale confirmed',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: context.textSecondary,
@@ -399,7 +399,7 @@ class _ConvertedRow extends StatelessWidget {
               const SizedBox(width: 12),
               _SaleToggleButton(
                 isUpdating: isUpdating,
-                label: 'Desmarcar',
+                label: 'Unmark',
                 icon: Icons.remove_circle_outline_rounded,
                 color: const Color(0xFFB45309),
                 backgroundColor: context.isDark
@@ -467,7 +467,7 @@ class _PendingRow extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Última actividad: ${_timeAgo(lead.lastSeen)}',
+                      'Last activity: ${_timeAgo(lead.lastSeen)}',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: context.textSecondary,
@@ -479,7 +479,7 @@ class _PendingRow extends StatelessWidget {
               const SizedBox(width: 12),
               _SaleToggleButton(
                 isUpdating: isUpdating,
-                label: 'Marcar venta',
+                label: 'Mark as sale',
                 icon: Icons.attach_money_rounded,
                 color: const Color(0xFF15803D),
                 backgroundColor: context.isDark

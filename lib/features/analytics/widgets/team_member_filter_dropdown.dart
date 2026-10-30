@@ -18,7 +18,7 @@ class TeamMemberFilterDropdown extends StatelessWidget {
     required this.members,
     required this.selectedMemberId,
     required this.onChanged,
-    this.allLabel = 'Todos',
+    this.allLabel = 'All',
   });
 
   @override
@@ -34,7 +34,7 @@ class TeamMemberFilterDropdown extends StatelessWidget {
         : allLabel;
 
     return PopupMenuButton<String>(
-      tooltip: 'Filtrar por miembro',
+      tooltip: 'Filter by member',
       position: PopupMenuPosition.under,
       color: context.bgCard,
       elevation: 8,
@@ -56,7 +56,7 @@ class TeamMemberFilterDropdown extends StatelessWidget {
             child: _DropdownItem(
               label: member.name.trim().isNotEmpty
                   ? member.name
-                  : 'Miembro sin nombre',
+                  : 'Unnamed member',
               selected: selectedMemberId == member.id,
             ),
           ),

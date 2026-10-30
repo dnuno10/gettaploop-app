@@ -33,7 +33,7 @@ class AuthService {
         type: OtpType.email,
       );
       final authUser = res.user;
-      if (authUser == null) throw Exception('No se pudo verificar el código.');
+      if (authUser == null) throw Exception('Could not verify the code.');
       return _fetchOrCreatePublicUser(
         authUser.id,
         email: email.trim(),
@@ -55,7 +55,7 @@ class AuthService {
       password: password,
     );
     final authUser = res.user;
-    if (authUser == null) throw Exception('Autenticación fallida.');
+    if (authUser == null) throw Exception('Authentication failed.');
     return _fetchOrCreatePublicUser(authUser.id, email: email);
   }
 
@@ -78,7 +78,7 @@ class AuthService {
     }
 
     final authUser = res.user;
-    if (authUser == null) throw Exception('No se pudo crear la cuenta.');
+    if (authUser == null) throw Exception('Could not create the account.');
 
     if (res.session != null) {
       try {
@@ -118,7 +118,7 @@ class AuthService {
         id: authUser.id,
         name:
             (authUser.userMetadata?['name'] as String?) ??
-            (authUser.email?.split('@').first ?? 'Usuario'),
+            (authUser.email?.split('@').first ?? 'User'),
         email: authUser.email ?? '',
         emailVerified: authUser.emailConfirmedAt != null,
         createdAt: DateTime.now(),
@@ -160,7 +160,7 @@ class AuthService {
     final currentUser = _db.auth.currentUser;
     final email = currentUser?.email?.trim();
     if (currentUser == null || email == null || email.isEmpty) {
-      throw Exception('No se encontró una sesión activa.');
+      throw Exception('No active session found.');
     }
 
     await _db.auth.signInWithPassword(email: email, password: currentPassword);

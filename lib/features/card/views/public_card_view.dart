@@ -22,6 +22,7 @@ import '../models/digital_card_model.dart';
 import '../models/contact_item_model.dart';
 import '../models/social_link_model.dart';
 import '../models/smart_form_model.dart';
+import '../../../core/utils/stored_text.dart';
 import '../utils/calendar_links.dart';
 import '../utils/vcard_download_stub.dart'
     if (dart.library.html) '../utils/vcard_download_web.dart';
@@ -237,7 +238,7 @@ class _PublicCardViewState extends State<PublicCardView> {
       if (targetCard == null) {
         setState(() {
           _activationError =
-              'No se encontró una tarjeta digital para vincular este NFC.';
+              'No digital card was found to link this NFC to.';
           _activating = false;
         });
         return;
@@ -259,7 +260,7 @@ class _PublicCardViewState extends State<PublicCardView> {
         context.go('/');
       } else {
         setState(() {
-          _activationError = 'Esta tarjeta ya fue activada por otra cuenta.';
+          _activationError = 'This card has already been activated by another account.';
           _activating = false;
         });
       }
@@ -332,7 +333,7 @@ class _PublicCardViewState extends State<PublicCardView> {
       return _CardDeactivatedPage(
         message: _card!.deactivationReason?.trim().isNotEmpty == true
             ? _card!.deactivationReason!
-            : 'Tarjeta digital desactivada por seguridad',
+            : 'Digital card disabled for security',
       );
     }
     return _CardPage(card: _card!, logoPending: _logoPending);
@@ -493,7 +494,7 @@ class _CardDeactivatedPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Esta tarjeta no se encuentra disponible temporalmente.',
+                    'This card is temporarily unavailable.',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
@@ -584,7 +585,7 @@ class _CardPage extends StatelessWidget {
         if (isModern && visibleSocials.isNotEmpty) ...[
           SliverToBoxAdapter(
             child: _ModernSectionHeader(
-              title: 'Conecta conmigo',
+              title: 'Connect with me',
               textColor: textCol,
             ),
           ),
@@ -599,8 +600,8 @@ class _CardPage extends StatelessWidget {
         if (visibleContacts.isNotEmpty) ...[
           SliverToBoxAdapter(
             child: isModern
-                ? _ModernSectionHeader(title: 'Contacto', textColor: textCol)
-                : _SectionHeader(title: 'Contacto', textColor: textCol),
+                ? _ModernSectionHeader(title: 'Contact', textColor: textCol)
+                : _SectionHeader(title: 'Contact', textColor: textCol),
           ),
           SliverToBoxAdapter(
             child: _ContactSection(
@@ -613,7 +614,7 @@ class _CardPage extends StatelessWidget {
         ],
         if (!isModern && visibleSocials.isNotEmpty) ...[
           SliverToBoxAdapter(
-            child: _SectionHeader(title: 'Redes sociales', textColor: textCol),
+            child: _SectionHeader(title: 'Social networks', textColor: textCol),
           ),
           SliverToBoxAdapter(
             child: _SocialSection(
@@ -627,7 +628,7 @@ class _CardPage extends StatelessWidget {
         if (card.calendarEnabled &&
             (card.calendarUrl?.trim().isNotEmpty ?? false)) ...[
           SliverToBoxAdapter(
-            child: _SectionHeader(title: 'Agendar reunión', textColor: textCol),
+            child: _SectionHeader(title: 'Schedule a meeting', textColor: textCol),
           ),
           SliverToBoxAdapter(
             child: _CalendarButton(
@@ -777,7 +778,7 @@ class _SaveContactButton extends StatelessWidget {
         .toLowerCase()
         .replaceAll(RegExp(r'[^a-z0-9]+'), '-')
         .replaceAll(RegExp(r'^-+|-+$'), '');
-    return normalized.isEmpty ? 'contacto-taploop' : normalized;
+    return normalized.isEmpty ? 'contact-taploop' : normalized;
   }
 
   @override
@@ -792,7 +793,7 @@ class _SaveContactButton extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: _downloadVCard,
               icon: const Icon(Icons.person_add_alt_1_outlined, size: 20),
-              label: const Text('Guardar contacto'),
+              label: const Text('Save contact'),
               style: FilledButton.styleFrom(
                 backgroundColor: accent,
                 foregroundColor: Colors.white,
@@ -857,7 +858,7 @@ class _ModernActionButtons extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Enlace copiado',
+          'Link copied',
           style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
         ),
       ),
@@ -878,7 +879,7 @@ class _ModernActionButtons extends StatelessWidget {
                 Expanded(
                   child: _ModernSecondaryButton(
                     icon: Icons.email_rounded,
-                    label: 'Enviar correo',
+                    label: 'Send email',
                     iconColor: iconColor,
                     onTap: _sendEmail,
                   ),
@@ -888,7 +889,7 @@ class _ModernActionButtons extends StatelessWidget {
               Expanded(
                 child: _ModernSecondaryButton(
                   icon: Icons.share_rounded,
-                  label: 'Compartir',
+                  label: 'Share',
                   iconColor: iconColor,
                   onTap: () => _share(context),
                 ),
@@ -1023,7 +1024,7 @@ class _HeroHeader extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          card.name,
+                          localizeStoredText(card.name),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.outfit(
                             fontSize: nameSize,
@@ -1211,7 +1212,7 @@ class _SectionHeader extends StatelessWidget {
             width: double.infinity,
             child: HelpTitle(
               title: title.toUpperCase(),
-              helpText: 'Muestra la sección pública de $title en esta tarjeta.',
+              helpText: 'Shows the public $title section on this card.',
               style: GoogleFonts.outfit(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
@@ -1294,12 +1295,14 @@ class _ContactSection extends StatelessWidget {
 
   String _modernLabel(ContactItemModel item) {
     return switch (item.type) {
-      ContactType.phone => 'Llamar',
-      ContactType.whatsapp => 'Enviar WhatsApp',
-      ContactType.email => 'Enviar correo',
-      ContactType.address => 'Cómo llegar',
+      ContactType.phone => 'Call',
+      ContactType.whatsapp => 'Send WhatsApp',
+      ContactType.email => 'Send email',
+      ContactType.address => 'Get directions',
       ContactType.website =>
-        item.displayLabel.isNotEmpty ? item.displayLabel : 'Visitar sitio web',
+        item.displayLabel.isNotEmpty
+            ? localizeStoredText(item.displayLabel)
+            : 'Visit website',
     };
   }
 
@@ -1367,7 +1370,7 @@ class _ContactSection extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          item.displayLabel,
+                                          localizeStoredText(item.displayLabel),
                                           style: GoogleFonts.dmSans(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w600,
@@ -1429,7 +1432,7 @@ class _ModernSectionHeader extends StatelessWidget {
             width: double.infinity,
             child: HelpTitle(
               title: title,
-              helpText: 'Muestra la sección pública de $title en esta tarjeta.',
+              helpText: 'Shows the public $title section on this card.',
               style: GoogleFonts.outfit(
                 fontSize: 19,
                 height: 1.1,
@@ -1609,7 +1612,7 @@ class _SocialSection extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    link.label,
+                                    localizeStoredText(link.label),
                                     style: GoogleFonts.outfit(
                                       fontSize: 17,
                                       height: 1.12,
@@ -1671,14 +1674,14 @@ class _Footer extends StatelessWidget {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () async {
-                final uri = Uri.parse('https://www.taploop.com.mx');
+                final uri = Uri.parse('https://app.gettaploop.com');
                 await _launchPublicUri(uri);
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Creado con ',
+                    'Created with',
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       color: textCol.withValues(alpha: 0.5),
@@ -1759,7 +1762,7 @@ class _CalendarButton extends StatelessWidget {
                               const SizedBox(width: 16),
                               Expanded(
                                 child: Text(
-                                  integration.displayLabel,
+                                  localizeStoredText(integration.displayLabel),
                                   style: GoogleFonts.outfit(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
@@ -1857,7 +1860,7 @@ class _FormsSectionState extends State<_FormsSection> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),
             child: Text(
-              'No se pudieron cargar los formularios.',
+              'Could not load the forms.',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 color: widget.textColor.withValues(alpha: 0.65),
@@ -1873,7 +1876,7 @@ class _FormsSectionState extends State<_FormsSection> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _SectionHeader(
-          title: 'Formulario de contacto',
+          title: 'Contact form',
           textColor: widget.textColor,
         ),
         Center(
@@ -1949,7 +1952,8 @@ class _FormCardState extends State<_FormCard> {
     }
 
     for (final field in fields) {
-      if (field.label.toLowerCase().contains('nombre')) {
+      final label = field.label.toLowerCase();
+      if (label.contains('nombre') || label.contains('name')) {
         return field;
       }
     }
@@ -1964,7 +1968,9 @@ class _FormCardState extends State<_FormCard> {
       if (f.isRequired && (_ctrl[f.id]?.text.trim().isEmpty ?? true)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Por favor completa: ${f.label}'),
+            content: Text(
+              'Please complete: ${localizeStoredText(f.label)}',
+            ),
             backgroundColor: AppColors.error,
           ),
         );
@@ -1989,7 +1995,8 @@ class _FormCardState extends State<_FormCard> {
           .where(
             (f) =>
                 f.fieldType == SmartFormFieldType.email ||
-                f.label.toLowerCase().contains('correo'),
+                f.label.toLowerCase().contains('correo') ||
+                f.label.toLowerCase().contains('mail'),
           )
           .map((f) => _ctrl[f.id]?.text.trim() ?? '')
           .where((v) => v.isNotEmpty)
@@ -1999,13 +2006,18 @@ class _FormCardState extends State<_FormCard> {
             (f) =>
                 f.fieldType == SmartFormFieldType.phone ||
                 f.label.toLowerCase().contains('tel') ||
-                f.label.toLowerCase().contains('cel'),
+                f.label.toLowerCase().contains('cel') ||
+                f.label.toLowerCase().contains('phone'),
           )
           .map((f) => _ctrl[f.id]?.text.trim() ?? '')
           .where((v) => v.isNotEmpty)
           .firstOrNull;
       final company = fields
-          .where((f) => f.label.toLowerCase().contains('empresa'))
+          .where(
+            (f) =>
+                f.label.toLowerCase().contains('empresa') ||
+                f.label.toLowerCase().contains('company'),
+          )
           .map((f) => _ctrl[f.id]?.text.trim() ?? '')
           .where((v) => v.isNotEmpty)
           .firstOrNull;
@@ -2013,7 +2025,7 @@ class _FormCardState extends State<_FormCard> {
       await LeadRepository.submitFormLead(
         cardId: widget.card.id,
         formType: widget.form.id,
-        name: name.isEmpty ? 'Anónimo' : name,
+        name: name.isEmpty ? 'Anonymous' : name,
         email: email,
         phone: phone,
         company: company,
@@ -2034,7 +2046,7 @@ class _FormCardState extends State<_FormCard> {
         });
         TapLoopToast.show(
           context,
-          'Solicitud enviada satisfactoriamente.',
+          'Request sent successfully.',
           TapLoopToastType.success,
         );
       }
@@ -2044,7 +2056,7 @@ class _FormCardState extends State<_FormCard> {
         setState(() => _submitting = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error al enviar. Intenta de nuevo.'),
+            content: Text('Error sending. Please try again.'),
             backgroundColor: AppColors.error,
           ),
         );
@@ -2080,7 +2092,7 @@ class _FormCardState extends State<_FormCard> {
                   const SizedBox(width: 14),
                   Expanded(
                     child: Text(
-                      widget.form.name,
+                      localizeStoredText(widget.form.name),
                       style: GoogleFonts.outfit(
                         fontSize: 17,
                         fontWeight: FontWeight.w600,
@@ -2170,7 +2182,7 @@ class _FormBody extends StatelessWidget {
                 child: submitting
                     ? const TapLoopProgressIndicator(color: Colors.white)
                     : Text(
-                        'Enviar',
+                        'Send',
                         style: GoogleFonts.outfit(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -2190,13 +2202,15 @@ class _FormBody extends StatelessWidget {
     Color borderCol,
     Color textColor,
   ) {
-    final label = field.label;
+    final label = localizeStoredText(field.label);
     final required = field.isRequired;
     final controller = ctrl[field.id]!;
 
     InputDecoration decoration = InputDecoration(
       labelText: required ? '$label *' : label,
-      hintText: field.placeholder,
+      hintText: field.placeholder == null
+          ? null
+          : localizeStoredText(field.placeholder!),
       counterText: '',
       labelStyle: GoogleFonts.dmSans(
         fontSize: 13,
@@ -2358,8 +2372,8 @@ class _NfcActivationPage extends StatelessWidget {
                       const SizedBox(height: 32),
                       Text(
                         loggedIn
-                            ? 'Activa tu tarjeta digital'
-                            : 'Esta tarjeta está lista para activarse',
+                            ? 'Activate your digital card'
+                            : 'This card is ready to be activated',
                         style: GoogleFonts.inter(
                           fontSize: 22,
                           fontWeight: FontWeight.w700,
@@ -2370,8 +2384,8 @@ class _NfcActivationPage extends StatelessWidget {
                       const SizedBox(height: 12),
                       Text(
                         loggedIn
-                            ? 'Esta tarjeta NFC todavía no está vinculada a ninguna cuenta. ¿Deseas vincularla a tu cuenta?'
-                            : 'Crea una cuenta o inicia sesión para vincular esta tarjeta NFC a tu perfil.',
+                            ? 'This NFC card isn\'t linked to any account yet. Do you want to link it to your account?'
+                            : 'Create an account or sign in to link this NFC card to your profile.',
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           color: AppColors.grey,
@@ -2418,7 +2432,7 @@ class _NfcActivationPage extends StatelessWidget {
                                     color: Colors.white,
                                   )
                                 : Text(
-                                    'Vincular con mi cuenta',
+                                    'Link to my account',
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
@@ -2430,7 +2444,7 @@ class _NfcActivationPage extends StatelessWidget {
                         TextButton(
                           onPressed: () => context.go('/'),
                           child: Text(
-                            'Cancelar',
+                            'Cancel',
                             style: GoogleFonts.inter(
                               color: AppColors.grey,
                               fontSize: 14,
@@ -2453,7 +2467,7 @@ class _NfcActivationPage extends StatelessWidget {
                               elevation: 0,
                             ),
                             child: Text(
-                              'Ir a inicio',
+                              'Go to home',
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -2475,7 +2489,7 @@ class _NfcActivationPage extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              'Ya tengo cuenta',
+                              'I already have an account',
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -2560,7 +2574,7 @@ class _LoadErrorPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'No se pudo cargar el perfil',
+                'Could not load the profile',
                 style: GoogleFonts.outfit(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -2569,7 +2583,7 @@ class _LoadErrorPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Revisa tu conexión a internet e intenta de nuevo.',
+                'Check your internet connection and try again.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.grey),
               ),
@@ -2588,7 +2602,7 @@ class _LoadErrorPage extends StatelessWidget {
               GestureDetector(
                 onTap: onRetry,
                 child: Text(
-                  'Reintentar →',
+                  'Retry →',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -2636,7 +2650,7 @@ class _NotFoundPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Tarjeta no encontrada',
+                'Card not found',
                 style: GoogleFonts.outfit(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -2645,7 +2659,7 @@ class _NotFoundPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'La tarjeta /$slug no existe o fue desactivada.',
+                'The card /$slug doesn\'t exist or has been deactivated.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.grey),
               ),
@@ -2663,11 +2677,11 @@ class _NotFoundPage extends StatelessWidget {
               const SizedBox(height: 32),
               GestureDetector(
                 onTap: () async {
-                  final uri = Uri.parse('https://app.taploop.com.mx');
+                  final uri = Uri.parse('https://app.gettaploop.com');
                   await _launchPublicUri(uri);
                 },
                 child: Text(
-                  'Ir al inicio →',
+                  'Go to home →',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,

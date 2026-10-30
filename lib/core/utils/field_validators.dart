@@ -27,13 +27,13 @@ class FieldValidators {
     
     final cleanedValue = value.replaceAll(RegExp(r'[^\d+\-\s]'), '');
     if (cleanedValue.isEmpty) {
-      return ValidationResult.invalid('Teléfono inválido. Solo se permiten números, +, - y espacios.');
+      return ValidationResult.invalid('Invalid phone number. Only numbers, +, -, and spaces are allowed.');
     }
     
     // Debe tener al menos 7 dígitos
     final digitsOnly = cleanedValue.replaceAll(RegExp(r'[^\d]'), '');
     if (digitsOnly.length < 7) {
-      return ValidationResult.invalid('El teléfono debe tener al menos 7 dígitos.');
+      return ValidationResult.invalid('The phone number must have at least 7 digits.');
     }
     
     return ValidationResult.valid();
@@ -50,7 +50,7 @@ class FieldValidators {
     );
 
     if (!emailRegex.hasMatch(value)) {
-      return ValidationResult.invalid('Ingresa un email válido.');
+      return ValidationResult.invalid('Enter a valid email.');
     }
 
     return ValidationResult.valid();
@@ -68,18 +68,18 @@ class FieldValidators {
       // Debe tener esquema http o https
       if (uri.scheme != 'http' && uri.scheme != 'https') {
         return ValidationResult.invalid(
-          'La URL debe comenzar con http:// o https://',
+          'The URL must start with http:// or https://',
         );
       }
 
       // Debe tener host
       if (uri.host.isEmpty) {
-        return ValidationResult.invalid('La URL debe ser válida.');
+        return ValidationResult.invalid('The URL must be valid.');
       }
 
       return ValidationResult.valid();
     } catch (_) {
-      return ValidationResult.invalid('La URL no es válida.');
+      return ValidationResult.invalid('The URL is not valid.');
     }
   }
 
@@ -90,7 +90,7 @@ class FieldValidators {
     }
 
     if (!RegExp(r'^[0-9]+([.,][0-9]+)?$').hasMatch(value)) {
-      return ValidationResult.invalid('Solo se permiten números.');
+      return ValidationResult.invalid('Only numbers are allowed.');
     }
 
     return ValidationResult.valid();
@@ -106,7 +106,7 @@ class FieldValidators {
     final allowedChars = RegExp(r'^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ\s.,;:!?()\-@]+$');
     if (!allowedChars.hasMatch(value)) {
       return ValidationResult.invalid(
-        'Solo se permiten letras, números y puntuación básica.',
+        'Only letters, numbers, and basic punctuation are allowed.',
       );
     }
 
@@ -119,7 +119,7 @@ class FieldValidators {
   static ValidationResult validateMaxLength(String value, int maxLength, String fieldName) {
     if (value.length > maxLength) {
       return ValidationResult.invalid(
-        '$fieldName no puede exceder $maxLength caracteres.',
+        '$fieldName cannot exceed $maxLength characters.',
       );
     }
     return ValidationResult.valid();
@@ -128,7 +128,7 @@ class FieldValidators {
   /// Valida que el campo no esté vacío
   static ValidationResult validateRequired(String value, String fieldName) {
     if (value.trim().isEmpty) {
-      return ValidationResult.invalid('$fieldName es requerido.');
+      return ValidationResult.invalid('$fieldName is required.');
     }
     return ValidationResult.valid();
   }
@@ -143,7 +143,7 @@ class FieldValidators {
     
     if (value.length > contactPrimaryMaxLength) {
       return ValidationResult.invalid(
-        'El teléfono no puede exceder $contactPrimaryMaxLength caracteres.',
+        'The phone number cannot exceed $contactPrimaryMaxLength characters.',
       );
     }
 
@@ -158,7 +158,7 @@ class FieldValidators {
 
     if (value.length > contactPrimaryMaxLength) {
       return ValidationResult.invalid(
-        'El email no puede exceder $contactPrimaryMaxLength caracteres.',
+        'The email cannot exceed $contactPrimaryMaxLength characters.',
       );
     }
 
@@ -173,7 +173,7 @@ class FieldValidators {
 
     if (value.length > contactPrimaryMaxLength) {
       return ValidationResult.invalid(
-        'Este campo no puede exceder $contactPrimaryMaxLength caracteres.',
+        'This field cannot exceed $contactPrimaryMaxLength characters.',
       );
     }
 
@@ -188,7 +188,7 @@ class FieldValidators {
 
     if (value.length > socialUrlMaxLength) {
       return ValidationResult.invalid(
-        'La URL no puede exceder $socialUrlMaxLength caracteres.',
+        'The URL cannot exceed $socialUrlMaxLength characters.',
       );
     }
 
@@ -203,7 +203,7 @@ class FieldValidators {
 
     if (value.length > socialLabelMaxLength) {
       return ValidationResult.invalid(
-        'La etiqueta no puede exceder $socialLabelMaxLength caracteres.',
+        'The label cannot exceed $socialLabelMaxLength characters.',
       );
     }
 
@@ -218,7 +218,7 @@ class FieldValidators {
 
     if (value.length > calendarUrlMaxLength) {
       return ValidationResult.invalid(
-        'La URL no puede exceder $calendarUrlMaxLength caracteres.',
+        'The URL cannot exceed $calendarUrlMaxLength characters.',
       );
     }
 

@@ -53,7 +53,7 @@ Future<void> _bootstrapAppState() async {
   try {
     await _hydrateAuthenticatedState();
   } catch (_) {
-    appState.setError('No se pudo restaurar la sesión.');
+    appState.setError('Could not restore the session.');
   } finally {
     appState.setLoadingUser(false);
   }
@@ -97,15 +97,17 @@ final _router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/terminos',
+      path: '/terms',
       pageBuilder: (context, state) =>
           _motionPage(state, const TermsAndConditionsView()),
     ),
     GoRoute(
-      path: '/privacidad',
+      path: '/privacy',
       pageBuilder: (context, state) =>
           _motionPage(state, const PrivacyPolicyView()),
     ),
+    GoRoute(path: '/terminos', redirect: (_, __) => '/terms'),
+    GoRoute(path: '/privacidad', redirect: (_, __) => '/privacy'),
     // Flujo anterior comentado a petición del proyecto:
     // GoRoute(
     //   path: '/register',

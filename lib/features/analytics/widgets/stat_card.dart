@@ -83,7 +83,7 @@ class StatCard extends StatelessWidget {
           const SizedBox(height: 2),
           HelpTitle(
             title: label,
-            helpText: 'Indicador de analítica para $label.',
+            helpText: 'Analytics indicator for $label.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: context.textSecondary,

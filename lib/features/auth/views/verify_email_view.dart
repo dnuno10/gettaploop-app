@@ -65,7 +65,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
     if (_fullCode.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Ingresa los 6 dígitos del código'),
+          content: Text('Enter the 6 digits of the code'),
           backgroundColor: AppColors.error,
         ),
       );
@@ -92,7 +92,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
       _startResendCountdown();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Código reenviado correctamente'),
+          content: Text('Code resent successfully'),
           backgroundColor: AppColors.success,
         ),
       );
@@ -136,7 +136,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           const SizedBox(height: 24),
 
           Text(
-            'Verifica tu correo',
+            'Verify your email',
             style: GoogleFonts.outfit(
               fontSize: 26,
               fontWeight: FontWeight.w700,
@@ -146,7 +146,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Enviamos un código de 6 dígitos a\n${widget.email}',
+            'We sent a 6-digit code to\n${widget.email}',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               color: context.textSecondary,
@@ -180,7 +180,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           const SizedBox(height: 32),
 
           TapLoopButton(
-            label: 'Verificar correo',
+            label: 'Verify email',
             onPressed: _onVerify,
             variant: TapLoopButtonVariant.secondary,
             isLoading: _loading,
@@ -191,7 +191,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           Center(
             child: _resendCountdown > 0
                 ? Text(
-                    'Reenviar código en ${_resendCountdown}s',
+                    'Resend code in ${_resendCountdown}s',
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       color: context.textSecondary,
@@ -202,7 +202,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 : GestureDetector(
                     onTap: _onResend,
                     child: Text(
-                      '¿No recibiste el código? Reenviar',
+                      'Didn\'t get the code? Resend',
                       style: GoogleFonts.dmSans(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -217,7 +217,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Text(
-                'Cambiar correo electrónico',
+                'Change email address',
                 style: GoogleFonts.dmSans(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,

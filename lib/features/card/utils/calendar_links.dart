@@ -16,7 +16,7 @@ class CalendarIntegrationLink {
   String get displayLabel {
     if (provider != CalendarProviderType.custom) return provider.label;
     final label = customLabel?.trim();
-    return label == null || label.isEmpty ? 'Otra integración' : label;
+    return label == null || label.isEmpty ? 'Other integration' : label;
   }
 }
 
@@ -32,16 +32,16 @@ extension CalendarProviderTypeX on CalendarProviderType {
     CalendarProviderType.calendly => 'Calendly',
     CalendarProviderType.googleCalendar => 'Google Calendar',
     CalendarProviderType.microsoftTeams => 'Microsoft Teams',
-    CalendarProviderType.custom => 'Otro',
+    CalendarProviderType.custom => 'Other',
   };
 
   String get hint => switch (this) {
-    CalendarProviderType.calendly => 'https://calendly.com/tu-usuario',
+    CalendarProviderType.calendly => 'https://calendly.com/your-username',
     CalendarProviderType.googleCalendar =>
-      'https://calendar.app.google/... o enlace de cita',
+      'https://calendar.app.google/... or booking link',
     CalendarProviderType.microsoftTeams =>
-      'https://teams.microsoft.com/... o Bookings',
-    CalendarProviderType.custom => 'https://tu-servicio.com/tu-enlace',
+      'https://teams.microsoft.com/... or Bookings',
+    CalendarProviderType.custom => 'https://your-service.com/your-link',
   };
 }
 
@@ -134,7 +134,7 @@ List<CalendarIntegrationLink> parseCalendarIntegrationLinks(String? raw) {
     CalendarIntegrationLink(
       provider: CalendarProviderType.custom,
       url: normalized,
-      customLabel: 'Otra integración',
+      customLabel: 'Other integration',
     ),
   ];
 }
@@ -232,7 +232,7 @@ CalendarIntegrationLink? _parseIntegrationValue(
       provider: provider,
       url: normalizeCalendarUrl(value),
       customLabel: provider == CalendarProviderType.custom
-          ? 'Otra integración'
+          ? 'Other integration'
           : null,
     );
   }
@@ -253,7 +253,7 @@ CalendarIntegrationLink? _parseIntegrationValue(
 
 String _normalizeCustomLabel(String? label) {
   final value = label?.trim();
-  if (value == null || value.isEmpty) return 'Otra integración';
+  if (value == null || value.isEmpty) return 'Other integration';
   return value;
 }
 

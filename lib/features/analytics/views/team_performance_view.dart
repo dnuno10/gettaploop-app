@@ -202,9 +202,9 @@ class _TeamPerformanceViewState extends State<TeamPerformanceView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HelpTitle(
-                      title: 'Equipo',
+                      title: 'Team',
                       helpText:
-                          'Panel para gestionar miembros y comparar rendimiento del equipo.',
+                          'Panel to manage members and compare team performance.',
                       style: GoogleFonts.outfit(
                         fontSize: isDesktop ? 42 : 30,
                         fontWeight: FontWeight.w800,
@@ -214,7 +214,7 @@ class _TeamPerformanceViewState extends State<TeamPerformanceView> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Gestiona tu equipo y visualiza el rendimiento en conjunto.',
+                      'Manage your team and view its overall performance.',
                       style: GoogleFonts.dmSans(
                         fontSize: 15,
                         color: context.textSecondary,
@@ -233,7 +233,7 @@ class _TeamPerformanceViewState extends State<TeamPerformanceView> {
                 hasScrollBody: false,
                 child: EmptyDataState(
                   centered: true,
-                  hint: 'Aún no hay registros del equipo para mostrar.',
+                  hint: 'No team records to show yet.',
                 ),
               )
             else ...[
@@ -333,27 +333,27 @@ class _TeamKpiGrid extends StatelessWidget {
       _TeamKpiItem(
         icon: Icons.visibility_outlined,
         value: '$totalViews',
-        label: 'Visitas totales',
+        label: 'Total visits',
       ),
       _TeamKpiItem(
         icon: Icons.nfc_outlined,
         value: '$totalTaps',
-        label: 'Taps NFC',
+        label: 'NFC Taps',
       ),
       _TeamKpiItem(
         icon: Icons.qr_code_2_rounded,
         value: '$totalQrScans',
-        label: 'Escaneos QR',
+        label: 'QR scans',
       ),
       _TeamKpiItem(
         icon: Icons.share_outlined,
         value: '$totalClicks',
-        label: 'Clicks totales',
+        label: 'Total clicks',
       ),
       _TeamKpiItem(
         icon: Icons.handshake_outlined,
         value: '$totalLeads',
-        label: 'Leads generados',
+        label: 'Generated leads',
       ),
     ];
 
@@ -464,9 +464,9 @@ class _TeamDirectoryPanel extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: HelpTitle(
-                  title: 'Directorio del equipo',
+                  title: 'Team directory',
                   helpText:
-                      'Listado de miembros activos, roles, tarjetas y estado operativo.',
+                      'List of active members, roles, cards, and operational status.',
                   style: GoogleFonts.outfit(
                     fontSize: 23,
                     fontWeight: FontWeight.w800,
@@ -475,7 +475,7 @@ class _TeamDirectoryPanel extends StatelessWidget {
                 ),
               ),
               Text(
-                '${members.length} activos',
+                '${members.length} active',
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                   fontWeight: FontWeight.w800,
@@ -528,27 +528,27 @@ class _TeamDirectoryHeader extends StatelessWidget {
       children: [
         Expanded(
           flex: 34,
-          child: HelpTitle(title: 'Miembro', style: style),
+          child: HelpTitle(title: 'Member', style: style),
         ),
         Expanded(
           flex: 13,
-          child: HelpTitle(title: 'Rol', style: style),
+          child: HelpTitle(title: 'Role', style: style),
         ),
         Expanded(
           flex: 11,
-          child: HelpTitle(title: 'Perfiles', style: style),
+          child: HelpTitle(title: 'Profiles', style: style),
         ),
         Expanded(
           flex: 11,
-          child: HelpTitle(title: 'Tarjetas', style: style),
+          child: HelpTitle(title: 'Cards', style: style),
         ),
         Expanded(
           flex: 18,
-          child: HelpTitle(title: 'Última actividad', style: style),
+          child: HelpTitle(title: 'Last activity', style: style),
         ),
         Expanded(
           flex: 13,
-          child: HelpTitle(title: 'Estado', style: style),
+          child: HelpTitle(title: 'Status', style: style),
         ),
       ],
     );
@@ -580,7 +580,7 @@ class _TeamDirectoryRow extends StatelessWidget {
                       Text(
                         member.name.trim().isNotEmpty
                             ? member.name
-                            : 'Miembro sin nombre',
+                            : 'Unnamed member',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.dmSans(
@@ -595,7 +595,7 @@ class _TeamDirectoryRow extends StatelessWidget {
                             ? member.email
                             : member.jobTitle.trim().isNotEmpty
                             ? member.jobTitle
-                            : 'Sin correo registrado',
+                            : 'No email on file',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.dmSans(
@@ -643,7 +643,7 @@ class _TeamDirectoryRow extends StatelessWidget {
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
-                  'Activo',
+                  'Active',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     fontWeight: FontWeight.w800,
@@ -698,7 +698,7 @@ class _TeamDirectoryCompactRow extends StatelessWidget {
                       child: Text(
                         member.name.trim().isNotEmpty
                             ? member.name
-                            : 'Miembro sin nombre',
+                            : 'Unnamed member',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.dmSans(
@@ -718,7 +718,7 @@ class _TeamDirectoryCompactRow extends StatelessWidget {
                       ? member.email
                       : member.jobTitle.trim().isNotEmpty
                       ? member.jobTitle
-                      : 'Sin correo registrado',
+                      : 'No email on file',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
@@ -729,8 +729,8 @@ class _TeamDirectoryCompactRow extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${_roleLabel(member)} · ${member.cardIds.length} perfiles · '
-                  '${lastActivity == null ? 'Sin actividad' : _relativeActivity(lastActivity!)}',
+                  '${_roleLabel(member)} · ${member.cardIds.length} profiles ·'
+                  '${lastActivity == null ? 'No activity' : _relativeActivity(lastActivity!)}',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -756,7 +756,7 @@ class _TeamDirectoryStatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
       ),
       child: Text(
-        'Activo',
+        'Active',
         style: GoogleFonts.dmSans(
           fontSize: 13,
           fontWeight: FontWeight.w800,
@@ -799,7 +799,7 @@ class _TeamActivityPanel extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'Actividad del equipo',
+                  'Team activity',
                   style: GoogleFonts.outfit(
                     fontSize: 23,
                     fontWeight: FontWeight.w800,
@@ -819,7 +819,7 @@ class _TeamActivityPanel extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Últimas interacciones registradas.',
+            'Latest recorded interactions.',
             style: GoogleFonts.dmSans(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -832,7 +832,7 @@ class _TeamActivityPanel extends StatelessWidget {
               height: 220,
               child: Center(
                 child: Text(
-                  'Aún no hay actividad para este filtro.',
+                  'No activity for this filter yet.',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     color: context.textMuted,
@@ -952,7 +952,7 @@ String _memberInitials(TeamMemberModel member) {
 String _roleLabel(TeamMemberModel member) {
   if (member.isAdmin) return 'Owner';
   final role = member.role.trim();
-  if (role.isEmpty || role == 'default') return 'Miembro';
+  if (role.isEmpty || role == 'default') return 'Member';
   return role[0].toUpperCase() + role.substring(1);
 }
 
@@ -960,8 +960,8 @@ String _relativeActivity(DateTime timestamp) {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
   final date = DateTime(timestamp.year, timestamp.month, timestamp.day);
-  if (date == today) return 'Hoy';
-  if (date == today.subtract(const Duration(days: 1))) return 'Ayer';
+  if (date == today) return 'Today';
+  if (date == today.subtract(const Duration(days: 1))) return 'Yesterday';
   return _activityDate(timestamp);
 }
 
@@ -1000,25 +1000,25 @@ IconData _activityIcon(VisitEventModel event) {
 String _activityLabel(VisitEventModel event) {
   switch (event.source) {
     case 'nfc':
-      return 'Tap NFC';
+      return 'NFC tap';
     case 'qr':
-      return 'Escaneo QR';
+      return 'QR scan';
     case 'link':
-      return 'Visita al perfil';
+      return 'Profile visit';
     case 'downloaded_contact':
-      return 'Guardó contacto';
+      return 'Saved contact';
     case 'form':
-      return 'Formulario completado';
+      return 'Form completed';
     case 'contact':
     case 'social':
       final label = event.label?.trim();
       return label == null || label.isEmpty
-          ? 'Click en enlace'
-          : 'Click en $label';
+          ? 'Link click'
+          : 'Clicked $label';
     case 'share':
-      return 'Compartió perfil';
+      return 'Shared profile';
     default:
-      return 'Visita al perfil';
+      return 'Profile visit';
   }
 }
 
@@ -1076,7 +1076,7 @@ class _TeamMemberExplorer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Miembros',
+                'Members',
                 style: GoogleFonts.outfit(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -1085,7 +1085,7 @@ class _TeamMemberExplorer extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                'Selecciona un perfil para inspeccionar su rendimiento.',
+                'Select a profile to inspect its performance.',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: context.textSecondary,
@@ -1136,7 +1136,7 @@ class _ExplorerSearchField extends StatelessWidget {
       inputFormatters: [LengthLimitingTextInputFormatter(200)],
       maxLength: 200,
       decoration: InputDecoration(
-        hintText: 'Buscar miembro',
+        hintText: 'Search member',
         counterText: '',
         prefixIcon: const Icon(Icons.search_rounded, size: 18),
         contentPadding: const EdgeInsets.symmetric(
@@ -1178,7 +1178,7 @@ class _ExplorerHeaderRow extends StatelessWidget {
       children: [
         Expanded(
           flex: 6,
-          child: HelpTitle(title: 'MIEMBRO', style: style),
+          child: HelpTitle(title: 'MEMBER', style: style),
         ),
         Expanded(
           flex: 2,
@@ -1244,7 +1244,7 @@ class _ExplorerMemberTile extends StatelessWidget {
                     Text(
                       member.jobTitle.trim().isNotEmpty
                           ? member.jobTitle
-                          : 'Perfil del equipo',
+                          : 'Team profile',
                       style: GoogleFonts.dmSans(
                         fontSize: 11,
                         color: context.textSecondary,
@@ -1299,7 +1299,7 @@ class _EmptyTeamExplorer extends StatelessWidget {
         border: Border.all(color: _teamAnalyticsBorderColor(context)),
       ),
       child: Text(
-        'No hay miembros disponibles para mostrar.',
+        'No members available to show.',
         style: GoogleFonts.dmSans(fontSize: 13, color: context.textSecondary),
       ),
     );
@@ -1348,11 +1348,11 @@ class _OverviewMetricsLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      ('Miembros activos', '$activeMembers'),
-      ('Vistas del equipo', '$totalViews'),
-      ('Taps del equipo', '$totalTaps'),
-      ('Clicks en enlaces', '$totalClicks'),
-      ('Leads registrados', '$totalLeads'),
+      ('Active members', '$activeMembers'),
+      ('Team views', '$totalViews'),
+      ('Team taps', '$totalTaps'),
+      ('Link clicks', '$totalClicks'),
+      ('Registered leads', '$totalLeads'),
     ];
 
     return Wrap(
@@ -1409,9 +1409,9 @@ class _TeamLeaderPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HelpTitle(
-          title: 'Resumen ejecutivo',
+          title: 'Executive summary',
           helpText:
-              'Lectura rápida del rendimiento global y del miembro con más tracción.',
+              'Quick read of overall performance and the member with the most traction.',
           style: GoogleFonts.outfit(
             fontSize: 18,
             fontWeight: FontWeight.w800,
@@ -1420,13 +1420,13 @@ class _TeamLeaderPanel extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          'Lectura rápida del equipo y del miembro con mayor tracción comercial.',
+          'Quick read of the team and the member with the most commercial traction.',
           style: GoogleFonts.dmSans(fontSize: 12, color: context.textSecondary),
         ),
         const SizedBox(height: 18),
         if (member != null) ...[
           Text(
-            'Miembro destacado',
+            'Top member',
             style: GoogleFonts.dmSans(
               fontSize: 11,
               fontWeight: FontWeight.w700,
@@ -1444,7 +1444,7 @@ class _TeamLeaderPanel extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${member!.leads} leads • ${member!.profileViews} vistas • ${member!.totalClicks} clicks',
+            '${member!.leads} leads • ${member!.profileViews} views • ${member!.totalClicks} clicks',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               color: context.textSecondary,
@@ -1452,7 +1452,7 @@ class _TeamLeaderPanel extends StatelessWidget {
           ),
         ] else
           Text(
-            'No hay miembros activos para mostrar.',
+            'No active members to show.',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               color: context.textSecondary,
@@ -1463,9 +1463,9 @@ class _TeamLeaderPanel extends StatelessWidget {
           spacing: 16,
           runSpacing: 12,
           children: [
-            _InlineFact(label: 'Equipo', value: '$totalMembers'),
+            _InlineFact(label: 'Team', value: '$totalMembers'),
             _InlineFact(label: 'Leads', value: '$totalLeads'),
-            _InlineFact(label: 'Vistas', value: '$totalViews'),
+            _InlineFact(label: 'Views', value: '$totalViews'),
           ],
         ),
       ],
@@ -1524,11 +1524,11 @@ class _TeamTrendSection extends StatelessWidget {
       children: [
         if (!hasTrendData)
           const EmptyDataState(
-            hint: 'Aún no hay actividad del equipo registrada.',
+            hint: 'No team activity recorded yet.',
           )
         else ...[
           _TrendRow(
-            label: 'Vistas',
+            label: 'Views',
             total: viewsSeries.fold(0, (a, b) => a + b),
             series: viewsSeries,
             color: AppColors.primary,
@@ -1542,7 +1542,7 @@ class _TeamTrendSection extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _TrendRow(
-            label: 'Clicks en enlace',
+            label: 'Link clicks',
             total: clicksSeries.fold(0, (a, b) => a + b),
             series: clicksSeries,
             color: const Color(0xFFE67E22),
@@ -1656,7 +1656,7 @@ class _TopMembersColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Top desempeño',
+          'Top performers',
           style: GoogleFonts.outfit(
             fontSize: 16,
             fontWeight: FontWeight.w800,
@@ -1665,7 +1665,7 @@ class _TopMembersColumn extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Miembros con mayor impacto comercial.',
+          'Members with the highest commercial impact.',
           style: GoogleFonts.dmSans(fontSize: 12, color: context.textSecondary),
         ),
         const SizedBox(height: 12),
@@ -1840,7 +1840,7 @@ class _MemberOverviewHeader extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     [
-                      'Miembro #$rank',
+                      'Member #$rank',
                       if (member.jobTitle.trim().isNotEmpty) member.jobTitle,
                     ].join(' · '),
                     style: GoogleFonts.dmSans(
@@ -1870,7 +1870,7 @@ class _MemberKpiGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      ('Visitas', '${member.profileViews}'),
+      ('Visits', '${member.profileViews}'),
       ('Taps', '${member.taps}'),
       ('Clicks', '${member.totalClicks}'),
       ('Leads', '$leadsCount'),
@@ -1920,7 +1920,7 @@ class _MemberFunnelPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final steps = [
       _FunnelStepData(
-        label: 'Vistas',
+        label: 'Views',
         value: member.profileViews,
         color: AppColors.primary,
       ),
@@ -1942,8 +1942,8 @@ class _MemberFunnelPanel extends StatelessWidget {
     ];
 
     return _MemberSectionPanel(
-      title: 'Embudo de conversión',
-      subtitle: 'Dónde avanza la interacción y dónde se cae el flujo.',
+      title: 'Conversion funnel',
+      subtitle: 'Where interaction advances and where the flow drops off.',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -2081,11 +2081,11 @@ class _MemberLinksPanel extends StatelessWidget {
     final ranked = [...linkStats]..sort((a, b) => b.clicks.compareTo(a.clicks));
     final total = ranked.fold<int>(0, (sum, link) => sum + link.clicks);
     return _MemberSectionPanel(
-      title: 'Top links e insight',
-      subtitle: 'Qué enlace concentra la intención y qué canal pesa más.',
+      title: 'Top links and insight',
+      subtitle: 'Which link concentrates intent and which channel weighs more.',
       child: ranked.isEmpty
           ? Text(
-              'Sin clicks en enlaces registrados.',
+              'No link clicks recorded.',
               style: GoogleFonts.dmSans(fontSize: 12, color: context.textMuted),
             )
           : Column(
@@ -2138,12 +2138,12 @@ class _MemberLeadsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDesktop = Responsive.isDesktop(context);
     return _MemberSectionPanel(
-      title: 'Leads capturados',
+      title: 'Captured leads',
       subtitle:
-          'Lista priorizada por intención; el detalle de interacción aparece al seleccionar un lead.',
+          'List prioritized by intent; interaction details appear when you select a lead.',
       child: leads.isEmpty
           ? Text(
-              'No hay leads registrados para este miembro.',
+              'No leads recorded for this member.',
               style: GoogleFonts.dmSans(fontSize: 12, color: context.textMuted),
             )
           : isDesktop
@@ -2262,7 +2262,7 @@ class _LeadListHeader extends StatelessWidget {
         ),
         Expanded(
           flex: 3,
-          child: HelpTitle(title: 'SEÑALES', style: style),
+          child: HelpTitle(title: 'SIGNALS', style: style),
         ),
       ],
     );
@@ -2411,7 +2411,7 @@ class _LeadCompactCard extends StatelessWidget {
                         [
                           if ((lead.company ?? '').trim().isNotEmpty)
                             lead.company!,
-                          'Última actividad ${_relativeDate(lead.lastSeen)}',
+                          'Last activity ${_relativeDate(lead.lastSeen)}',
                         ].join(' · '),
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
@@ -2520,11 +2520,11 @@ class _LeadDetailPanel extends StatelessWidget {
             runSpacing: 10,
             children: [
               _LeadDetailFact(
-                label: 'Primera visita',
+                label: 'First visit',
                 value: _relativeDate(lead.firstSeen),
               ),
               _LeadDetailFact(
-                label: 'Último evento',
+                label: 'Last event',
                 value: _relativeDate(lead.lastSeen),
               ),
             ],
@@ -2540,7 +2540,7 @@ class _LeadDetailPanel extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Text(
-            'Recorrido de interacción',
+            'Interaction journey',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               fontWeight: FontWeight.w700,
@@ -2549,7 +2549,7 @@ class _LeadDetailPanel extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Desliza para ver más',
+            'Swipe to see more',
             style: GoogleFonts.dmSans(
               fontSize: 11,
               color: context.textSecondary,
@@ -2558,7 +2558,7 @@ class _LeadDetailPanel extends StatelessWidget {
           const SizedBox(height: 12),
           actions.isEmpty
               ? Text(
-                  'Sin eventos detallados todavía.',
+                  'No detailed events yet.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: context.textMuted,
@@ -2651,21 +2651,21 @@ String _funnelInsight(TeamMemberModel member) {
       : ((member.leads / member.totalClicks) * 100).round();
 
   if (tapToClick < viewToTap && tapToClick < clickToLead) {
-    return 'El mayor drop-off ocurre entre taps y clicks. Conviene reforzar CTAs y enlaces de alto valor.';
+    return 'The biggest drop-off occurs between taps and clicks. Consider reinforcing CTAs and high-value links.';
   }
   if (clickToLead < 20 && member.totalClicks > 0) {
-    return 'Hay interés real, pero los clicks todavía no convierten en lead con suficiente fuerza.';
+    return 'There is real interest, but clicks are not yet converting into leads strongly enough.';
   }
-  return 'El flujo se mantiene sano desde la visita hasta el lead. Este miembro sostiene intención comercial consistente.';
+  return 'The flow stays healthy from visit to lead. This member sustains consistent commercial intent.';
 }
 
 String _topLinkInsight(List<TeamMemberLinkStat> links, int totalClicks) {
   if (links.isEmpty || totalClicks == 0) {
-    return 'Aún no hay suficiente interacción para detectar un canal dominante.';
+    return 'Not enough interaction yet to detect a dominant channel.';
   }
   final top = links.first;
   final share = ((top.clicks / totalClicks) * 100).round();
-  return '${top.label} genera el $share% de la interacción total en enlaces.';
+  return '${top.label} generates $share% of total link interaction.';
 }
 
 List<String> _leadTags(LeadModel lead) {
@@ -2673,7 +2673,7 @@ List<String> _leadTags(LeadModel lead) {
   for (final action in lead.actions) {
     switch (action.action) {
       case LeadAction.visitedProfile:
-        tags.add('Visita');
+        tags.add('Visit');
         break;
       case LeadAction.clickedLinkedIn:
         tags.add('LinkedIn');
@@ -2685,10 +2685,10 @@ List<String> _leadTags(LeadModel lead) {
         tags.add('WhatsApp');
         break;
       case LeadAction.downloadedContact:
-        tags.add('Contacto');
+        tags.add('Contact');
         break;
       case LeadAction.filledForm:
-        tags.add('Formulario');
+        tags.add('Form');
         break;
     }
   }
@@ -2714,15 +2714,15 @@ IconData _platformIcon(String platform) {
 }
 
 String _dayLabel(int index) {
-  const labels = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  const labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   return labels[index % labels.length];
 }
 
 String _relativeDate(DateTime date) {
   final now = DateTime.now();
   final diff = now.difference(date);
-  if (diff.inMinutes < 60) return 'hace ${diff.inMinutes.clamp(1, 59)} min';
-  if (diff.inHours < 24) return 'hace ${diff.inHours} h';
-  if (diff.inDays < 7) return 'hace ${diff.inDays} d';
+  if (diff.inMinutes < 60) return '${diff.inMinutes.clamp(1, 59)} min ago';
+  if (diff.inHours < 24) return '${diff.inHours} h ago';
+  if (diff.inDays < 7) return '${diff.inDays} d ago';
   return '${date.day}/${date.month}/${date.year}';
 }

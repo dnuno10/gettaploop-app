@@ -101,15 +101,15 @@ class _FormState extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const AuthHeader(
-            title: 'Recuperar contraseña',
+            title: 'Recover password',
             subtitle:
-                'Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña',
+                'Enter your email and we\'ll send you a link to reset your password',
           ),
           const SizedBox(height: 32),
 
           TapLoopTextField(
-            label: 'Correo electrónico',
-            hint: 'tu@email.com',
+            label: 'Email',
+            hint: 'you@email.com',
             controller: emailCtrl,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
@@ -119,9 +119,9 @@ class _FormState extends StatelessWidget {
               color: context.textMuted,
             ),
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'Ingresa tu correo';
+              if (v == null || v.trim().isEmpty) return 'Enter your email';
               final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-              if (!emailRegex.hasMatch(v.trim())) return 'Correo inválido';
+              if (!emailRegex.hasMatch(v.trim())) return 'Invalid email';
               return null;
             },
             onSubmitted: (_) => onSend(),
@@ -129,7 +129,7 @@ class _FormState extends StatelessWidget {
           const SizedBox(height: 24),
 
           TapLoopButton(
-            label: 'Enviar enlace de recuperación',
+            label: 'Send recovery link',
             onPressed: onSend,
             variant: TapLoopButtonVariant.secondary,
             isLoading: loading,
@@ -140,7 +140,7 @@ class _FormState extends StatelessWidget {
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Text(
-                'Volver a iniciar sesión',
+                'Back to sign in',
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -183,7 +183,7 @@ class _SuccessState extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(
-          '¡Revisa tu correo!',
+          'Check your email!',
           style: GoogleFonts.outfit(
             fontSize: 24,
             fontWeight: FontWeight.w700,
@@ -193,7 +193,7 @@ class _SuccessState extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Enviamos un enlace de recuperación a\n$email',
+          'We sent a recovery link to\n$email',
           style: GoogleFonts.dmSans(
             fontSize: 14,
             color: context.textSecondary,
@@ -203,14 +203,14 @@ class _SuccessState extends StatelessWidget {
         ),
         const SizedBox(height: 32),
         TapLoopButton(
-          label: 'Volver a iniciar sesión',
+          label: 'Back to sign in',
           onPressed: () => Navigator.pop(context),
           variant: TapLoopButtonVariant.secondary,
         ),
         const SizedBox(height: 16),
         Center(
           child: Text(
-            '¿No recibiste el correo? Revisa tu carpeta de spam',
+            'Didn\'t get the email? Check your spam folder',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               color: context.textSecondary,

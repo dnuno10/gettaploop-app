@@ -555,7 +555,7 @@ class AdminRepository {
             .limit(1);
         final cardRows = (rows as List).cast<Map<String, dynamic>>();
         if (cardRows.isEmpty) {
-          throw Exception('La tarjeta plantilla no existe.');
+          throw Exception('The template card does not exist.');
         }
         final cardRow = cardRows.first;
         final cardOrgId = (cardRow['org_id'] as String?)?.trim();
@@ -565,7 +565,7 @@ class AdminRepository {
                 ?.trim();
         if (cardOrgId != orgId && ownerOrgId != orgId) {
           throw Exception(
-            'La tarjeta plantilla debe pertenecer a tu organización.',
+            'The template card must belong to your organization.',
           );
         }
         payload['shared_template_card_id'] = trimmed;
@@ -608,11 +608,11 @@ class AdminRepository {
       if (resolved != null) return resolved;
     }
     final fallbackLabel = switch (source) {
-      'contact' => 'Contacto',
-      'social' => 'Red social',
-      'downloaded_contact' => 'Guardó contacto',
-      'share' => 'Compartió perfil',
-      _ => 'Interacción',
+      'contact' => 'Contact',
+      'social' => 'Social network',
+      'downloaded_contact' => 'Saved contact',
+      'share' => 'Shared profile',
+      _ => 'Interaction',
     };
     return _ResolvedLinkReference(label: fallbackLabel, platform: source);
   }

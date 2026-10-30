@@ -133,12 +133,23 @@ class _LinkStatIcon extends StatelessWidget {
     if (text.contains('github')) return 'github';
     if (text.contains('whatsapp')) return 'whatsapp';
     if (text.contains('correo') || text.contains('email')) return 'email';
-    if (text.contains('tel') || text.contains('llamar')) return 'phone';
+    if (text.contains('tel') ||
+        text.contains('llamar') ||
+        text.contains('phone') ||
+        text.contains('call')) {
+      return 'phone';
+    }
     if (text.contains('sitio') || text.contains('web')) return 'website';
-    if (text.contains('dirección') || text.contains('direccion')) {
+    if (text.contains('dirección') ||
+        text.contains('direccion') ||
+        text.contains('address')) {
       return 'address';
     }
-    if (text.contains('form') || text.contains('agenda')) return 'calendly';
+    if (text.contains('form') ||
+        text.contains('agenda') ||
+        text.contains('schedule')) {
+      return 'calendly';
+    }
     return raw;
   }
 

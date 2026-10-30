@@ -99,7 +99,7 @@ class SocialLinkModel {
       case SocialPlatform.github:
         return 'GitHub';
       case SocialPlatform.custom:
-        return 'Enlace';
+        return 'Link';
     }
   }
 

@@ -80,26 +80,26 @@ class TeamMemberModel {
   /// AI-generated insight for this member.
   String get aiInsight {
     if (conversionRate >= 0.15) {
-      return 'Tiene la mejor tasa de conversión del equipo.';
+      return 'Has the best conversion rate on the team.';
     }
     if (taps >= 60) {
-      return 'Alto volumen de taps. Enfocarse en conversión.';
+      return 'High volume of taps. Focus on conversion.';
     }
     if (contactsSaved >= 20) {
-      return 'Muchos contactos guardados — buen cierre presencial.';
+      return 'Many saved contacts — good in-person closing.';
     }
-    return 'Potencial de mejora activando más redes en la tarjeta.';
+    return 'Room to improve by enabling more networks on the card.';
   }
 
   String get behaviorSummary {
     if (totalClicks >= leads && leads > 0) {
-      return 'Genera intención alta: sus clicks ya están empujando leads reales.';
+      return 'Generates high intent: their clicks are already driving real leads.';
     }
     if (profileViews > 0 && totalClicks == 0) {
-      return 'Tiene visibilidad, pero falta convertir visitas en interacción.';
+      return 'Has visibility, but needs to convert visits into interaction.';
     }
     if (taps > profileViews / 2 && profileViews > 0) {
-      return 'Sobresale en contacto presencial y activación directa.';
+      return 'Excels at in-person contact and direct activation.';
     }
     return aiInsight;
   }

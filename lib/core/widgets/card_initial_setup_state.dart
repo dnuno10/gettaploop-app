@@ -30,7 +30,7 @@ class CardInitialSetupState extends StatefulWidget {
 
 class _CardInitialSetupStateState extends State<CardInitialSetupState> {
   static const String _phoneFallbackMessage =
-      'Si tu computadora no tiene camara, accede desde tu telefono para usar su camara y escanear el QR.';
+      'If your computer has no camera, sign in from your phone to use its camera and scan the QR.';
 
   MobileScannerController? _scannerController;
 
@@ -75,7 +75,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
           _scannerVisible = true;
           _scannerPaused = true;
           _cameraError =
-              'No se pudo iniciar la camara en este dispositivo o navegador. $_phoneFallbackMessage';
+              'Could not start the camera on this device or browser. $_phoneFallbackMessage';
           _error = null;
           _hasProcessedScan = false;
         });
@@ -208,7 +208,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
-                        'Configuracion inicial',
+                        'Initial setup',
                         style: GoogleFonts.dmSans(
                           color: context.textPrimary,
                           fontSize: 12,
@@ -218,7 +218,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     ),
                     const SizedBox(height: 18),
                     Text(
-                      'Escanea el QR de tu tarjeta para conectar tu perfil digital.',
+                      'Scan your card\'s QR code to connect your digital profile.',
                       style: GoogleFonts.outfit(
                         color: context.textPrimary,
                         fontSize: 34,
@@ -229,8 +229,8 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     const SizedBox(height: 12),
                     Text(
                       _usesEmbeddedScanner
-                          ? 'La vinculacion se realiza unicamente con la camara del dispositivo. Al validar el QR se enlaza el NFC a la tarjeta digital seleccionada y, si no tienes una creada, se genera una base para habilitar clicks, taps, visitas, leads y metricas.'
-                          : 'En navegador se abrira la camara del dispositivo para escanear el QR en vivo y vincular la tarjeta.',
+                          ? 'Linking is done only with your device\'s camera. Validating the QR links the NFC to the selected digital card and, if you don\'t have one yet, creates a base card to enable clicks, taps, visits, leads, and metrics.'
+                          : 'In a browser, your device\'s camera will open to scan the QR live and link the card.',
                       style: GoogleFonts.dmSans(
                         color: context.textSecondary,
                         fontSize: 14,
@@ -239,7 +239,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'En caso de que el dispositivo no tenga camara, accede desde un dispositivo movil.',
+                      'If your device has no camera, sign in from a mobile device.',
                       style: GoogleFonts.dmSans(
                         color: context.textSecondary,
                         fontSize: 13,
@@ -251,9 +251,9 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     _CardSetupActionButton(
                       label: _scannerVisible
                           ? (_usesEmbeddedScanner
-                                ? 'Escaneando QR...'
-                                : 'Leyendo QR...')
-                          : 'Escanear QR de tarjeta',
+                                ? 'Scanning QR...'
+                                : 'Reading QR...')
+                          : 'Scan card QR',
                       icon: Icons.qr_code_scanner_rounded,
                       filled: true,
                       onTap: _scannerVisible || _submitting
@@ -287,7 +287,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     ),
                     const Spacer(),
                     Text(
-                      'Activa tu perfil',
+                      'Activate your profile',
                       style: GoogleFonts.outfit(
                         color: context.textPrimary,
                         fontSize: 24,
@@ -296,7 +296,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'QR validado • NFC vinculada • Perfil digital',
+                      'QR validated • NFC linked • Digital profile',
                       style: GoogleFonts.dmSans(
                         color: context.textSecondary,
                         fontSize: 13,
@@ -325,8 +325,8 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                       Expanded(
                         child: Text(
                           _usesEmbeddedScanner
-                              ? 'Escanea el QR de la tarjeta'
-                              : 'Lee el QR con la camara',
+                              ? 'Scan the card\'s QR code'
+                              : 'Read the QR with your camera',
                           style: GoogleFonts.outfit(
                             color: context.textPrimary,
                             fontSize: 22,
@@ -336,15 +336,15 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                       ),
                       TextButton(
                         onPressed: _submitting ? null : _closeScanner,
-                        child: const Text('Cancelar'),
+                        child: const Text('Cancel'),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   Text(
                     _usesEmbeddedScanner
-                        ? 'Coloca el QR dentro del recuadro. La lectura de la camara validara la tarjeta y la vinculara automaticamente a tu cuenta.'
-                        : 'Tu navegador pedira permiso para abrir la camara del dispositivo y leer el QR en tiempo real.',
+                        ? 'Place the QR inside the frame. The camera scan will validate the card and link it to your account automatically.'
+                        : 'Your browser will ask for permission to open the device camera and read the QR in real time.',
                     style: GoogleFonts.dmSans(
                       color: context.textSecondary,
                       fontSize: 13,
@@ -354,7 +354,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                   const SizedBox(height: 18),
                   _scannerPaused
                       ? _ScannerValidationErrorState(
-                          message: _error ?? 'No se pudo validar el QR.',
+                          message: _error ?? 'Could not validate the QR.',
                           onRetry: _retryScanner,
                           onClose: _closeScanner,
                         )
@@ -388,10 +388,10 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                                               .errorCode) {
                                             MobileScannerErrorCode
                                                 .permissionDenied =>
-                                              'La camara no tiene permiso. Permite el acceso a la camara para escanear el QR.',
+                                              'Camera permission denied. Allow camera access to scan the QR.',
                                             MobileScannerErrorCode
                                                 .unsupported =>
-                                              'Este dispositivo o navegador no soporta escaneo con camara. $_phoneFallbackMessage',
+                                              'This device or browser doesn\'t support camera scanning. $_phoneFallbackMessage',
                                             _ =>
                                               error.errorDetails?.message ??
                                                   error.errorCode.message,
@@ -441,7 +441,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                                               const TapLoopProgressIndicator(),
                                               const SizedBox(height: 14),
                                               Text(
-                                                'Validando QR y vinculando tarjeta...',
+                                                'Validating QR and linking card...',
                                                 style: GoogleFonts.dmSans(
                                                   color: AppColors.white,
                                                   fontSize: 13,
@@ -498,7 +498,7 @@ class _CardInitialSetupStateState extends State<CardInitialSetupState> {
                                       const TapLoopProgressIndicator(),
                                       const SizedBox(height: 14),
                                       Text(
-                                        'Validando QR y vinculando tarjeta...',
+                                        'Validating QR and linking card...',
                                         style: GoogleFonts.dmSans(
                                           color: AppColors.white,
                                           fontSize: 13,
@@ -569,7 +569,7 @@ class _ScannerErrorState extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           Text(
-            'No se pudo iniciar la camara',
+            'Could not start the camera',
             textAlign: TextAlign.center,
             style: GoogleFonts.outfit(
               color: context.textPrimary,
@@ -623,7 +623,7 @@ class _ScannerValidationErrorState extends StatelessWidget {
           const Icon(Icons.qr_code_2_rounded, size: 34, color: AppColors.error),
           const SizedBox(height: 14),
           Text(
-            'No se pudo validar el QR',
+            'Could not validate the QR',
             textAlign: TextAlign.center,
             style: GoogleFonts.outfit(
               color: context.textPrimary,
@@ -675,12 +675,12 @@ class _ScannerActionRow extends StatelessWidget {
         FilledButton.tonal(
           onPressed: onRetry,
           style: buttonStyle,
-          child: const Text('Reintentar'),
+          child: const Text('Retry'),
         ),
         OutlinedButton(
           onPressed: onClose,
           style: buttonStyle,
-          child: const Text('Cerrar lector'),
+          child: const Text('Close scanner'),
         ),
       ],
     );
@@ -756,7 +756,7 @@ Future<_CardLinkResult> _linkCardFromInput(
   if (user == null) {
     return const _CardLinkResult(
       success: false,
-      message: 'Necesitas iniciar sesion para vincular una tarjeta.',
+      message: 'You need to sign in to link a card.',
     );
   }
 
@@ -764,7 +764,7 @@ Future<_CardLinkResult> _linkCardFromInput(
   if (serial == null) {
     return const _CardLinkResult(
       success: false,
-      message: 'El QR no contiene un identificador valido de tarjeta.',
+      message: 'The QR doesn\'t contain a valid card identifier.',
     );
   }
 
@@ -774,7 +774,7 @@ Future<_CardLinkResult> _linkCardFromInput(
     if (status == 'not_found') {
       return const _CardLinkResult(
         success: false,
-        message: 'No encontramos una tarjeta valida en ese QR.',
+        message: 'We couldn\'t find a valid card in that QR.',
       );
     }
 
@@ -789,13 +789,13 @@ Future<_CardLinkResult> _linkCardFromInput(
         }
         return const _CardLinkResult(
           success: true,
-          message: 'Esta tarjeta ya estaba vinculada a tu cuenta.',
+          message: 'This card was already linked to your account.',
         );
       }
 
       return const _CardLinkResult(
         success: false,
-        message: 'Esta tarjeta ya esta vinculada a otra cuenta.',
+        message: 'This card is already linked to another account.',
       );
     }
 
@@ -814,7 +814,7 @@ Future<_CardLinkResult> _linkCardFromInput(
       }
       return const _CardLinkResult(
         success: false,
-        message: 'No se pudo vincular la tarjeta. Intenta de nuevo.',
+        message: 'Could not link the card. Please try again.',
       );
     }
 
@@ -827,7 +827,7 @@ Future<_CardLinkResult> _linkCardFromInput(
     }
     return const _CardLinkResult(
       success: true,
-      message: 'Tarjeta vinculada correctamente.',
+      message: 'Card linked successfully.',
     );
   } catch (_) {
     if (targetResolution?.createdNow == true) {
@@ -835,7 +835,7 @@ Future<_CardLinkResult> _linkCardFromInput(
     }
     return const _CardLinkResult(
       success: false,
-      message: 'Ocurrio un error al vincular la tarjeta.',
+      message: 'An error occurred while linking the card.',
     );
   }
 }
@@ -848,7 +848,7 @@ Future<_TargetCardResolution> _resolveTargetCardForNfcLink(
     final createdCard = await CardRepository.createCardForUser(
       userId: user.id,
       orgId: user.orgId,
-      fallbackName: 'Nueva tarjeta',
+      fallbackName: 'New card',
       fallbackJobTitle: '',
       fallbackCompany: '',
     );

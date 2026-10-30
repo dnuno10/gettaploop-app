@@ -81,7 +81,7 @@ class VisitEventModel {
     if (city != null && country != null) return '$city, $country';
     if (city != null) return city!;
     if (country != null) return country!;
-    return 'Desconocido';
+    return 'Unknown';
   }
 
   // Backward-compatible alias used by some older views/widgets.
@@ -95,18 +95,18 @@ class VisitEventModel {
 
   String get formattedDate {
     const months = [
-      'Ene',
+      'Jan',
       'Feb',
       'Mar',
-      'Abr',
+      'Apr',
       'May',
       'Jun',
       'Jul',
-      'Ago',
+      'Aug',
       'Sep',
       'Oct',
       'Nov',
-      'Dic',
+      'Dec',
     ];
     return '${timestamp.day} ${months[timestamp.month - 1]}';
   }

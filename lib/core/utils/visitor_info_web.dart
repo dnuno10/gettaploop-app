@@ -70,11 +70,11 @@ Future<Map<String, String?>> collectVisitorInfo() async {
   final String device;
   if (lc.contains('iphone') ||
       (lc.contains('android') && lc.contains('mobile'))) {
-    device = 'Móvil';
+    device = 'Mobile';
   } else if (lc.contains('ipad') || lc.contains('tablet')) {
     device = 'Tablet';
   } else {
-    device = 'Escritorio';
+    device = 'Desktop';
   }
 
   String? ip, city, country;

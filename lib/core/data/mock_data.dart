@@ -13,22 +13,22 @@ class MockData {
   static final DigitalCardModel card = DigitalCardModel(
     id: '1',
     name: 'Juan García',
-    jobTitle: 'Director Comercial',
-    company: 'Empresa S.A.',
+    jobTitle: 'Sales Director',
+    company: 'Company Inc.',
     bio:
-        'Especialista en networking y desarrollo de negocios B2B. Conecto empresas con soluciones que generan resultados.',
+        'Specialist in networking and B2B business development. I connect companies with solutions that deliver results.',
     themeStyle: CardThemeStyle.white,
     publicSlug: 'juan-garcia',
     contactItems: [
       const ContactItemModel(
         id: 'c1',
         type: ContactType.phone,
-        value: '+52 55 1234 5678',
+        value: '+1 555 123 4567',
       ),
       const ContactItemModel(
         id: 'c2',
         type: ContactType.whatsapp,
-        value: '+52 55 1234 5678',
+        value: '+1 555 123 4567',
       ),
       const ContactItemModel(
         id: 'c3',
@@ -135,7 +135,7 @@ class MockData {
         id: 'v2',
         timestamp: DateTime.now().subtract(const Duration(hours: 1)),
         device: 'Samsung Galaxy S23',
-        city: 'Ciudad de México',
+        city: 'Mexico City',
         country: 'MX',
         source: 'qr',
       ),
@@ -180,7 +180,7 @@ class MockData {
     LeadModel(
       id: 'l1',
       name: 'María Hernández',
-      company: 'Tech Solutions S.A.',
+      company: 'Tech Solutions Inc.',
       location: 'Monterrey, MX',
       firstSeen: DateTime.now().subtract(const Duration(hours: 2)),
       lastSeen: DateTime.now().subtract(const Duration(minutes: 15)),
@@ -210,7 +210,7 @@ class MockData {
     LeadModel(
       id: 'l2',
       name: 'Carlos Ruiz',
-      company: 'Distribuidora del Norte',
+      company: 'Northern Distribution',
       location: 'Guadalajara, MX',
       firstSeen: DateTime.now().subtract(const Duration(hours: 5)),
       lastSeen: DateTime.now().subtract(const Duration(hours: 1)),
@@ -233,7 +233,7 @@ class MockData {
       id: 'l3',
       name: null,
       company: null,
-      location: 'Ciudad de México, MX',
+      location: 'Mexico City, MX',
       firstSeen: DateTime.now().subtract(const Duration(days: 1)),
       lastSeen: DateTime.now().subtract(const Duration(days: 1)),
       actions: [
@@ -246,7 +246,7 @@ class MockData {
     LeadModel(
       id: 'l4',
       name: 'Sofía Torres',
-      company: 'Innovación MX',
+      company: 'Innovation MX',
       location: 'CDMX, MX',
       isConverted: true,
       firstSeen: DateTime.now().subtract(const Duration(days: 3)),
@@ -273,7 +273,7 @@ class MockData {
     LeadModel(
       id: 'l5',
       name: 'Roberto Leal',
-      company: 'Consultoría RL',
+      company: 'RL Consulting',
       location: 'Cancún, MX',
       firstSeen: DateTime.now().subtract(const Duration(days: 2)),
       lastSeen: DateTime.now().subtract(const Duration(days: 1, hours: 6)),
@@ -300,7 +300,7 @@ class MockData {
     const TeamMemberModel(
       id: 't1',
       name: 'Ana Martínez',
-      jobTitle: 'Ejecutiva de Ventas',
+      jobTitle: 'Sales Executive',
       taps: 75,
       profileViews: 210,
       contactsSaved: 38,
@@ -309,7 +309,7 @@ class MockData {
     const TeamMemberModel(
       id: 't2',
       name: 'Carlos Mendoza',
-      jobTitle: 'Asesor Comercial',
+      jobTitle: 'Sales Advisor',
       taps: 61,
       profileViews: 175,
       contactsSaved: 25,
@@ -318,7 +318,7 @@ class MockData {
     const TeamMemberModel(
       id: 't3',
       name: 'Luis Pérez',
-      jobTitle: 'Rep. de Ventas',
+      jobTitle: 'Sales Rep.',
       taps: 42,
       profileViews: 134,
       contactsSaved: 19,
@@ -327,7 +327,7 @@ class MockData {
     const TeamMemberModel(
       id: 't4',
       name: 'Diana Flores',
-      jobTitle: 'Ejecutiva de Ventas',
+      jobTitle: 'Sales Executive',
       taps: 38,
       profileViews: 98,
       contactsSaved: 14,

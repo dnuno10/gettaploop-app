@@ -41,7 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
     if (!_acceptedTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Debes aceptar los términos y condiciones'),
+          content: Text('You must accept the terms and conditions'),
           backgroundColor: AppColors.error,
         ),
       );
@@ -83,16 +83,16 @@ class _RegisterViewState extends State<RegisterView> {
 
   String _friendlyError(String raw) {
     if (raw.contains('rate limit') || raw.contains('too many')) {
-      return 'Demasiados intentos. Espera un momento.';
+      return 'Too many attempts. Please wait a moment.';
     }
     if (raw.contains('signup is disabled') ||
         raw.contains('Signups not allowed')) {
-      return 'El registro está temporalmente desactivado.';
+      return 'Sign-up is temporarily disabled.';
     }
     if (raw.contains('invalid') && raw.contains('email')) {
-      return 'El correo ingresado no es válido.';
+      return 'The email entered is not valid.';
     }
-    return 'Error al enviar el código. Intenta de nuevo.';
+    return 'Error sending the code. Please try again.';
   }
 
   @override
@@ -104,15 +104,15 @@ class _RegisterViewState extends State<RegisterView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const AuthHeader(
-              title: 'Crea tu cuenta',
-              subtitle: 'Únete a TapLoop y conecta sin límites',
+              title: 'Create your account',
+              subtitle: 'Join TapLoop and connect without limits',
             ),
             const SizedBox(height: 32),
 
             // Full name
             TapLoopTextField(
-              label: 'Nombre completo',
-              hint: 'Juan García',
+              label: 'Full name',
+              hint: 'John Smith',
               controller: _nameCtrl,
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
@@ -122,8 +122,8 @@ class _RegisterViewState extends State<RegisterView> {
                 color: context.textMuted,
               ),
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Ingresa tu nombre';
-                if (v.trim().length < 3) return 'Nombre demasiado corto';
+                if (v == null || v.trim().isEmpty) return 'Enter your name';
+                if (v.trim().length < 3) return 'Name is too short';
                 return null;
               },
             ),
@@ -131,8 +131,8 @@ class _RegisterViewState extends State<RegisterView> {
 
             // Email
             TapLoopTextField(
-              label: 'Correo electrónico',
-              hint: 'tu@email.com',
+              label: 'Email',
+              hint: 'you@email.com',
               controller: _emailCtrl,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.done,
@@ -142,9 +142,9 @@ class _RegisterViewState extends State<RegisterView> {
                 color: context.textMuted,
               ),
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Ingresa tu correo';
+                if (v == null || v.trim().isEmpty) return 'Enter your email';
                 final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                if (!emailRegex.hasMatch(v.trim())) return 'Correo inválido';
+                if (!emailRegex.hasMatch(v.trim())) return 'Invalid email';
                 return null;
               },
               onSubmitted: (_) => _onSendOtp(),
@@ -201,25 +201,25 @@ class _RegisterViewState extends State<RegisterView> {
                         color: context.textSecondary,
                       ),
                       children: [
-                        const TextSpan(text: 'Acepto los '),
+                        const TextSpan(text: 'I accept the'),
                         TextSpan(
-                          text: 'Términos de Servicio',
+                          text: 'Terms of Service',
                           style: GoogleFonts.dmSans(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: AppColors.primary,
                           ),
                         ),
-                        const TextSpan(text: ' y la '),
+                        const TextSpan(text: ' and the'),
                         TextSpan(
-                          text: 'Política de Privacidad',
+                          text: 'Privacy Policy',
                           style: GoogleFonts.dmSans(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: AppColors.primary,
                           ),
                         ),
-                        const TextSpan(text: ' de TapLoop'),
+                        const TextSpan(text: ' of TapLoop'),
                       ],
                     ),
                   ),
@@ -230,7 +230,7 @@ class _RegisterViewState extends State<RegisterView> {
 
             // Register button
             TapLoopButton(
-              label: 'Crear cuenta',
+              label: 'Create account',
               onPressed: _loading ? null : _onSendOtp,
               variant: TapLoopButtonVariant.primary,
               isLoading: _loading,
@@ -248,7 +248,7 @@ class _RegisterViewState extends State<RegisterView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '¿Ya tienes cuenta? ',
+                  'Already have an account?',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     color: context.textSecondary,
@@ -264,7 +264,7 @@ class _RegisterViewState extends State<RegisterView> {
                     context.go('/');
                   },
                   child: Text(
-                    'Inicia sesión',
+                    'Sign in',
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,

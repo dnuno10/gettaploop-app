@@ -50,7 +50,7 @@ class _AIIntelligenceShellState extends State<AIIntelligenceShell>
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
-                'IA',
+                'AI',
                 style: GoogleFonts.outfit(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
@@ -60,7 +60,7 @@ class _AIIntelligenceShellState extends State<AIIntelligenceShell>
             ),
             const SizedBox(width: 8),
             Text(
-              'Inteligencia',
+              'Intelligence',
               style: GoogleFonts.outfit(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
@@ -92,8 +92,8 @@ class _AIIntelligenceShellState extends State<AIIntelligenceShell>
                 indicatorWeight: 2.5,
                 tabs: const [
                   Tab(text: 'Leads'),
-                  Tab(text: 'Equipo'),
-                  Tab(text: 'Ventas'),
+                  Tab(text: 'Team'),
+                  Tab(text: 'Sales'),
                 ],
               ),
             ],

@@ -224,7 +224,7 @@ class CardRepository {
     final card = await _ensureDigitalCardForUser(userId);
     if (card == null) {
       throw Exception(
-        'No se pudo preparar una tarjeta digital para el usuario.',
+        'Could not prepare a digital card for the user.',
       );
     }
     return card;
@@ -267,7 +267,7 @@ class CardRepository {
       }
     }
     final slug = _generateSlug(
-      resolvedName == null || resolvedName.isEmpty ? 'usuario' : resolvedName,
+      resolvedName == null || resolvedName.isEmpty ? 'user' : resolvedName,
       userId,
     );
 
@@ -315,7 +315,7 @@ class CardRepository {
     final resolvedName =
         (fallbackName ?? userJson['name'] as String?)?.trim().isNotEmpty == true
         ? (fallbackName ?? userJson['name'] as String?)!.trim()
-        : 'Nueva tarjeta';
+        : 'New card';
     final resolvedJobTitle =
         (fallbackJobTitle ?? userJson['job_title'] as String?)?.trim() ?? '';
 
@@ -379,7 +379,7 @@ class CardRepository {
         .replaceAll(RegExp(r'[^a-z0-9\s]'), '')
         .trim()
         .replaceAll(RegExp(r'\s+'), '-');
-    final normalized = base.isEmpty ? 'usuario' : base;
+    final normalized = base.isEmpty ? 'user' : base;
     final suffix = uid.substring(0, 6);
     return '$normalized-$suffix';
   }
@@ -866,7 +866,7 @@ class CardRepository {
         .eq('id', item.id)
         .select('id');
     if ((updated as List).isEmpty) {
-      throw Exception('No se encontró el contacto para actualizar.');
+      throw Exception('Contact to update was not found.');
     }
   }
 
@@ -891,7 +891,7 @@ class CardRepository {
         .eq('id', itemId)
         .select('id');
     if ((deleted as List).isEmpty) {
-      throw Exception('No se encontró el contacto para eliminar.');
+      throw Exception('Contact to delete was not found.');
     }
   }
 
@@ -931,7 +931,7 @@ class CardRepository {
   static Future<void> updateSocialLink(SocialLinkModel link) async {
     final updated = await _updateSocialLink(link.id, link.toJson());
     if (updated.isEmpty) {
-      throw Exception('No se encontró el enlace para actualizar.');
+      throw Exception('Link to update was not found.');
     }
   }
 
@@ -953,7 +953,7 @@ class CardRepository {
         .eq('id', linkId)
         .select('id');
     if ((deleted as List).isEmpty) {
-      throw Exception('No se encontró el enlace para eliminar.');
+      throw Exception('Link to delete was not found.');
     }
   }
 

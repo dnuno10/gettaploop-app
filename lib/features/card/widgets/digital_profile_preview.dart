@@ -9,6 +9,7 @@ import '../models/contact_item_model.dart';
 import '../models/digital_card_model.dart';
 import '../models/smart_form_model.dart';
 import '../models/social_link_model.dart';
+import '../../../core/utils/stored_text.dart';
 import '../utils/calendar_links.dart';
 
 /// Mini phone-frame preview of the digital profile card (centralized links).
@@ -250,7 +251,7 @@ class _ScreenContent extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  card.name.isEmpty ? 'Tu nombre' : card.name,
+                  card.name.isEmpty ? 'Your name' : card.name,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.outfit(
                     fontSize: 21 * scale,
@@ -272,7 +273,7 @@ class _ScreenContent extends StatelessWidget {
           ),
           SizedBox(height: 5 * scale),
           Text(
-            card.jobTitle.isEmpty ? 'Tu cargo' : card.jobTitle,
+            card.jobTitle.isEmpty ? 'Your job title' : card.jobTitle,
             textAlign: TextAlign.center,
             style: GoogleFonts.outfit(
               fontSize: 12 * scale,
@@ -338,7 +339,7 @@ class _ScreenContent extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  card.name.isEmpty ? 'Tu nombre' : card.name,
+                  card.name.isEmpty ? 'Your name' : card.name,
                   textAlign: titleAlign,
                   style: GoogleFonts.outfit(
                     fontSize: 21 * scale,
@@ -360,7 +361,7 @@ class _ScreenContent extends StatelessWidget {
           ),
           SizedBox(height: 5 * scale),
           Text(
-            card.jobTitle.isEmpty ? 'Tu cargo' : card.jobTitle,
+            card.jobTitle.isEmpty ? 'Your job title' : card.jobTitle,
             textAlign: titleAlign,
             style: GoogleFonts.outfit(
               fontSize: 12 * scale,
@@ -421,7 +422,7 @@ class _ScreenContent extends StatelessWidget {
             ),
             SizedBox(width: 7 * scale),
             Text(
-              'Guardar contacto',
+              'Save contact',
               style: GoogleFonts.outfit(
                 fontSize: 10.8 * scale,
                 fontWeight: FontWeight.w800,
@@ -461,7 +462,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSectionTitle('REDES SOCIALES'),
+        _buildSectionTitle('SOCIAL NETWORKS'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Column(
@@ -478,7 +479,7 @@ class _ScreenContent extends StatelessWidget {
                           : null,
                       iconKey: link.iconKey,
                     ),
-                    title: link.label,
+                    title: localizeStoredText(link.label),
                     subtitle: _shortHandle(link.url),
                     titleFirst: true,
                   ),
@@ -494,7 +495,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSectionTitle('Contacto'),
+        _buildSectionTitle('Contact'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Column(
@@ -507,7 +508,7 @@ class _ScreenContent extends StatelessWidget {
                       contactType: item.type,
                       size: 13 * scale,
                     ),
-                    title: item.displayLabel,
+                    title: localizeStoredText(item.displayLabel),
                     subtitle: _displayContactValue(item),
                   ),
                 ),
@@ -530,7 +531,7 @@ class _ScreenContent extends StatelessWidget {
                 size: 15 * scale,
                 color: _iconColor,
               ),
-              label: 'Enviar correo',
+              label: 'Send email',
               filled: false,
               trailing: Icons.keyboard_arrow_right_rounded,
             ),
@@ -543,7 +544,7 @@ class _ScreenContent extends StatelessWidget {
                 size: 15 * scale,
                 color: _iconColor,
               ),
-              label: 'Compartir',
+              label: 'Share',
               filled: false,
               trailing: Icons.keyboard_arrow_right_rounded,
             ),
@@ -557,7 +558,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildModernSectionTitle('Conecta conmigo'),
+        _buildModernSectionTitle('Connect with me'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Wrap(
@@ -599,7 +600,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildModernSectionTitle('Contacto'),
+        _buildModernSectionTitle('Contact'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Column(
@@ -688,7 +689,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSectionTitle('Agendar reunión'),
+        _buildSectionTitle('Schedule a meeting'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Column(
@@ -702,7 +703,7 @@ class _ScreenContent extends StatelessWidget {
                       size: 14 * scale,
                       color: Colors.white,
                     ),
-                    label: integration.displayLabel,
+                    label: localizeStoredText(integration.displayLabel),
                     filled: true,
                     allowWrap: true,
                   ),
@@ -727,7 +728,7 @@ class _ScreenContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSectionTitle('Formulario de contacto'),
+        _buildSectionTitle('Contact form'),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 14 * scale),
           child: Container(
@@ -750,14 +751,14 @@ class _ScreenContent extends StatelessWidget {
                     size: 14 * scale,
                     color: _accentColor,
                   ),
-                  label: form.name,
+                  label: localizeStoredText(form.name),
                   filled: false,
                   textColor: _surfaceTextColor,
                   borderColor: const Color(0xFFE5E7EB),
                   trailing: Icons.keyboard_arrow_up_rounded,
                 ),
                 SizedBox(height: 10 * scale),
-                for (final label in ['Nombre *', 'Correo *', 'Teléfono'])
+                for (final label in ['Name *', 'Email *', 'Phone'])
                   Padding(
                     padding: EdgeInsets.only(bottom: 7 * scale),
                     child: Container(
@@ -788,7 +789,7 @@ class _ScreenContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
-                    'Enviar',
+                    'Send',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.outfit(
                       fontSize: 10 * scale,
@@ -1038,12 +1039,14 @@ class _ScreenContent extends StatelessWidget {
 
   String _modernContactLabel(ContactItemModel item) {
     return switch (item.type) {
-      ContactType.phone => 'Llamar',
-      ContactType.whatsapp => 'Enviar WhatsApp',
-      ContactType.email => 'Enviar correo',
-      ContactType.address => 'Cómo llegar',
+      ContactType.phone => 'Call',
+      ContactType.whatsapp => 'Send WhatsApp',
+      ContactType.email => 'Send email',
+      ContactType.address => 'Get directions',
       ContactType.website =>
-        item.displayLabel.isNotEmpty ? item.displayLabel : 'Visitar sitio web',
+        item.displayLabel.isNotEmpty
+            ? localizeStoredText(item.displayLabel)
+            : 'Visit website',
     };
   }
 

@@ -55,12 +55,12 @@ class _EditCardViewState extends State<EditCardView>
   bool _hasCompletedForm = false;
 
   static const _steps = <_EditStepData>[
-    _EditStepData('Perfil', Icons.person_outline_rounded),
-    _EditStepData('Contacto', Icons.call_outlined),
-    _EditStepData('Enlaces', Icons.link_rounded),
-    _EditStepData('Diseño', Icons.palette_outlined),
-    _EditStepData('Formularios', Icons.assignment_outlined),
-    _EditStepData('Integraciones', Icons.hub_outlined),
+    _EditStepData('Profile', Icons.person_outline_rounded),
+    _EditStepData('Contact', Icons.call_outlined),
+    _EditStepData('Links', Icons.link_rounded),
+    _EditStepData('Design', Icons.palette_outlined),
+    _EditStepData('Forms', Icons.assignment_outlined),
+    _EditStepData('Integrations', Icons.hub_outlined),
   ];
 
   late TextEditingController _nameCtrl;
@@ -367,7 +367,7 @@ class _EditCardViewState extends State<EditCardView>
     if (_card.id.isEmpty) {
       TapLoopToast.show(
         context,
-        'No hay tarjeta activa. Recarga la página.',
+        'No active card. Reload the page.',
         TapLoopToastType.error,
       );
       return;
@@ -383,7 +383,7 @@ class _EditCardViewState extends State<EditCardView>
         });
         TapLoopToast.show(
           context,
-          'Cambios guardados correctamente.',
+          'Changes saved successfully.',
           TapLoopToastType.success,
         );
       }
@@ -392,7 +392,7 @@ class _EditCardViewState extends State<EditCardView>
         setState(() => _saving = false);
         TapLoopToast.show(
           context,
-          'No se pudieron guardar los cambios. Intenta de nuevo.',
+          'Could not save the changes. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -435,7 +435,7 @@ class _EditCardViewState extends State<EditCardView>
     if (_card.contactItems.length >= 8) {
       TapLoopToast.show(
         context,
-        'Máximo 8 contactos permitidos.',
+        'Maximum of 8 contacts allowed.',
         TapLoopToastType.error,
       );
       return;
@@ -515,7 +515,7 @@ class _EditCardViewState extends State<EditCardView>
         _syncCard(_card.copyWith(contactItems: [..._card.contactItems, saved]));
         TapLoopToast.show(
           context,
-          'Contacto añadido correctamente.',
+          'Contact added successfully.',
           TapLoopToastType.success,
         );
       }
@@ -523,7 +523,7 @@ class _EditCardViewState extends State<EditCardView>
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo añadir el contacto. Intenta de nuevo.',
+          'Could not add the contact. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -543,17 +543,17 @@ class _EditCardViewState extends State<EditCardView>
         );
         TapLoopToast.show(
           context,
-          'Contacto actualizado correctamente.',
+          'Contact updated successfully.',
           TapLoopToastType.success,
         );
       }
     } catch (error, stackTrace) {
-      debugPrint('No se pudo actualizar el contacto: $error');
+      debugPrint('Could not update the contact: $error');
       debugPrintStack(stackTrace: stackTrace);
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo actualizar el contacto. Intenta de nuevo.',
+          'Could not update the contact. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -564,7 +564,7 @@ class _EditCardViewState extends State<EditCardView>
     if (_card.socialLinks.length >= 8) {
       TapLoopToast.show(
         context,
-        'Máximo 8 redes sociales permitidas.',
+        'Maximum of 8 social networks allowed.',
         TapLoopToastType.error,
       );
       return;
@@ -639,7 +639,7 @@ class _EditCardViewState extends State<EditCardView>
         _syncCard(_card.copyWith(socialLinks: [..._card.socialLinks, saved]));
         TapLoopToast.show(
           context,
-          'Red social añadida correctamente.',
+          'Social network added successfully.',
           TapLoopToastType.success,
         );
       }
@@ -647,7 +647,7 @@ class _EditCardViewState extends State<EditCardView>
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo añadir la red social. Intenta de nuevo.',
+          'Could not add the social network. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -667,7 +667,7 @@ class _EditCardViewState extends State<EditCardView>
         );
         TapLoopToast.show(
           context,
-          'Red social actualizada correctamente.',
+          'Social network updated successfully.',
           TapLoopToastType.success,
         );
       }
@@ -675,7 +675,7 @@ class _EditCardViewState extends State<EditCardView>
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo actualizar la red social. Intenta de nuevo.',
+          'Could not update the social network. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -718,18 +718,18 @@ class _EditCardViewState extends State<EditCardView>
       if (mounted && newItems.length < oldItems.length) {
         TapLoopToast.show(
           context,
-          'Contacto eliminado.',
+          'Contact deleted.',
           TapLoopToastType.success,
         );
       }
     } catch (error, stackTrace) {
-      debugPrint('No se pudieron actualizar los contactos: $error');
+      debugPrint('Could not update the contacts: $error');
       debugPrintStack(stackTrace: stackTrace);
       if (mounted) {
         _syncCard(_card.copyWith(contactItems: oldItems));
         TapLoopToast.show(
           context,
-          'No se pudieron actualizar los contactos. Intenta de nuevo.',
+          'Could not update the contacts. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -773,18 +773,18 @@ class _EditCardViewState extends State<EditCardView>
       if (mounted && newLinks.length < oldLinks.length) {
         TapLoopToast.show(
           context,
-          'Red social eliminada.',
+          'Social network deleted.',
           TapLoopToastType.success,
         );
       }
     } catch (error, stackTrace) {
-      debugPrint('No se pudieron actualizar los enlaces: $error');
+      debugPrint('Could not update the links: $error');
       debugPrintStack(stackTrace: stackTrace);
       if (mounted) {
         _syncCard(_card.copyWith(socialLinks: oldLinks));
         TapLoopToast.show(
           context,
-          'No se pudieron actualizar las redes sociales. Intenta de nuevo.',
+          'Could not update the social networks. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -800,12 +800,12 @@ class _EditCardViewState extends State<EditCardView>
     final overrideName = widget.overrideCard?.name.trim() ?? '';
     final headerTitleText = _isOverride
         ? (overrideName.isNotEmpty
-              ? 'Editando a $overrideName'
-              : 'Editando perfil del equipo')
-        : 'Perfil digital';
+              ? 'Editing $overrideName'
+              : 'Editing team profile')
+        : 'Digital profile';
     final headerSubtitleText = _isOverride
-        ? 'Estás editando el perfil de este miembro de tu equipo.'
-        : 'Edita tu perfil, contacto, diseño y flujos de captura desde un mismo espacio.';
+        ? 'You are editing this team member\'s profile.'
+        : 'Edit your profile, contact info, design, and capture flows from one place.';
     final headerTitle = ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: isDesktop ? 320 : 240,
@@ -953,7 +953,7 @@ class _EditCardViewState extends State<EditCardView>
               Icon(Icons.route_outlined, size: 14, color: AppColors.primary),
               const SizedBox(width: 7),
               Text(
-                'Paso ${_stepIndex + 1} de ${_steps.length}: ${_steps[_stepIndex].label}',
+                'Step ${_stepIndex + 1} of ${_steps.length}: ${_steps[_stepIndex].label}',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
@@ -1118,9 +1118,9 @@ class _EditCardViewState extends State<EditCardView>
     if (_sharedLinksLocked)
       const SharedTemplateLockBanner(
         icon: Icons.link_rounded,
-        title: 'Enlaces compartidos activos',
+        title: 'Shared links active',
         message:
-            'Esta sección es gestionada por tu organización: tus redes sociales públicas se toman del perfil plantilla del equipo.',
+            'This section is managed by your organization: your public social networks come from the team\'s template profile.',
       )
     else
       _SocialTab(
@@ -1132,9 +1132,9 @@ class _EditCardViewState extends State<EditCardView>
     if (_sharedDesignLocked)
       const SharedTemplateLockBanner(
         icon: Icons.palette_outlined,
-        title: 'Diseño compartido activo',
+        title: 'Shared design active',
         message:
-            'Esta sección es gestionada por tu organización: tu diseño público se toma del perfil plantilla del equipo.',
+            'This section is managed by your organization: your public design comes from the team\'s template profile.',
       )
     else
       _DesignTab(
@@ -1147,9 +1147,9 @@ class _EditCardViewState extends State<EditCardView>
     if (_sharedFormsLocked)
       const SharedTemplateLockBanner(
         icon: Icons.assignment_outlined,
-        title: 'Formulario compartido activo',
+        title: 'Shared form active',
         message:
-            'Esta sección es gestionada por tu organización: tu formulario público se toma del perfil plantilla del equipo.',
+            'This section is managed by your organization: your public form comes from the team\'s template profile.',
       )
     else
       _FormulariosTab(
@@ -1165,9 +1165,9 @@ class _EditCardViewState extends State<EditCardView>
     if (_sharedIntegrationsLocked)
       const SharedTemplateLockBanner(
         icon: Icons.admin_panel_settings_outlined,
-        title: 'Integración compartida activa',
+        title: 'Shared integration active',
         message:
-            'Esta sección es gestionada por tu organización: tu calendario público se toma del perfil plantilla del equipo.',
+            'This section is managed by your organization: your public calendar comes from the team\'s template profile.',
       )
     else
       _CalendarioTab(
@@ -1491,7 +1491,7 @@ class _BottomStepNav extends StatelessWidget {
           children: [
             Expanded(
               child: TapLoopButton(
-                label: 'Paso anterior',
+                label: 'Previous step',
                 onPressed: hasPrev ? onPrev : null,
                 variant: TapLoopButtonVariant.outline,
                 height: 46,
@@ -1500,7 +1500,7 @@ class _BottomStepNav extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: TapLoopButton(
-                label: hasNext ? 'Siguiente paso' : 'Último paso',
+                label: hasNext ? 'Next step' : 'Last step',
                 onPressed: hasNext ? onNext : null,
                 height: 46,
               ),
@@ -1524,8 +1524,8 @@ class _LivePreviewPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final slug = card.publicSlug.trim();
     final publicPath = slug.isEmpty
-        ? 'app.taploop.com.mx'
-        : 'app.taploop.com.mx/$slug';
+        ? 'app.gettaploop.com'
+        : 'app.gettaploop.com/$slug';
     final publicUrl = 'https://$publicPath';
 
     return Container(
@@ -1540,9 +1540,9 @@ class _LivePreviewPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HelpTitle(
-              title: 'Vista previa',
+              title: 'Preview',
               helpText:
-                  'Previsualiza cómo se verá el perfil público antes de publicar cambios.',
+                  'Preview how your public profile will look before publishing changes.',
               style: GoogleFonts.outfit(
                 fontSize: 22,
                 fontWeight: FontWeight.w800,
@@ -1551,7 +1551,7 @@ class _LivePreviewPanel extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Así se verá tu perfil público en TapLoop.',
+              'This is how your public profile will look on TapLoop.',
               style: GoogleFonts.dmSans(fontSize: 12, color: context.textMuted),
             ),
             const SizedBox(height: 16),
@@ -1584,7 +1584,7 @@ class _LivePreviewPanel extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Tooltip(
-                    message: 'Abrir perfil público',
+                    message: 'Open public profile',
                     child: TapLoopPressable(
                       onTap: () => html.window.open(publicUrl, '_blank'),
                       borderRadius: BorderRadius.circular(12),
@@ -1609,7 +1609,7 @@ class _LivePreviewPanel extends StatelessWidget {
             Divider(color: context.borderColor, height: 1),
             const SizedBox(height: 16),
             Text(
-              card.name.isEmpty ? 'Nombre' : card.name,
+              card.name.isEmpty ? 'Name' : card.name,
               style: GoogleFonts.outfit(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
@@ -1621,7 +1621,7 @@ class _LivePreviewPanel extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               card.jobTitle.isEmpty
-                  ? 'Cargo · Empresa'
+                  ? 'Job title · Company'
                   : '${card.jobTitle} · ${card.company}',
               style: GoogleFonts.dmSans(
                 fontSize: 13,
@@ -1699,7 +1699,7 @@ class _ProfileTabState extends State<_ProfileTab> {
           final validation = FieldValidators.validateMaxLength(
             widget.nameCtrl.text,
             FieldValidators.nameMaxLength,
-            'Nombre',
+            'Name',
           );
           _nameError = validation.errorMessage ?? '';
           break;
@@ -1707,7 +1707,7 @@ class _ProfileTabState extends State<_ProfileTab> {
           final validation = FieldValidators.validateMaxLength(
             widget.titleCtrl.text,
             FieldValidators.jobTitleMaxLength,
-            'Cargo',
+            'Job title',
           );
           _titleError = validation.errorMessage ?? '';
           break;
@@ -1715,7 +1715,7 @@ class _ProfileTabState extends State<_ProfileTab> {
           final validation = FieldValidators.validateMaxLength(
             widget.bioCtrl.text,
             FieldValidators.bioMaxLength,
-            'Biografía',
+            'Bio',
           );
           _bioError = validation.errorMessage ?? '';
           break;
@@ -1742,7 +1742,7 @@ class _ProfileTabState extends State<_ProfileTab> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Perfil',
+                    'Profile',
                     style: GoogleFonts.outfit(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
@@ -1758,9 +1758,9 @@ class _ProfileTabState extends State<_ProfileTab> {
               ),
               const SizedBox(height: 28),
               _EditInputField(
-                label: 'Nombre completo',
+                label: 'Full name',
                 controller: widget.nameCtrl,
-                hint: 'Ej: Juan García',
+                hint: 'e.g. John Smith',
                 error: _nameError,
                 maxLength: FieldValidators.nameMaxLength,
                 onChanged: (_) => _validateFieldsOnBlur('name'),
@@ -1774,24 +1774,24 @@ class _ProfileTabState extends State<_ProfileTab> {
               ),
               const SizedBox(height: 18),
               _EditInputField(
-                label: 'Cargo / Rol',
+                label: 'Job title / Role',
                 controller: widget.titleCtrl,
-                hint: 'Ej: Representante de ventas',
+                hint: 'e.g. Sales Representative',
                 error: _titleError,
                 maxLength: FieldValidators.jobTitleMaxLength,
                 onChanged: (_) => _validateFieldsOnBlur('title'),
               ),
               const SizedBox(height: 18),
               _EditInputField(
-                label: 'Empresa',
+                label: 'Company',
                 controller: widget.companyCtrl,
-                hint: 'Ej: TapLoop',
+                hint: 'e.g. TapLoop',
                 enabled: !widget.companyLocked,
               ),
               if (widget.companyLocked) ...[
                 const SizedBox(height: 8),
                 Text(
-                  'Este campo se completa automaticamente segun la organizacion del usuario y no puede modificarse.',
+                  'This field is filled in automatically based on the user\'s organization and can\'t be changed.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: context.textSecondary,
@@ -1800,9 +1800,9 @@ class _ProfileTabState extends State<_ProfileTab> {
               ],
               const SizedBox(height: 16),
               _EditInputField(
-                label: 'Biografía',
+                label: 'Bio',
                 controller: widget.bioCtrl,
-                hint: 'Especialista en...',
+                hint: 'Specialist in...',
                 maxLines: 4,
                 error: _bioError,
                 maxLength: FieldValidators.bioMaxLength,
@@ -1848,7 +1848,7 @@ class AvatarPickerState extends State<AvatarPicker> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Solo se permiten imágenes en formato JPG o PNG.',
+          'Only JPG or PNG images are allowed.',
           TapLoopToastType.error,
         );
       }
@@ -1860,7 +1860,7 @@ class AvatarPickerState extends State<AvatarPicker> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'La imagen supera el límite de 5 MB.',
+          'The image exceeds the 5 MB limit.',
           TapLoopToastType.error,
         );
       }
@@ -1871,9 +1871,9 @@ class AvatarPickerState extends State<AvatarPicker> {
     final adjustment = await _showImageAdjustmentDialog(
       context,
       file: file,
-      title: 'Ajustar foto de perfil',
+      title: 'Adjust profile photo',
       subtitle:
-          'Previsualiza el encuadre antes de guardarlo en tu perfil público.',
+          'Preview the framing before saving it to your public profile.',
       aspectRatio: 1,
       shape: BoxShape.circle,
     );
@@ -1916,7 +1916,7 @@ class AvatarPickerState extends State<AvatarPicker> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Foto de perfil actualizada.',
+          'Profile photo updated.',
           TapLoopToastType.success,
         );
       }
@@ -1926,7 +1926,7 @@ class AvatarPickerState extends State<AvatarPicker> {
           context,
           friendlyStorageUploadError(
             error,
-            assetLabel: 'la imagen',
+            assetLabel: 'the image',
             bucket: 'avatars',
           ),
           TapLoopToastType.warning,
@@ -2013,10 +2013,10 @@ class AvatarPickerState extends State<AvatarPicker> {
                         const SizedBox(width: 9),
                         Text(
                           _uploading
-                              ? 'Subiendo foto...'
+                              ? 'Uploading photo...'
                               : photoUrl == null
-                              ? 'Cargar foto de perfil'
-                              : 'Cambiar foto de perfil',
+                              ? 'Upload profile photo'
+                              : 'Change profile photo',
                           style: GoogleFonts.outfit(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
@@ -2032,7 +2032,7 @@ class AvatarPickerState extends State<AvatarPicker> {
           ),
           const SizedBox(height: 8),
           Text(
-            'JPG, PNG · máx 5 MB',
+            'JPG, PNG · max 5 MB',
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,
@@ -2126,11 +2126,11 @@ class _ImageAdjustmentDialogState extends State<_ImageAdjustmentDialog> {
 
   String _labelFor(WebImageCropPosition position) {
     return switch (position) {
-      WebImageCropPosition.top => 'Arriba',
-      WebImageCropPosition.center => 'Centro',
-      WebImageCropPosition.bottom => 'Abajo',
-      WebImageCropPosition.left => 'Izquierda',
-      WebImageCropPosition.right => 'Derecha',
+      WebImageCropPosition.top => 'Top',
+      WebImageCropPosition.center => 'Center',
+      WebImageCropPosition.bottom => 'Bottom',
+      WebImageCropPosition.left => 'Left',
+      WebImageCropPosition.right => 'Right',
     };
   }
 
@@ -2238,7 +2238,7 @@ class _ImageAdjustmentDialogState extends State<_ImageAdjustmentDialog> {
                       const SizedBox(height: 20),
                       HelpTitle(
                         title: 'Zoom',
-                        helpText: 'Ajusta el acercamiento de la imagen.',
+                        helpText: 'Adjust the image zoom.',
                         style: GoogleFonts.outfit(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
@@ -2266,9 +2266,9 @@ class _ImageAdjustmentDialogState extends State<_ImageAdjustmentDialog> {
                       ),
                       const SizedBox(height: 12),
                       HelpTitle(
-                        title: 'Posición',
+                        title: 'Position',
                         helpText:
-                            'Elige el encuadre de la imagen dentro del recorte.',
+                            'Choose how the image is framed within the crop.',
                         style: GoogleFonts.outfit(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
@@ -2301,7 +2301,7 @@ class _ImageAdjustmentDialogState extends State<_ImageAdjustmentDialog> {
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(
-                        'Cancelar',
+                        'Cancel',
                         style: GoogleFonts.dmSans(
                           fontSize: 17,
                           fontWeight: FontWeight.w800,
@@ -2313,7 +2313,7 @@ class _ImageAdjustmentDialogState extends State<_ImageAdjustmentDialog> {
                     SizedBox(
                       width: 210,
                       child: TapLoopButton(
-                        label: 'Usar imagen',
+                        label: 'Use image',
                         height: 52,
                         borderRadius: 999,
                         icon: const Icon(Icons.check_rounded, size: 20),
@@ -2438,7 +2438,7 @@ class _VerifiedProfileOption extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Verificado',
+                      'Verified',
                       style: GoogleFonts.outfit(
                         fontSize: 17,
                         fontWeight: FontWeight.w800,
@@ -2468,7 +2468,7 @@ class _VerifiedProfileOption extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Muestra una insignia junto a tu nombre público.',
+                  'Show a badge next to your public name.',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -2554,7 +2554,7 @@ class _ContactTabState extends State<_ContactTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Información de contacto',
+                          'Contact information',
                           style: GoogleFonts.outfit(
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
@@ -2563,7 +2563,7 @@ class _ContactTabState extends State<_ContactTab> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Completa tus datos y decide cuáles aparecerán como acciones en tu perfil público.',
+                          'Fill in your details and decide which ones appear as actions on your public profile.',
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             color: context.textSecondary,
@@ -2573,7 +2573,7 @@ class _ContactTabState extends State<_ContactTab> {
                     ),
                   ),
                   TapLoopButton(
-                    label: 'Añadir contacto',
+                    label: 'Add contact',
                     width: 224,
                     height: 46,
                     borderRadius: 999,
@@ -2652,7 +2652,7 @@ class _ContactRow extends StatelessWidget {
     final displayedValue = active && value != null && value.isNotEmpty
         ? value
         : _contactTypePlaceholder(type);
-    final statusText = active ? (visible ? 'Visible' : 'Oculto') : 'Sin dato';
+    final statusText = active ? (visible ? 'Visible' : 'Hidden') : 'No data';
     final statusColor = active
         ? (visible ? AppColors.success : context.textMuted)
         : context.textMuted;
@@ -2705,7 +2705,7 @@ class _ContactRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           IconButton(
-            tooltip: active ? 'Editar contacto' : 'Añadir contacto',
+            tooltip: active ? 'Edit contact' : 'Add contact',
             onPressed: active ? onEdit : onAdd,
             constraints: const BoxConstraints.tightFor(width: 32, height: 34),
             padding: EdgeInsets.zero,
@@ -2718,7 +2718,7 @@ class _ContactRow extends StatelessWidget {
           ),
           if (active)
             IconButton(
-              tooltip: 'Eliminar contacto',
+              tooltip: 'Delete contact',
               onPressed: onDelete,
               constraints: const BoxConstraints.tightFor(width: 32, height: 34),
               padding: EdgeInsets.zero,
@@ -2890,7 +2890,7 @@ class _SocialTabState extends State<_SocialTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Enlaces principales',
+                          'Main links',
                           style: GoogleFonts.outfit(
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
@@ -2899,7 +2899,7 @@ class _SocialTabState extends State<_SocialTab> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Gestiona los enlaces que aparecen en tu perfil. Ordénalos, edítalos y destaca los importantes.',
+                          'Manage the links that appear on your profile. Sort them, edit them, and highlight the important ones.',
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             color: context.textSecondary,
@@ -2933,7 +2933,7 @@ class _SocialTabState extends State<_SocialTab> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TapLoopButton(
-                  label: 'Agregar enlace',
+                  label: 'Add link',
                   width: 220,
                   height: 50,
                   borderRadius: 999,
@@ -2944,8 +2944,8 @@ class _SocialTabState extends State<_SocialTab> {
               const SizedBox(height: 18),
               if (socials.isEmpty)
                 _EmptyState(
-                  message: 'Sin enlaces visibles',
-                  hint: 'Añade WhatsApp, sitio web, Instagram u otro canal.',
+                  message: 'No visible links',
+                  hint: 'Add WhatsApp, a website, Instagram, or another channel.',
                 )
               else ...[
                 ReorderableListView.builder(
@@ -2987,7 +2987,7 @@ class _SocialTabState extends State<_SocialTab> {
                 ),
                 const SizedBox(height: 8),
                 _DragHint(
-                  text: 'Arrastra los enlaces para cambiar su prioridad.',
+                  text: 'Drag links to change their priority.',
                 ),
               ],
             ],
@@ -3094,7 +3094,7 @@ class _SocialRow extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    tooltip: 'Editar enlace',
+                    tooltip: 'Edit link',
                     onPressed: onEdit,
                     icon: Icon(
                       Icons.edit_outlined,
@@ -3103,7 +3103,7 @@ class _SocialRow extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    tooltip: 'Eliminar enlace',
+                    tooltip: 'Delete link',
                     onPressed: onDelete,
                     icon: const Icon(
                       Icons.delete_outline,
@@ -3366,21 +3366,21 @@ Color _contactTypeColor(ContactType type) {
 
 String _contactTypeLabel(ContactType type) {
   return switch (type) {
-    ContactType.phone => 'Teléfono',
+    ContactType.phone => 'Phone',
     ContactType.whatsapp => 'WhatsApp',
     ContactType.email => 'Email',
-    ContactType.address => 'Dirección',
-    ContactType.website => 'Sitio web',
+    ContactType.address => 'Address',
+    ContactType.website => 'Website',
   };
 }
 
 String _contactTypePlaceholder(ContactType type) {
   return switch (type) {
-    ContactType.phone => '+52 55 1234 5678',
-    ContactType.whatsapp => '+52 55 1234 5678',
-    ContactType.email => 'tu@email.com',
-    ContactType.address => 'Ciudad de México, CDMX',
-    ContactType.website => 'https://tuwebsite.com',
+    ContactType.phone => '+1 555 123 4567',
+    ContactType.whatsapp => '+1 555 123 4567',
+    ContactType.email => 'you@email.com',
+    ContactType.address => 'New York, NY',
+    ContactType.website => 'https://yourwebsite.com',
   };
 }
 
@@ -3465,7 +3465,7 @@ class _DesignTab extends StatelessWidget {
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              'Diseño de tu perfil',
+                              'Your profile design',
                               style: GoogleFonts.outfit(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w800,
@@ -3477,7 +3477,7 @@ class _DesignTab extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Elige un estilo profesional y personaliza tu perfil en segundos.',
+                        'Choose a professional style and customize your profile in seconds.',
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           color: context.textSecondary,
@@ -3515,7 +3515,7 @@ class _DesignTab extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Identidad visual',
+                  'Visual identity',
                   style: GoogleFonts.outfit(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
@@ -3526,7 +3526,7 @@ class _DesignTab extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             _DesignSectionCard(
-              title: 'Color principal',
+              title: 'Primary color',
               child: _DesignColorPicker(
                 color: card.primaryColor,
                 palette: _primaryDesignPalette,
@@ -3535,7 +3535,7 @@ class _DesignTab extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             _DesignSectionCard(
-              title: 'Color de iconos',
+              title: 'Icon color',
               child: _DesignColorPicker(
                 color: card.iconColor,
                 palette: _accentDesignPalette,
@@ -3544,13 +3544,13 @@ class _DesignTab extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             _DesignSectionCard(
-              title: 'Fondo',
+              title: 'Background',
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: [
                   _DesignChoiceChip(
-                    label: 'Claro',
+                    label: 'Light',
                     selected: !_isDarkDesignColor(card.bgColor ?? Colors.white),
                     onTap: () => onChanged(
                       card.copyWith(
@@ -3560,7 +3560,7 @@ class _DesignTab extends StatelessWidget {
                     ),
                   ),
                   _DesignChoiceChip(
-                    label: 'Oscuro',
+                    label: 'Dark',
                     selected: _isDarkDesignColor(card.bgColor ?? Colors.white),
                     onTap: () => onChanged(
                       card.copyWith(
@@ -3574,7 +3574,7 @@ class _DesignTab extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             _DesignSectionCard(
-              title: 'Fondo y portada sin imagen',
+              title: 'Background and cover without image',
               child: _DesignColorPicker(
                 color: card.bgColor ?? Colors.white,
                 palette: _backgroundDesignPalette,
@@ -3583,7 +3583,7 @@ class _DesignTab extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             _DesignSectionCard(
-              title: 'Efecto de fondo',
+              title: 'Background effect',
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -3706,7 +3706,7 @@ class _DesignTipsButton extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Consejos de diseño',
+                    'Design tips',
                     style: GoogleFonts.outfit(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
@@ -3744,7 +3744,7 @@ class _DesignSectionCard extends StatelessWidget {
         children: [
           HelpTitle(
             title: title,
-            helpText: 'Configura las opciones de $title en esta tarjeta.',
+            helpText: 'Configure the $title options for this card.',
             style: GoogleFonts.outfit(
               fontSize: 15,
               fontWeight: FontWeight.w800,
@@ -4136,14 +4136,14 @@ class _AdvancedColorDialogState extends State<_AdvancedColorDialog> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    tooltip: 'Copiar color',
+                    tooltip: 'Copy color',
                     onPressed: () {
                       Clipboard.setData(
                         ClipboardData(text: _designHex(_color)),
                       );
                       TapLoopToast.show(
                         context,
-                        'Color copiado.',
+                        'Color copied.',
                         TapLoopToastType.success,
                       );
                     },
@@ -4157,7 +4157,7 @@ class _AdvancedColorDialogState extends State<_AdvancedColorDialog> {
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(
-                        'Cancelar',
+                        'Cancel',
                         style: GoogleFonts.dmSans(
                           fontSize: 17,
                           fontWeight: FontWeight.w800,
@@ -4169,7 +4169,7 @@ class _AdvancedColorDialogState extends State<_AdvancedColorDialog> {
                     SizedBox(
                       width: 180,
                       child: TapLoopButton(
-                        label: 'Aplicar',
+                        label: 'Apply',
                         height: 52,
                         borderRadius: 999,
                         icon: const Icon(Icons.check_rounded, size: 20),
@@ -4276,10 +4276,10 @@ class _BgStyleChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = switch (style) {
-      CardBgStyle.plain => 'Liso',
-      CardBgStyle.gradient => 'Degradado',
-      CardBgStyle.mesh => 'Malla',
-      CardBgStyle.stripes => 'Rayas',
+      CardBgStyle.plain => 'Solid',
+      CardBgStyle.gradient => 'Gradient',
+      CardBgStyle.mesh => 'Mesh',
+      CardBgStyle.stripes => 'Stripes',
     };
     var hovering = false;
     return StatefulBuilder(
@@ -4348,9 +4348,9 @@ class _ProfileDesignSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HelpTitle(
-            title: 'Estilo de perfil',
+            title: 'Profile style',
             helpText:
-                'Selecciona la apariencia pública que usará esta tarjeta digital.',
+                'Select the public look this digital card will use.',
             style: GoogleFonts.outfit(
               fontSize: 20,
               fontWeight: FontWeight.w800,
@@ -4359,7 +4359,7 @@ class _ProfileDesignSection extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Elige cómo se organizará la información de tu perfil',
+            'Choose how your profile information is organized',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -4426,12 +4426,12 @@ class _ProfileDesignChip extends StatelessWidget {
       CardProfileDesign.modern => Icons.grid_view_rounded,
     };
     final label = switch (design) {
-      CardProfileDesign.classic => 'Clásico',
-      CardProfileDesign.modern => 'Moderno',
+      CardProfileDesign.classic => 'Classic',
+      CardProfileDesign.modern => 'Modern',
     };
     final desc = switch (design) {
-      CardProfileDesign.classic => 'Información centrada',
-      CardProfileDesign.modern => 'Acciones y contenido primero',
+      CardProfileDesign.classic => 'Centered information',
+      CardProfileDesign.modern => 'Actions and content first',
     };
     final iconColor = context.textSecondary;
     var hovering = false;
@@ -4559,7 +4559,7 @@ class _EditorInlineMetric extends StatelessWidget {
         const SizedBox(height: 2),
         HelpTitle(
           title: label,
-          helpText: 'Métrica del perfil digital para $label.',
+          helpText: 'Digital profile metric for $label.',
           style: GoogleFonts.dmSans(
             fontSize: 14,
             fontWeight: FontWeight.w700,
@@ -4955,7 +4955,7 @@ class _SaveButtonState extends State<_SaveButton> {
                       const TapLoopProgressIndicator(color: AppColors.success),
                       const SizedBox(width: 8),
                       Text(
-                        'Guardando...',
+                        'Saving...',
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
@@ -4976,7 +4976,7 @@ class _SaveButtonState extends State<_SaveButton> {
                         const SizedBox(width: 8),
                       ],
                       Text(
-                        widget.unsaved ? 'Guardar cambios' : 'Guardado',
+                        widget.unsaved ? 'Save changes' : 'Saved',
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           fontWeight: FontWeight.w800,
@@ -5071,7 +5071,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
           final lengthValidation = FieldValidators.validateMaxLength(
             value,
             FieldValidators.contactPrimaryMaxLength,
-            'El sitio web',
+            'The website',
           );
           valueValidation = lengthValidation;
         }
@@ -5097,19 +5097,19 @@ class _AddContactSheetState extends State<_AddContactSheet> {
   }
 
   static const _hints = {
-    ContactType.phone: '+52 55 1234 5678',
-    ContactType.whatsapp: '+52 55 1234 5678',
-    ContactType.email: 'tu@email.com',
-    ContactType.address: 'Ciudad de México, CDMX',
-    ContactType.website: 'https://tuwebsite.com',
+    ContactType.phone: '+1 555 123 4567',
+    ContactType.whatsapp: '+1 555 123 4567',
+    ContactType.email: 'you@email.com',
+    ContactType.address: 'New York, NY',
+    ContactType.website: 'https://yourwebsite.com',
   };
 
   static const _labels = {
-    ContactType.phone: 'Teléfono',
+    ContactType.phone: 'Phone',
     ContactType.whatsapp: 'WhatsApp',
     ContactType.email: 'Email',
-    ContactType.address: 'Dirección',
-    ContactType.website: 'Sitio web',
+    ContactType.address: 'Address',
+    ContactType.website: 'Website',
   };
 
   @override
@@ -5209,9 +5209,9 @@ class _AddContactSheetState extends State<_AddContactSheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _EditInputField(
-          label: 'Etiqueta visible (opcional)',
+          label: 'Visible label (optional)',
           controller: _labelCtrl,
-          hint: 'Ej: Oficina',
+          hint: 'e.g. Office',
           error: _labelError,
           maxLength: FieldValidators.contactSecondaryMaxLength,
         ),
@@ -5244,7 +5244,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Visible en el perfil público',
+                      'Visible on public profile',
                       style: GoogleFonts.outfit(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
@@ -5253,7 +5253,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Las personas podrán usar este medio desde tu tarjeta.',
+                      'People will be able to use this channel from your card.',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: context.textSecondary,
@@ -5307,7 +5307,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _isEditing ? 'Editar contacto' : 'Añadir contacto',
+                        _isEditing ? 'Edit contact' : 'Add contact',
                         style: GoogleFonts.outfit(
                           fontSize: widget.isDialog ? 30 : 22,
                           fontWeight: FontWeight.w800,
@@ -5316,7 +5316,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Elige el medio y completa el dato que aparecerá en tu perfil.',
+                        'Choose the channel and fill in the detail that will appear on your profile.',
                         style: GoogleFonts.dmSans(
                           fontSize: 15,
                           color: context.textSecondary,
@@ -5342,7 +5342,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _EditorDialogLabel('Medio de contacto'),
+                        _EditorDialogLabel('Contact channel'),
                         const SizedBox(height: 12),
                         contactCards,
                       ],
@@ -5358,7 +5358,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                 ],
               )
             else ...[
-              _EditorDialogLabel('Medio de contacto'),
+              _EditorDialogLabel('Contact channel'),
               const SizedBox(height: 12),
               contactCards,
               const SizedBox(height: 20),
@@ -5373,7 +5373,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    'Cancelar',
+                    'Cancel',
                     style: GoogleFonts.dmSans(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
@@ -5385,7 +5385,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                 SizedBox(
                   width: 220,
                   child: TapLoopButton(
-                    label: _isEditing ? 'Guardar cambios' : 'Añadir',
+                    label: _isEditing ? 'Save changes' : 'Add',
                     height: 54,
                     borderRadius: 999,
                     icon: Icon(
@@ -5396,7 +5396,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                       if (!_validateFields()) {
                         TapLoopToast.show(
                           context,
-                          'Por favor, verifica los campos marcados.',
+                          'Please check the highlighted fields.',
                           TapLoopToastType.error,
                         );
                         return;
@@ -5405,7 +5405,7 @@ class _AddContactSheetState extends State<_AddContactSheet> {
                       if (_valueCtrl.text.trim().isEmpty) {
                         TapLoopToast.show(
                           context,
-                          '${_labels[_type]} es requerido.',
+                          '${_labels[_type]} is required.',
                           TapLoopToastType.error,
                         );
                         return;
@@ -5525,7 +5525,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
     if (clean.isEmpty) return ValidationResult.valid();
     if (clean.length > FieldValidators.socialUrlMaxLength) {
       return ValidationResult.invalid(
-        'El WhatsApp no puede exceder ${FieldValidators.socialUrlMaxLength} caracteres.',
+        'WhatsApp cannot exceed ${FieldValidators.socialUrlMaxLength} characters.',
       );
     }
     if (clean.startsWith(RegExp(r'https?://'))) {
@@ -5544,20 +5544,20 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
     SocialPlatform.whatsapp: 'WhatsApp',
     SocialPlatform.calendly: 'Calendly',
     SocialPlatform.github: 'GitHub',
-    SocialPlatform.custom: 'Otro enlace',
+    SocialPlatform.custom: 'Other link',
   };
 
   static const _platformHints = {
-    SocialPlatform.linkedin: 'https://linkedin.com/in/tu-usuario',
-    SocialPlatform.instagram: 'https://instagram.com/tu_usuario',
-    SocialPlatform.facebook: 'https://facebook.com/tu-pagina',
-    SocialPlatform.tiktok: 'https://tiktok.com/@tu_usuario',
-    SocialPlatform.twitter: 'https://x.com/tu_usuario',
-    SocialPlatform.youtube: 'https://youtube.com/@canal',
-    SocialPlatform.whatsapp: '+52 55 1234 5678',
-    SocialPlatform.calendly: 'https://calendly.com/tu-nombre',
-    SocialPlatform.github: 'https://github.com/tu-usuario',
-    SocialPlatform.custom: 'https://tuenlace.com',
+    SocialPlatform.linkedin: 'https://linkedin.com/in/your-username',
+    SocialPlatform.instagram: 'https://instagram.com/your_username',
+    SocialPlatform.facebook: 'https://facebook.com/your-page',
+    SocialPlatform.tiktok: 'https://tiktok.com/@your_username',
+    SocialPlatform.twitter: 'https://x.com/your_username',
+    SocialPlatform.youtube: 'https://youtube.com/@channel',
+    SocialPlatform.whatsapp: '+1 555 123 4567',
+    SocialPlatform.calendly: 'https://calendly.com/your-name',
+    SocialPlatform.github: 'https://github.com/your-username',
+    SocialPlatform.custom: 'https://yourlink.com',
   };
 
   static const _selectablePlatforms = [
@@ -5667,9 +5667,9 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _EditInputField(
-          label: 'Etiqueta visible',
+          label: 'Visible label',
           controller: _labelCtrl,
-          hint: 'Ej: WhatsApp',
+          hint: 'e.g. WhatsApp',
           error: _labelError,
           maxLength: FieldValidators.socialLabelMaxLength,
         ),
@@ -5684,7 +5684,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
         ),
         if (_platform == SocialPlatform.custom) ...[
           const SizedBox(height: 16),
-          _EditorDialogLabel('Icono'),
+          _EditorDialogLabel('Icon'),
           const SizedBox(height: 10),
           _CustomSocialIconPicker(
             selectedKey: _customIconKey,
@@ -5712,7 +5712,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Visible en el perfil público',
+                      'Visible on public profile',
                       style: GoogleFonts.outfit(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
@@ -5721,7 +5721,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Las personas podrán abrir este enlace desde tu tarjeta.',
+                      'People will be able to open this link from your card.',
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: context.textSecondary,
@@ -5775,7 +5775,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _isEditing ? 'Editar enlace' : 'Agregar enlace',
+                        _isEditing ? 'Edit link' : 'Add link',
                         style: GoogleFonts.outfit(
                           fontSize: widget.isDialog ? 30 : 22,
                           fontWeight: FontWeight.w800,
@@ -5784,7 +5784,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Conecta tus canales para que otros puedan contactarte fácilmente.',
+                        'Connect your channels so others can reach you easily.',
                         style: GoogleFonts.dmSans(
                           fontSize: 15,
                           color: context.textSecondary,
@@ -5809,7 +5809,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _EditorDialogLabel('Tipo de enlace'),
+                        _EditorDialogLabel('Link type'),
                         const SizedBox(height: 12),
                         platformCards,
                       ],
@@ -5825,7 +5825,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                 ],
               )
             else ...[
-              _EditorDialogLabel('Tipo de enlace'),
+              _EditorDialogLabel('Link type'),
               const SizedBox(height: 12),
               platformCards,
               const SizedBox(height: 20),
@@ -5840,7 +5840,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    'Cancelar',
+                    'Cancel',
                     style: GoogleFonts.dmSans(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
@@ -5852,7 +5852,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                 SizedBox(
                   width: 220,
                   child: TapLoopButton(
-                    label: _isEditing ? 'Guardar cambios' : 'Agregar enlace',
+                    label: _isEditing ? 'Save changes' : 'Add link',
                     height: 54,
                     borderRadius: 999,
                     icon: Icon(
@@ -5863,7 +5863,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                       if (!_validateFields()) {
                         TapLoopToast.show(
                           context,
-                          'Por favor, verifica los campos marcados.',
+                          'Please check the highlighted fields.',
                           TapLoopToastType.error,
                         );
                         return;
@@ -5872,7 +5872,7 @@ class _AddSocialSheetState extends State<_AddSocialSheet> {
                       if (_urlCtrl.text.trim().isEmpty) {
                         TapLoopToast.show(
                           context,
-                          'La URL es requerida.',
+                          'The URL is required.',
                           TapLoopToastType.error,
                         );
                         return;
@@ -5921,22 +5921,22 @@ class _CustomLinkIconOption {
 }
 
 const _customLinkIconOptions = [
-  _CustomLinkIconOption('link', 'Enlace', Icons.link_rounded),
+  _CustomLinkIconOption('link', 'Link', Icons.link_rounded),
   _CustomLinkIconOption('language', 'Web', Icons.language_rounded),
-  _CustomLinkIconOption('store', 'Tienda', Icons.storefront_outlined),
-  _CustomLinkIconOption('work', 'Trabajo', Icons.work_outline_rounded),
-  _CustomLinkIconOption('event', 'Evento', Icons.event_available_outlined),
-  _CustomLinkIconOption('location', 'Ubicación', Icons.location_on_outlined),
-  _CustomLinkIconOption('phone', 'Teléfono', Icons.phone_outlined),
-  _CustomLinkIconOption('mail', 'Correo', Icons.mail_outline_rounded),
+  _CustomLinkIconOption('store', 'Store', Icons.storefront_outlined),
+  _CustomLinkIconOption('work', 'Work', Icons.work_outline_rounded),
+  _CustomLinkIconOption('event', 'Event', Icons.event_available_outlined),
+  _CustomLinkIconOption('location', 'Location', Icons.location_on_outlined),
+  _CustomLinkIconOption('phone', 'Phone', Icons.phone_outlined),
+  _CustomLinkIconOption('mail', 'Email', Icons.mail_outline_rounded),
   _CustomLinkIconOption('chat', 'Chat', Icons.chat_bubble_outline_rounded),
-  _CustomLinkIconOption('document', 'Documento', Icons.description_outlined),
-  _CustomLinkIconOption('image', 'Imagen', Icons.image_outlined),
+  _CustomLinkIconOption('document', 'Document', Icons.description_outlined),
+  _CustomLinkIconOption('image', 'Image', Icons.image_outlined),
   _CustomLinkIconOption('video', 'Video', Icons.play_circle_outline_rounded),
-  _CustomLinkIconOption('music', 'Música', Icons.music_note_rounded),
-  _CustomLinkIconOption('payment', 'Pago', Icons.payments_outlined),
-  _CustomLinkIconOption('shopping', 'Compra', Icons.shopping_bag_outlined),
-  _CustomLinkIconOption('restaurant', 'Restaurante', Icons.restaurant_outlined),
+  _CustomLinkIconOption('music', 'Music', Icons.music_note_rounded),
+  _CustomLinkIconOption('payment', 'Payment', Icons.payments_outlined),
+  _CustomLinkIconOption('shopping', 'Shopping', Icons.shopping_bag_outlined),
+  _CustomLinkIconOption('restaurant', 'Restaurant', Icons.restaurant_outlined),
 ];
 
 class _CustomSocialIconPicker extends StatelessWidget {
@@ -6056,7 +6056,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
     if (_forms.length >= 5) {
       TapLoopToast.show(
         context,
-        'Máximo 5 formularios permitidos en total.',
+        'Maximum of 5 forms allowed in total.',
         TapLoopToastType.error,
       );
       return;
@@ -6064,7 +6064,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
     final nameCtrl = TextEditingController();
     final descriptionCtrl = TextEditingController();
     final successCtrl = TextEditingController(
-      text: 'Gracias, recibimos tu información.',
+      text: 'Thank you, we received your information.',
     );
     var activeForm = true;
     final selectedFields = <SmartFormIncludedField>{
@@ -6126,7 +6126,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Crear formulario',
+                                  'Create form',
                                   style: GoogleFonts.outfit(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w800,
@@ -6135,7 +6135,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'Crea un formulario para captar contactos, cotizaciones o solicitudes.',
+                                  'Create a form to capture contacts, quotes, or requests.',
                                   style: GoogleFonts.dmSans(
                                     fontSize: 14,
                                     color: ctx.textSecondary,
@@ -6159,7 +6159,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _EditorDialogLabel('Nombre del formulario'),
+                                _EditorDialogLabel('Form name'),
                                 const SizedBox(height: 10),
                                 TextField(
                                   controller: nameCtrl,
@@ -6168,7 +6168,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                   onChanged: (_) => setDialog(() {}),
                                   decoration: _corporateInputDecoration(
                                     ctx,
-                                    'Ej. Contacto, cotización o demo',
+                                    'e.g. Contact, quote, or demo',
                                   ).copyWith(counterText: ''),
                                 ),
                                 const SizedBox(height: 6),
@@ -6186,24 +6186,24 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                   ),
                                 ),
                                 const SizedBox(height: 12),
-                                _EditorDialogLabel('Descripción'),
+                                _EditorDialogLabel('Description'),
                                 const SizedBox(height: 8),
                                 TextField(
                                   controller: descriptionCtrl,
                                   maxLines: 3,
                                   decoration: _corporateInputDecoration(
                                     ctx,
-                                    'Describe el propósito de este formulario',
+                                    'Describe the purpose of this form',
                                   ),
                                 ),
                                 const SizedBox(height: 14),
-                                _EditorDialogLabel('Mensaje de éxito'),
+                                _EditorDialogLabel('Success message'),
                                 const SizedBox(height: 8),
                                 TextField(
                                   controller: successCtrl,
                                   decoration: _corporateInputDecoration(
                                     ctx,
-                                    'Gracias, recibimos tu información.',
+                                    'Thank you, we received your information.',
                                   ),
                                 ),
                               ],
@@ -6222,17 +6222,17 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const _EditorDialogLabel('Usos sugeridos'),
+                                  const _EditorDialogLabel('Suggested uses'),
                                   const SizedBox(height: 12),
                                   _SuggestedUsePill(
                                     icon: Icons.person_outline_rounded,
-                                    label: 'Contacto',
+                                    label: 'Contact',
                                     onTap: () => applyPreset(
-                                      name: 'Contacto',
+                                      name: 'Contact',
                                       description:
-                                          'Formulario para recibir datos de contacto.',
+                                          'Form to receive contact details.',
                                       successMessage:
-                                          'Gracias, recibimos tu información.',
+                                          'Thank you, we received your information.',
                                       fields: const [
                                         SmartFormIncludedField.name,
                                         SmartFormIncludedField.email,
@@ -6244,13 +6244,13 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                   const SizedBox(height: 8),
                                   _SuggestedUsePill(
                                     icon: Icons.receipt_long_outlined,
-                                    label: 'Cotización',
+                                    label: 'Quote',
                                     onTap: () => applyPreset(
-                                      name: 'Cotización',
+                                      name: 'Quote',
                                       description:
-                                          'Formulario para solicitar una cotización.',
+                                          'Form to request a quote.',
                                       successMessage:
-                                          'Gracias, recibimos tu solicitud de cotización.',
+                                          'Thank you, we received your quote request.',
                                       fields: const [
                                         SmartFormIncludedField.name,
                                         SmartFormIncludedField.email,
@@ -6264,13 +6264,13 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                   const SizedBox(height: 8),
                                   _SuggestedUsePill(
                                     icon: Icons.calendar_month_outlined,
-                                    label: 'Agendar demo',
+                                    label: 'Schedule a demo',
                                     onTap: () => applyPreset(
-                                      name: 'Agendar demo',
+                                      name: 'Schedule a demo',
                                       description:
-                                          'Formulario para coordinar una demostración.',
+                                          'Form to arrange a demo.',
                                       successMessage:
-                                          'Gracias, recibimos tu solicitud de demo.',
+                                          'Thank you, we received your demo request.',
                                       fields: const [
                                         SmartFormIncludedField.name,
                                         SmartFormIncludedField.email,
@@ -6299,10 +6299,10 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _EditorDialogLabel('Campos incluidos'),
+                            _EditorDialogLabel('Included fields'),
                             const SizedBox(height: 4),
                             Text(
-                              'Selecciona la información que solicitará el formulario.',
+                              'Select the information the form will ask for.',
                               style: GoogleFonts.dmSans(
                                 fontSize: 12,
                                 color: ctx.textSecondary,
@@ -6357,7 +6357,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Formulario activo',
+                                    'Active form',
                                     style: GoogleFonts.outfit(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w800,
@@ -6366,7 +6366,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    'Permite recibir respuestas desde tu perfil público.',
+                                    'Allows you to receive responses from your public profile.',
                                     style: GoogleFonts.dmSans(
                                       fontSize: 12,
                                       color: ctx.textSecondary,
@@ -6392,7 +6392,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                           TextButton(
                             onPressed: () => Navigator.pop(ctx),
                             child: Text(
-                              'Cancelar',
+                              'Cancel',
                               style: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
@@ -6404,7 +6404,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                           SizedBox(
                             width: 190,
                             child: TapLoopButton(
-                              label: 'Crear',
+                              label: 'Create',
                               height: 54,
                               borderRadius: 999,
                               icon: const Icon(Icons.add_rounded, size: 18),
@@ -6419,7 +6419,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                                             .trim(),
                                         successMessage:
                                             successCtrl.text.trim().isEmpty
-                                            ? 'Gracias, recibimos tu información.'
+                                            ? 'Thank you, we received your information.'
                                             : successCtrl.text.trim(),
                                         isActive: activeForm,
                                         includedFields: includedFields,
@@ -6449,7 +6449,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Formulario creado correctamente.',
+          'Form created successfully.',
           TapLoopToastType.success,
         );
       }
@@ -6457,7 +6457,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo crear el formulario. Intenta de nuevo.',
+          'Could not create the form. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -6483,7 +6483,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Formularios de captura',
+                        'Capture forms',
                         style: GoogleFonts.outfit(
                           fontSize: 28,
                           fontWeight: FontWeight.w800,
@@ -6492,7 +6492,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Crea y gestiona formularios para capturar prospectos desde tu perfil.',
+                        'Create and manage forms to capture prospects from your profile.',
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           color: context.textSecondary,
@@ -6510,7 +6510,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                   child: _EditorInlineMetric(
                     icon: Icons.dynamic_form_outlined,
                     value: '${_forms.length}',
-                    label: 'Formularios',
+                    label: 'Forms',
                   ),
                 ),
                 const SizedBox(width: 34),
@@ -6518,14 +6518,14 @@ class _FormulariosTabState extends State<_FormulariosTab> {
                   child: _EditorInlineMetric(
                     icon: Icons.check_circle_outline_rounded,
                     value: '${_forms.where((form) => form.isActive).length}',
-                    label: 'Activos',
+                    label: 'Active',
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 20),
             TapLoopButton(
-              label: 'Crear formulario',
+              label: 'Create form',
               height: 54,
               borderRadius: 999,
               icon: const Icon(Icons.add_rounded, size: 18),
@@ -6536,8 +6536,8 @@ class _FormulariosTabState extends State<_FormulariosTab> {
             const SizedBox(height: 24),
             if (_forms.isEmpty)
               _EmptyState(
-                message: 'No hay formularios creados',
-                hint: 'Crea uno seleccionando los campos incluidos.',
+                message: 'No forms created',
+                hint: 'Create one by selecting the included fields.',
               )
             else
               ..._forms.map(
@@ -6552,7 +6552,7 @@ class _FormulariosTabState extends State<_FormulariosTab> {
               child: SizedBox(
                 width: 210,
                 child: TapLoopButton(
-                  label: 'Guardar cambios',
+                  label: 'Save changes',
                   height: 54,
                   borderRadius: 999,
                   icon: const Icon(Icons.save_outlined, size: 18),
@@ -6612,7 +6612,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
               borderRadius: BorderRadius.circular(18),
             ),
             constraints: const BoxConstraints(maxWidth: 720),
-            title: const Text('Editar formulario'),
+            title: const Text('Edit form'),
             content: SizedBox(
               width: 640,
               child: SingleChildScrollView(
@@ -6620,7 +6620,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _EditorDialogLabel('Nombre del formulario'),
+                    _EditorDialogLabel('Form name'),
                     const SizedBox(height: 8),
                     TextField(
                       controller: ctrl,
@@ -6629,7 +6629,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                       onChanged: (value) => setDialog(() {}),
                       decoration: _corporateInputDecoration(
                         ctx,
-                        'Nombre',
+                        'Name',
                       ).copyWith(counterText: ''),
                     ),
                     const SizedBox(height: 8),
@@ -6647,28 +6647,28 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    _EditorDialogLabel('Descripción'),
+                    _EditorDialogLabel('Description'),
                     const SizedBox(height: 8),
                     TextField(
                       controller: descriptionCtrl,
                       maxLines: 3,
                       decoration: _corporateInputDecoration(
                         ctx,
-                        'Describe el propósito de este formulario',
+                        'Describe the purpose of this form',
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _EditorDialogLabel('Mensaje de éxito'),
+                    _EditorDialogLabel('Success message'),
                     const SizedBox(height: 8),
                     TextField(
                       controller: successCtrl,
                       decoration: _corporateInputDecoration(
                         ctx,
-                        'Gracias, recibimos tu información.',
+                        'Thank you, we received your information.',
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _EditorDialogLabel('Campos incluidos'),
+                    _EditorDialogLabel('Included fields'),
                     const SizedBox(height: 10),
                     Wrap(
                       spacing: 10,
@@ -6693,14 +6693,14 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                     SwitchListTile.adaptive(
                       contentPadding: EdgeInsets.zero,
                       title: Text(
-                        'Formulario activo',
+                        'Active form',
                         style: GoogleFonts.outfit(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       subtitle: const Text(
-                        'Permite recibir respuestas desde tu perfil público.',
+                        'Allows you to receive responses from your public profile.',
                       ),
                       value: activeForm,
                       onChanged: (value) => setDialog(() => activeForm = value),
@@ -6712,7 +6712,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('Cancelar'),
+                child: const Text('Cancel'),
               ),
               TextButton(
                 onPressed: canSave
@@ -6722,14 +6722,14 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                           name: ctrl.text.trim(),
                           description: descriptionCtrl.text.trim(),
                           successMessage: successCtrl.text.trim().isEmpty
-                              ? 'Gracias, recibimos tu información.'
+                              ? 'Thank you, we received your information.'
                               : successCtrl.text.trim(),
                           isActive: activeForm,
                           includedFields: includedFields,
                         ),
                       )
                     : null,
-                child: const Text('Guardar'),
+                child: const Text('Save'),
               ),
             ],
           );
@@ -6746,7 +6746,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Formulario actualizado correctamente.',
+          'Form updated successfully.',
           TapLoopToastType.success,
         );
       }
@@ -6754,7 +6754,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo actualizar el formulario. Intenta de nuevo.',
+          'Could not update the form. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -6768,7 +6768,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Formulario eliminado.',
+          'Form deleted.',
           TapLoopToastType.success,
         );
       }
@@ -6776,7 +6776,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'No se pudo eliminar el formulario. Intenta de nuevo.',
+          'Could not delete the form. Please try again.',
           TapLoopToastType.warning,
         );
       }
@@ -6786,7 +6786,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
   @override
   Widget build(BuildContext context) {
     final fieldCount = widget.form.fields.length;
-    final fieldLabel = fieldCount == 1 ? '1 campo' : '$fieldCount campos';
+    final fieldLabel = fieldCount == 1 ? '1 field' : '$fieldCount fields';
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
@@ -6824,7 +6824,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          'Deja tu contacto · $fieldLabel',
+                          'Leave your contact · $fieldLabel',
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -6840,7 +6840,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                   ),
                   const SizedBox(width: 8),
                   IconButton(
-                    tooltip: 'Editar formulario',
+                    tooltip: 'Edit form',
                     onPressed: _editForm,
                     icon: Icon(
                       Icons.edit_outlined,
@@ -6849,7 +6849,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
                     ),
                   ),
                   IconButton(
-                    tooltip: 'Eliminar formulario',
+                    tooltip: 'Delete form',
                     onPressed: _deleteForm,
                     icon: const Icon(
                       Icons.delete_outline,
@@ -6876,7 +6876,7 @@ class _DbSmartFormCardState extends State<_DbSmartFormCard> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Este formulario no tiene campos.',
+                  'This form has no fields.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: context.textMuted,
@@ -6946,8 +6946,8 @@ class _CalendarioTabState extends State<_CalendarioTab> {
     final urlCtrl = TextEditingController(text: initial?.url ?? '');
     final labelCtrl = TextEditingController(
       text: provider == CalendarProviderType.custom
-          ? initial?.displayLabel ?? 'Otra integración'
-          : 'Agenda una reunión',
+          ? initial?.displayLabel ?? 'Other integration'
+          : 'Schedule a meeting',
     );
     bool visible = _enabled;
 
@@ -6960,8 +6960,8 @@ class _CalendarioTabState extends State<_CalendarioTab> {
               provider = selected;
               providerCtrl.text = selected.label;
               labelCtrl.text = selected == CalendarProviderType.custom
-                  ? initial?.displayLabel ?? 'Otra integración'
-                  : 'Agenda una reunión';
+                  ? initial?.displayLabel ?? 'Other integration'
+                  : 'Schedule a meeting';
             });
           }
 
@@ -6994,8 +6994,8 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                               children: [
                                 Text(
                                   initialIndex == null
-                                      ? 'Agregar integración'
-                                      : 'Editar integración',
+                                      ? 'Add integration'
+                                      : 'Edit integration',
                                   style: GoogleFonts.outfit(
                                     fontSize: 30,
                                     fontWeight: FontWeight.w800,
@@ -7004,7 +7004,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'Conecta herramientas para mostrar agenda, capturar leads o enlazar servicios externos.',
+                                  'Connect tools to show your calendar, capture leads, or link external services.',
                                   style: GoogleFonts.dmSans(
                                     fontSize: 15,
                                     color: ctx.textSecondary,
@@ -7035,15 +7035,15 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      _EditorDialogLabel('Proveedor'),
+                      _EditorDialogLabel('Provider'),
                       const SizedBox(height: 10),
                       TextField(
                         controller: providerCtrl,
                         readOnly: true,
-                        decoration: _corporateInputDecoration(ctx, 'Proveedor'),
+                        decoration: _corporateInputDecoration(ctx, 'Provider'),
                       ),
                       const SizedBox(height: 16),
-                      _EditorDialogLabel('URL pública'),
+                      _EditorDialogLabel('Public URL'),
                       const SizedBox(height: 10),
                       TextField(
                         controller: urlCtrl,
@@ -7055,13 +7055,13 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                       ),
                       if (provider == CalendarProviderType.custom) ...[
                         const SizedBox(height: 16),
-                        _EditorDialogLabel('Etiqueta visible'),
+                        _EditorDialogLabel('Visible label'),
                         const SizedBox(height: 10),
                         TextField(
                           controller: labelCtrl,
                           decoration: _corporateInputDecoration(
                             ctx,
-                            'Ej. Demo personalizada, WhatsApp, CRM',
+                            'e.g. Custom demo, WhatsApp, CRM',
                           ),
                         ),
                       ],
@@ -7089,7 +7089,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Mostrar en el perfil',
+                                    'Show on profile',
                                     style: GoogleFonts.outfit(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w800,
@@ -7098,7 +7098,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    'Activa esta integración en tu tarjeta pública.',
+                                    'Enable this integration on your public card.',
                                     style: GoogleFonts.dmSans(
                                       fontSize: 12,
                                       color: ctx.textSecondary,
@@ -7124,7 +7124,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                           TextButton(
                             onPressed: () => Navigator.pop(ctx),
                             child: Text(
-                              'Cancelar',
+                              'Cancel',
                               style: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
@@ -7136,7 +7136,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                           SizedBox(
                             width: 210,
                             child: TapLoopButton(
-                              label: 'Guardar',
+                              label: 'Save',
                               height: 54,
                               borderRadius: 999,
                               icon: const Icon(Icons.save_outlined, size: 18),
@@ -7145,7 +7145,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                                 if (url.isEmpty) {
                                   TapLoopToast.show(
                                     context,
-                                    'La URL de la integración es requerida.',
+                                    'The integration URL is required.',
                                     TapLoopToastType.error,
                                   );
                                   return;
@@ -7157,7 +7157,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                                   customLabel:
                                       provider == CalendarProviderType.custom
                                       ? (label.isEmpty
-                                            ? 'Otra integración'
+                                            ? 'Other integration'
                                             : label)
                                       : null,
                                 );
@@ -7216,7 +7216,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
     _emitChanges();
     TapLoopToast.show(
       context,
-      'Integración eliminada.',
+      'Integration deleted.',
       TapLoopToastType.success,
     );
   }
@@ -7230,7 +7230,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Integraciones',
+              'Integrations',
               style: GoogleFonts.outfit(
                 fontSize: 28,
                 fontWeight: FontWeight.w800,
@@ -7239,7 +7239,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
             ),
             const SizedBox(height: 6),
             Text(
-              'Conecta herramientas externas a tu perfil.',
+              'Connect external tools to your profile.',
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 color: context.textSecondary,
@@ -7252,7 +7252,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                   child: _EditorInlineMetric(
                     icon: Icons.hub_outlined,
                     value: '$_configuredIntegrationCount',
-                    label: 'Integraciones',
+                    label: 'Integrations',
                   ),
                 ),
                 const SizedBox(width: 34),
@@ -7260,14 +7260,14 @@ class _CalendarioTabState extends State<_CalendarioTab> {
                   child: _EditorInlineMetric(
                     icon: Icons.check_circle_outline_rounded,
                     value: _enabled ? '$_configuredIntegrationCount' : '0',
-                    label: 'Activas',
+                    label: 'Active',
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 24),
             TapLoopButton(
-              label: 'Agregar integración',
+              label: 'Add integration',
               height: 54,
               borderRadius: 999,
               icon: const Icon(Icons.add_link_rounded, size: 18),
@@ -7278,9 +7278,9 @@ class _CalendarioTabState extends State<_CalendarioTab> {
             const SizedBox(height: 24),
             if (_integrations.every((link) => link.url.trim().isEmpty))
               _EmptyState(
-                message: 'No hay integraciones configuradas',
+                message: 'No integrations configured',
                 hint:
-                    'Agrega una agenda o herramienta externa para mostrarla en tu perfil.',
+                    'Add a calendar or external tool to show it on your profile.',
               )
             else
               ..._integrations
@@ -7306,7 +7306,7 @@ class _CalendarioTabState extends State<_CalendarioTab> {
               child: SizedBox(
                 width: 210,
                 child: TapLoopButton(
-                  label: 'Guardar cambios',
+                  label: 'Save changes',
                   height: 54,
                   borderRadius: 999,
                   icon: const Icon(Icons.save_outlined, size: 18),
@@ -7489,7 +7489,7 @@ class _IntegrationRow extends StatelessWidget {
                 ),
               ),
               IconButton(
-                tooltip: 'Editar integración',
+                tooltip: 'Edit integration',
                 onPressed: onEdit,
                 icon: Icon(
                   Icons.edit_outlined,
@@ -7498,7 +7498,7 @@ class _IntegrationRow extends StatelessWidget {
                 ),
               ),
               IconButton(
-                tooltip: 'Eliminar integración',
+                tooltip: 'Delete integration',
                 onPressed: onDelete,
                 icon: const Icon(
                   Icons.delete_outline,
@@ -7525,10 +7525,10 @@ IconData _calendarProviderIcon(CalendarProviderType provider) {
 
 String _calendarProviderSubtitle(CalendarProviderType provider) {
   return switch (provider) {
-    CalendarProviderType.calendly => 'Agenda reuniones',
-    CalendarProviderType.googleCalendar => 'Reservas con Google',
-    CalendarProviderType.microsoftTeams => 'Reuniones por Teams',
-    CalendarProviderType.custom => 'Etiqueta y enlace libres',
+    CalendarProviderType.calendly => 'Schedule meetings',
+    CalendarProviderType.googleCalendar => 'Google bookings',
+    CalendarProviderType.microsoftTeams => 'Teams meetings',
+    CalendarProviderType.custom => 'Free label and link',
   };
 }
 

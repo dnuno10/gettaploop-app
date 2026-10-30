@@ -5,7 +5,7 @@ import '../../../core/theme/app_theme_extensions.dart';
 class SocialDivider extends StatelessWidget {
   final String text;
 
-  const SocialDivider({super.key, this.text = 'O continúa con'});
+  const SocialDivider({super.key, this.text = 'Or continue with'});
 
   @override
   Widget build(BuildContext context) {

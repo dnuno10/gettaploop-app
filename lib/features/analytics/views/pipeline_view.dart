@@ -112,7 +112,7 @@ class _PipelineViewState extends State<PipelineView> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Lead marcado como venta correctamente.',
+          'Lead marked as a sale successfully.',
           TapLoopToastType.success,
         );
       }
@@ -120,7 +120,7 @@ class _PipelineViewState extends State<PipelineView> {
       if (mounted) {
         TapLoopToast.show(
           context,
-          'Error al guardar: $e',
+          'Error saving: $e',
           TapLoopToastType.error,
         );
       }
@@ -147,11 +147,11 @@ class _PipelineViewState extends State<PipelineView> {
             return name.contains(q) || company.contains(q);
           }).toList();
     final activeLabel = _selectedStage == _PipelineStage.proposals
-        ? 'Propuestas enviadas'
-        : 'Cerrados';
+        ? 'Sent proposals'
+        : 'Closed';
     final emptyMessage = _selectedStage == _PipelineStage.proposals
-        ? 'No hay propuestas pendientes por cerrar'
-        : 'Sin ventas cerradas aún';
+        ? 'No proposals pending closure'
+        : 'No closed sales yet';
     final useProposalWhiteSurface =
         !context.isDark && _selectedStage == _PipelineStage.proposals;
 
@@ -190,7 +190,7 @@ class _PipelineViewState extends State<PipelineView> {
                   color: context.textPrimary,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Buscar propuesta por nombre o empresa...',
+                  hintText: 'Search proposal by name or company...',
                   hintStyle: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: context.textMuted,
@@ -314,7 +314,7 @@ class _PipelineHeader extends StatelessWidget {
           HelpTitle(
             title: 'Pipeline',
             helpText:
-                'Organiza y da seguimiento a las oportunidades generadas desde tus tarjetas.',
+                'Organize and follow up on the opportunities generated from your cards.',
             style: GoogleFonts.outfit(
               fontSize: 32,
               fontWeight: FontWeight.w800,
@@ -324,7 +324,7 @@ class _PipelineHeader extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Sigue cada oportunidad de forma simple',
+            'Follow each opportunity in a simple way',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               color: context.textSecondary,
@@ -343,14 +343,14 @@ class _PipelineHeader extends StatelessWidget {
               const SizedBox(width: 10),
               _StatTile(
                 value: '$proposals',
-                label: 'Propuestas',
+                label: 'Proposals',
                 icon: Icons.description_outlined,
                 color: AppColors.primary,
               ),
               const SizedBox(width: 10),
               _StatTile(
                 value: '$closed',
-                label: 'Cerrados',
+                label: 'Closed',
                 icon: Icons.check_circle_outline_rounded,
                 color: const Color(0xFF16A34A),
               ),
@@ -360,7 +360,7 @@ class _PipelineHeader extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Conversión',
+                'Conversion',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -396,13 +396,13 @@ class _PipelineHeader extends StatelessWidget {
             runSpacing: 8,
             children: [
               _StageFilterChip(
-                label: 'Por cerrar',
+                label: 'To close',
                 count: proposals,
                 active: selected == _PipelineStage.proposals,
                 onTap: () => onSelected(_PipelineStage.proposals),
               ),
               _StageFilterChip(
-                label: 'Cerrados',
+                label: 'Closed',
                 count: closed,
                 active: selected == _PipelineStage.closed,
                 onTap: () => onSelected(_PipelineStage.closed),
@@ -562,7 +562,7 @@ class _SectionLabel extends StatelessWidget {
           Expanded(
             child: HelpTitle(
               title: label,
-              helpText: 'Lista de leads en la etapa $label.',
+              helpText: 'List of leads in the $label stage.',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -643,23 +643,23 @@ class _LeadCard extends StatelessWidget {
   });
 
   String _latestActionLabel(LeadModel lead) {
-    if (lead.actions.isEmpty) return 'Sin actividad registrada';
+    if (lead.actions.isEmpty) return 'No activity recorded';
     final latest = [...lead.actions]
       ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
     final action = latest.first;
     switch (action.action) {
       case LeadAction.visitedProfile:
-        return 'Visitó el perfil digital';
+        return 'Visited the digital profile';
       case LeadAction.clickedLinkedIn:
-        return 'Hizo click en LinkedIn';
+        return 'Clicked LinkedIn';
       case LeadAction.clickedWebsite:
-        return 'Hizo click en Sitio web';
+        return 'Clicked Website';
       case LeadAction.clickedWhatsApp:
-        return 'Hizo click en WhatsApp';
+        return 'Clicked WhatsApp';
       case LeadAction.downloadedContact:
-        return 'Descargó el contacto';
+        return 'Downloaded the contact';
       case LeadAction.filledForm:
-        return 'Hizo el llenado del formulario';
+        return 'Filled out the form';
     }
   }
 
@@ -668,10 +668,10 @@ class _LeadCard extends StatelessWidget {
     final daysSince = DateTime.now().difference(lead.lastSeen).inDays;
     final hasForm = lead.formData != null && lead.formData!.isNotEmpty;
     final timeLabel = daysSince == 0
-        ? 'Hoy'
+        ? 'Today'
         : daysSince == 1
-        ? 'Ayer'
-        : 'Hace $daysSince días';
+        ? 'Yesterday'
+        : '$daysSince days ago';
 
     return Container(
       decoration: BoxDecoration(
@@ -737,7 +737,7 @@ class _LeadCard extends StatelessWidget {
               if (lead.isConverted)
                 _MetaChip(
                   icon: Icons.check_circle_outline_rounded,
-                  label: 'Cerrado',
+                  label: 'Closed',
                   color: AppColors.success,
                 ),
             ],
@@ -826,7 +826,7 @@ class _MarkClosedButton extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Text(
-                'Mover a cerrados',
+                'Move to closed',
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -852,7 +852,7 @@ class _FormDataButton extends StatelessWidget {
     final ok = await launchUrl(uri, mode: LaunchMode.platformDefault);
     if (!ok && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No fue posible abrir la acción.')),
+        const SnackBar(content: Text('Could not open the action.')),
       );
     }
   }
@@ -863,7 +863,7 @@ class _FormDataButton extends StatelessWidget {
   ) async {
     final buffer = StringBuffer();
     buffer.writeln('Lead: ${lead.displayName}');
-    buffer.writeln('Formulario: ${_formTitle(lead.formType)}');
+    buffer.writeln('Form: ${_formTitle(lead.formType)}');
     for (final entry in _visibleFormEntries(data)) {
       final key = entry.key;
       final value = entry.value;
@@ -873,7 +873,7 @@ class _FormDataButton extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Información copiada para guardar contacto.'),
+          content: Text('Information copied to save the contact.'),
         ),
       );
     }
@@ -902,7 +902,7 @@ class _FormDataButton extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Dato copiado.')));
+      ).showSnackBar(const SnackBar(content: Text('Detail copied.')));
     }
   }
 
@@ -977,17 +977,17 @@ class _FormDataButton extends StatelessWidget {
   String _formTitle(String? formType) {
     switch (formType) {
       case 'cotizacion':
-        return 'Solicitar cotización';
+        return 'Request a quote';
       case 'demo':
-        return 'Agendar demo';
+        return 'Schedule a demo';
       case 'catalogo':
-        return 'Descargar catálogo';
+        return 'Download catalog';
       case 'contacto':
-        return 'Formulario de contacto';
+        return 'Contact form';
       case 'propuesta':
-        return 'Solicitar propuesta';
+        return 'Request a proposal';
       default:
-        return 'Formulario';
+        return 'Form';
     }
   }
 
@@ -1035,7 +1035,7 @@ class _FormDataButton extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              '${lead.displayName} · Información enviada desde el perfil público.',
+                              '${lead.displayName} · Information submitted from the public profile.',
                               style: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 color: ctx.textSecondary,
@@ -1181,7 +1181,7 @@ class _FormDataButton extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.pop(ctx),
                         child: Text(
-                          'Cerrar',
+                          'Close',
                           style: GoogleFonts.dmSans(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
@@ -1192,7 +1192,7 @@ class _FormDataButton extends StatelessWidget {
                       const SizedBox(width: 14),
                       _DialogPrimaryAction(
                         icon: Icons.save_alt_rounded,
-                        label: 'Guardar contacto',
+                        label: 'Save contact',
                         onTap: () => _saveLeadSummary(context, data),
                       ),
                     ],
@@ -1230,7 +1230,7 @@ class _FormDataButton extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Text(
-                'Ver info',
+                'View info',
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,

@@ -34,7 +34,7 @@ Future<OptimizedWebImage> optimizeWebRasterImage(
     final sourceWidth = image.naturalWidth;
     final sourceHeight = image.naturalHeight;
     if (sourceWidth <= 0 || sourceHeight <= 0) {
-      throw StateError('No se pudo leer la imagen seleccionada.');
+      throw StateError('Could not read the selected image.');
     }
 
     final scale = math.min(
@@ -56,7 +56,7 @@ Future<OptimizedWebImage> optimizeWebRasterImage(
     final dataUrl = canvas.toDataUrl(outputType, quality);
     final commaIndex = dataUrl.indexOf(',');
     if (commaIndex == -1) {
-      throw StateError('No se pudo optimizar la imagen seleccionada.');
+      throw StateError('Could not optimize the selected image.');
     }
 
     final bytes = base64Decode(dataUrl.substring(commaIndex + 1));
@@ -88,7 +88,7 @@ Future<OptimizedWebImage> optimizeAdjustedWebRasterImage(
     final sourceWidth = image.naturalWidth;
     final sourceHeight = image.naturalHeight;
     if (sourceWidth <= 0 || sourceHeight <= 0) {
-      throw StateError('No se pudo leer la imagen seleccionada.');
+      throw StateError('Could not read the selected image.');
     }
 
     final sourceAspect = sourceWidth / sourceHeight;
@@ -152,7 +152,7 @@ Future<OptimizedWebImage> optimizeAdjustedWebRasterImage(
     final dataUrl = canvas.toDataUrl(outputType, quality);
     final commaIndex = dataUrl.indexOf(',');
     if (commaIndex == -1) {
-      throw StateError('No se pudo ajustar la imagen seleccionada.');
+      throw StateError('Could not adjust the selected image.');
     }
 
     final bytes = base64Decode(dataUrl.substring(commaIndex + 1));
